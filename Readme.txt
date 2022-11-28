@@ -1,198 +1,197 @@
 
 
-ぜろちゃんねるプラス Ver.0.7.5 - Readme.txt
+Zero-Channel Plus Ver. 0.7.5 - Readme.txt
 
-公式WEB : http://zerochplus.sourceforge.jp/
-
-
-■はじめに
-　このファイルは、本家ぜろちゃんねる(http://0ch.mine.nu/)のスクリプトを２ちゃんねる仕様
-に改造するという目的ではじまったプロジェクト「ぜろちゃんねるプラス」の取り扱い説明書です。
-　なるべくどのような人でもわかるように解説していきたいですがなにぶん製作者が面倒くさがり
-なので至らない点があるかもしれませんがご了承ください。
-　なおこのファイルは本家ぜろちゃんねるの/readme/readme.txtを元に編集されていますので一部
-原文ままの部分があります。ご了承ください。
+Official WEB : http://zerochplus.sourceforge.jp/
 
 
-■ぜろちゃんねるプラスとは
-　スレッドフロート型掲示板を動作させるPerlスクリプトとして製作されたぜろちゃんねるの機能
-改善版です。
-　もともとはぜろちゃんねるスクリプトを使って作られた掲示板群の改造が適当だったので作りな
-おすことが目的でしたが「どうせならほかの人にも使ってもらおう」ということで今回の公開に至
-りました。
-　ぜろちゃんねると同じく２ちゃんねる専用ブラウザでも書き込みと閲覧が可能です。
+笆Preface
+縲This file is a description of "Zero-channel Plus," a project started to modify the script of the original Zero-channel (http://0ch.mine.nu/) to 2channel specifications.
+This file is an instruction manual for the project "Zero-Channel Plus", which started with the purpose of modifying the script of the original Zero-Channel () to 2Channel specifications.
+縲I'd like to explain it in a way that anyone can understand, but I'm a bit of a lazy creator, so there may be some things I haven't gotten to yet.
+I hope that anyone can understand it, but I am a bit of a lazy creator, so please understand that I may not be able to explain it well enough.
+縲This file has been edited based on /readme/readme.txt of the original Zero-Channel, so some parts of the file are still in the original text.
+Please note that some parts of this file are the same as the original text. Please be aware that some parts of the file may be left as they were in the original.
 
 
-■動作環境
-  ★必須環境
-    ・CGIの動作が可能なHTTPDが入っており，Perl 5.8以上(Perl 6は含まない)もしくはそのディ
-      ストリビューション系ソフトウェアが動作するOS
-    ・5MB以上のディスクスペース 
-  ★推奨環境
-    ・suEXECでCGI動作が可能なApache HTTP Serverが入っており，Perl 5.8以上(Perl 6は含まな
-      い)が動作するUNIX系もしくはLinux系のOS
-    ・10MB以上のディスクスペース
+What is Zero-Channel Plus?
+縲Zero-channel Plus is an improved version of Zero-channel, a Perl script that operates a thread float type bulletin board.
+This is an improved version of Zero-Channel.
+縲Originally, the purpose of Zero-channel Plus was to remodel a group of bulletin boards that had been created using the Zero-channel script, but the script was not modified properly, so it was reworked.
+The purpose was to re-create a group of boards that had been modified using the Zero-Channel script, but we decided to make it available to others anyway.
+However, we decided to open it to the public this time because we wanted to let other people use it.
+縲As with Zero-chan, you can write and view messages using a dedicated 2channel browser.
 
-■配布ファイル構成
+
+System Requirements
+  Required Environment
+    Perl 5.8 or higher (Perl 6 is not included) or its distribution software is required.
+      Perl 5.8 or higher (not including Perl 6) or OS on which the distribution software runs.
+    Disk space of 5 MB or more 
+  Recommended Environment
+    An OS that has an Apache HTTP Server capable of CGI operation with suEXEC and running Perl 5.8 or higher (Perl 6 is not included).
+      Perl 5.8 or higher (Perl 6 is not included).
+    Disk space of 10 MB or more
+
+笆Distribution File Structure
 zerochplus_x.x.x/
- + Readme/                    - 最初に読むべきファイル
- |  + ArtisticLicense.txt
- |  + Readme.txt              - ぜろちゃんねるプラスのReadmeファイル(これです)
- |  + Readme0ch.txt           - ぜろちゃんねる(本家)のReadmeファイル
- |
- + test/                      - ぜろちゃんねるプラス動作ディレクトリ
-    + *.cgi                   - 基本動作用CGI
-    + datas/                  - 初期データ・固定データ格納用
-    |  + 1000.txt
-    |  + 2000000000.dat
-    |  :
+ + Readme/ - the file you should read first
+ | + ArtisticLicense.txt
+ | + Readme.txt - Readme file for zerochplus (this is it)
+ | + Readme0ch.txt - Readme file for Zero-Channel (the original)
+ |test/ - test/ - readme file for Zero-Channel Plus (this is it)
+ + test/ - Zero-channel Plus working directory
+    + *.cgi - CGI for basic operation
+    + datas/ - initial and fixed data storage
+    | + 1000.txt
+    + + 2000000000.dat
+    | :
     + info/
-    |  + category.cgi         - 掲示板カテゴリの初期定義ファイル
-    |  + errmes.cgi           - エラーメッセージ定義ファイル
-    |  + users.cgi            - 初期ユーザ(Administrator)定義ファイル
+    | + category.cgi - initial definition file of BBS categories
+    | + errmes.cgi - Error message definition file
+    | + users.cgi - initial user (Administrator) definition files
     + module/
-    |  + *.pl                 - ぜろちゃんねるモジュール
+    | + *.pl - Zero-channel module
     + mordor/
-    |  + *.pl                 - 管理CGI用モジュール
+    | + *.pl - module for admin CGI
     + plugin/
-    |  + 0ch_*.pl             - プラグインスクリプト
+    | + 0ch_*.pl - plugin script
     + perllib/
-       + *                    - ぜろちゃんねるプラスに必要なパッケージ
+       + * - packages required for Zero-channel Plus
 
-■設置方法概略
-　Wikiにて画像つきの設置方法の解説を公開しています。
-  ・Install - ぜろちゃんねるプラス Wiki
+How to install
+縲The installation instructions with images are available on the Wiki.
+  Install - Zero-channel Plus Wiki
     http://sourceforge.jp/projects/zerochplus/wiki/Install
 
-1.スクリプト変更
+1.Change the script
 
-	・構成ファイルtest直下の.cgiファイルを開き、1行目に書いてあるperlパス
-	  を環境に合わせて変更します。
+	Open the .cgi file directly under the configuration file test, and change the perl path
+	  to match your environment.
 	
-	※以下のようになっている場所を変更します。
+	Change the following location.
 	
-		#!/usr/bin/perl
+		#! /usr/bin/perl
 
-2.スクリプトアップロード
+2. Upload the script
 
-	・構成ファイルのtest以下すべてを設置サーバにアップロードします。
-	・アップロード後パーミッションを適切な値に設定します。
+	Upload all the configuration files under test to the installation server.
+	After uploading, set the permissions to the appropriate values.
 	
-	※パーミッションの値については以下のページを参照
-	・Permission - ぜろちゃんねるプラス
+	Refer to the following page for permission values.
+	Permission - Zero-channel Plus
 	  http://sourceforge.jp/projects/zerochplus/wiki/Permission
 
-3.設定
+3. Configuration
 
-	・[設置サーバ]/test/admin.cgiにアクセスします。
-	・ユーザ名"Administrator",パス"zeroch"でログインします。
-	・画面上部の"システム設定"メニューを選択します。
-	・画面左側の"基本設定"メニューを選択します。
-	・項目[稼動サーバ]を適切な値に設定し、[設定]ボタンを押します。
-	・再度画面左側の"基本設定"メニューを選択して、稼動サーバが更新されていることを確認し
-	  てください。
-	  （もしされていない場合はパーミッションの設定に問題があるかもしれません）
-	・画面上部の"ユーザー"メニューを選択します。
-	・画面中央の[User Name]列の"Administrator"を選択します。
-	・ユーザ名、パスワードを変更して[設定]ボタンを押します。
-	・画面上部の"ログオフ"を選択します。
+	Access [installation server]/test/admin.cgi.
+	Log in with the user name "Administrator" and the path "zeroch".
+	Select the "System Settings" menu at the top of the screen.
+	Select the "Basic Settings" menu on the left side of the screen.
+	Set the item "Active Server" to an appropriate value and click the "Set" button.
+	Select the "Basic Settings" menu on the left side of the screen again, and confirm that the active server has been updated.
+	  Please make sure that the active server has been updated (if it has not, please check the permissions).
+	  (If not, there may be a problem with the permission settings.)
+	Select the "User" menu at the top of the screen.
+	Select "Administrator" in the "User Name" column in the center of the screen.
+	Change the user name and password, and press the "Set" button.
+	Select "Logoff" at the top of the screen.
 
-4.掲示板作成
+4. Create a BBS
 
-	・先ほど設定した管理者ユーザでログインします。
-	・画面上部の"掲示板"メニューを選択します。
-	・画面左側の"掲示板作成"メニューを選択します。
-	・必要項目を記入して[作成]ボタンを押します。
+	Log in as the administrator user you have just set up.
+	Select the "BBS" menu at the top of the screen.
+	Select the "Create Message Board" menu on the left side of the screen.
+	Fill in the required information and click the "Create" button.
 
-5.掲示板設定
+BBS Settings
 
-	・画面上部の"掲示板"メニューを選択します。
-	・掲示板一覧より、設定する掲示板を選択します。
-	・画面上部の"掲示板設定"を選択します。
-	・各項目を設定します。
+	Select "BBS" menu at the top of the screen.
+	Select a message board from the list of message boards.
+	Select "BBS Settings" at the top of the screen.
+	Select "BBS Settings" at the top of the screen.
 
+Select "BBS Settings" at the top of the screen. -----------------------------------------------------------------------
+Note
+	Please be sure to change the Administrator user after installation. Immediately after installation, the user name and password are fixed.
+	  If left unchecked, there is a risk that someone other than the administrator will be able to log in with administrative privileges.
+	  If left unchecked, there is a risk that someone other than the administrator may log in with administrative privileges.
 -----------------------------------------------------------------------
-※注意：
-	・設置後のAdministratorユーザは必ず変更を行ってください。設置直後は
-	  ユーザ名とパスワードが固定なので、放置しておくと管理者以外に管理
-	  権限でログインされてしまう危険があります。
------------------------------------------------------------------------
 
 
-■ライセンス
-　本スクリプトのライセンスは本家ぜろちゃんねると同じ扱いとします。以下は本家ぜろちゃんね
-る /readme/readme.txt からの引用です。
+License
+縲The license of this script is the same as that of the original Zerochanne. The following is the license of the original Zero-chan.
+The following is a quotation from /readme/readme.txt.
 
-> 本スクリプトは自由に改造・再配布してもらってかまいません。また、本スクリプトによって出
-力されるクレジット表示(バージョン表示)などの表示も消して使用してもらっても構いません。
-> ただし、作者は本スクリプトと付属ファイルに関する著作権を放棄しません。また、作者は本ス
-クリプト使用に関して発生したいかなるトラブルにも責任を負いかねますのでご了承ください。
+> This script may be freely modified and redistributed. You are free to modify and redistribute this script.
+You may also use this script with the credit (version) and other indications output by this script removed.
+> However, the author does not waive copyrights on this script and accompanying files. The author will not be liable for any trouble that may occur in connection with the use of this script.
+The author is not responsible for any trouble that may occur in connection with the use of this script.
 
-　またremake.cgiの著作権･ライセンスは別の方にあり、remake.cgiの作者に著作権･ライセンスを
-帰属します。
+縲The copyright and license of "make.cgi" belongs to another person, and the copyright and license of "make.cgi" belongs to the author of "make.cgi".
+The copyright and license belongs to the author of the "make.cgi" file.
 
-　perllibに含めてあるパッケージについては後述。
+縲The packages included in perllib are described below.
 
-■バージョンアップについて
-　0.7.0からバージョンアップの際には管理画面にて通知するようになりました。
-　セキュリティ修正を含むアップデートも多々ありますのでお手数かと思いますが、こまめなアッ
-プデートをよろしくおねがいします。
+Version Upgrade
+縲Starting from 0.7.0, we will notify you on the admin page when we upgrade the version of the software.
+縲Please update your software frequently as there are many updates including security fixes.
+Please update your software frequently.
 
 
-■ヘルプ・サポート
-　さらに詳しい内容をお求めの方は以下のページを参照してください。
-  ・ヘルプ - ぜろちゃんねるプラス
+Help and Support
+縲For more detailed information, please refer to the following pages.
+  Help - Zero-channel Plus
     http://zerochplus.sourceforge.jp/help/
-  ・ぜろちゃんねるプラスWiki
+  Zero-channel Plus Wiki
     http://sourceforge.jp/projects/zerochplus/wiki/
 
-　以上のページに求めている情報がない場合や不具合報告などしていただける場合は以下からお問
-い合わせください。
-  ・サポート - ぜろちゃんねるプラス
+縲If you do not find the information you are looking for on the above pages, or if you would like to report a problem, please contact us at
+Please contact us from below.
+  Support - Zero-channel Plus
     http://zerochplus.sourceforge.jp/support/
 
-■謝辞
-　ぜろちゃんねるプラスを作成するにあたって支援していただいたすべての皆様に感謝します。
-　そして何より元であるスクリプトのぜろちゃんねるをつくられた精神衰弱さんには心から感謝し
-ます。
+Acknowledgements
+縲We would like to thank everyone who has helped us in the creation of Zero-Channel Plus.
+縲And above all, I would like to thank Mr. Mental Decline who created the original script ZeroChannel.
+I would like to thank Mr. Mental Decline who created the original script Zero-Channel Plus.
 
-■公式WEB
-　http://zerochplus.sourceforge.jp/
+Official WEB
+縲http://zerochplus.sourceforge.jp/
 
-■perllibにあるパッケージ
-　これらはぜろちゃんねるプラスの実行に必要なパッケージです。すでにインストールされている
-サーバーもあるかもしれませんが、一応含めておきます。
-　以下はパッケージの詳細です。
+Packages in perllib
+縲These are the packages required to run Zero-channel Plus. Some servers may already have them installed.
+but we include them here just in case.
+縲Here are the details of the packages
 
 Digest-SHA-PurePerl
 Perl implementation of SHA-1/224/256/384/512
-    Version:    5.72
-    Released:   2012-09-24
-    Author:     Mark Shelor <mshelor@cpan.org>
-    License:    The Perl 5 License (Artistic 1 & GPL 1)
-    CPAN:       http://search.cpan.org/dist/Digest-SHA-PurePerl-5.72/
+    Version: 5.72
+    Released: 2012-09-24
+    Author: Mark Shelor <mshelor@cpan.org>
+    License: The Perl 5 License (Artistic 1 & GPL 1)
+    CPAN: http://search.cpan.org/dist/Digest-SHA-PurePerl-5.72/
 
 Net-DNS-Lite
 a pure-perl DNS resolver with support for timeout
-    Version:    0.09
-    Released:   2012-06-20
-    Author:     Kazuho Oku <kazuhooku@gmail.com>
-    License:    The Perl 5 License (Artistic 1 & GPL 1)
-    CPAN:       http://search.cpan.org/dist/Net-DNS-Lite-0.09/
+    Version: 0.09
+    Released: 2012-06-20
+    Author: Kazuho Oku <kazuhooku@gmail.com>
+    License: The Perl 5 License (Artistic 1 & GPL 1)
+    CPAN: http://search.cpan.org/dist/Net-DNS-Lite-0.09/
 
 List-MoreUtils
 Provide the stuff missing in List::Util
-    Version:    0.33
-    Released:   2011-08-04
-    Author:     Adam Kennedy <adamk@cpan.org>
-    License:    The Perl 5 License (Artistic 1 & GPL 1)
-    CPAN:       http://search.cpan.org/dist/List-MoreUtils-0.33/
+    Version: 0.33
+    Released: 2011-08-04
+    Author: Adam Kennedy <adamk@cpan.org>
+    License: The Perl 5 License (Artistic 1 & GPL 1)
+    CPAN: http://search.cpan.org/dist/List-MoreUtils-0.33/
 
 CGI-Session
 Persistent session data in CGI applications
-    Version:    4.48
-    Released:   2011-07-11
-    Author:     Mark Stosberg <mark@summersault.com>
-    License:    Artistic License 1.0
-    CPAN:       http://search.cpan.org/dist/CGI-Session-4.48/
-
+    Version: 4.48
+    Released: 2011-07-11
+    Author: Mark Stosberg <mark@summersault.com>
+    License: Artistic License 1.0
+    CPAN: http://search.cpan.org/dist/CGI
