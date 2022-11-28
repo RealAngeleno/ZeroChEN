@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 #============================================================================================================
 #
-#	‘‚«‚İ—pCGI
+#	æ›¸ãè¾¼ã¿ç”¨CGI
 #
 #============================================================================================================
 
@@ -13,15 +13,15 @@ no warnings 'once';
 ##use CGI::Carp qw(fatalsToBrowser warningsToBrowser);
 
 
-# CGI‚ÌÀsŒ‹‰Ê‚ğI—¹ƒR[ƒh‚Æ‚·‚é
+# CGIã®å®Ÿè¡Œçµæœã‚’çµ‚äº†ã‚³ãƒ¼ãƒ‰ã¨ã™ã‚‹
 exit(BBSCGI());
 
 #------------------------------------------------------------------------------------------------------------
 #
-#	bbs.cgiƒƒCƒ“
+#	bbs.cgiãƒ¡ã‚¤ãƒ³
 #	-------------------------------------------------------------------------------------
-#	@param	‚È‚µ
-#	@return	ƒGƒ‰[”Ô†
+#	@param	ãªã—
+#	@return	ã‚¨ãƒ©ãƒ¼ç•ªå·
 #
 #------------------------------------------------------------------------------------------------------------
 sub BBSCGI
@@ -35,7 +35,7 @@ sub BBSCGI
 	my $err = $ZP::E_SUCCESS;
 	
 	$err = Initialize($CGI, $Page);
-	# ‰Šú‰»‚É¬Œ÷‚µ‚½‚ç‘‚«‚İˆ—‚ğŠJn
+	# åˆæœŸåŒ–ã«æˆåŠŸã—ãŸã‚‰æ›¸ãè¾¼ã¿å‡¦ç†ã‚’é–‹å§‹
 	if ($err == $ZP::E_SUCCESS) {
 		my $Sys = $CGI->{'SYS'};
 		my $Form = $CGI->{'FORM'};
@@ -48,7 +48,7 @@ sub BBSCGI
 		$WriteAid->Init($Sys, $Form, $Set, $Threads, $Conv);
 		
 		$err = $WriteAid->Write();
-		# ‘‚«‚İ‚É¬Œ÷‚µ‚½‚çŒf¦”Â\¬—v‘f‚ğXV‚·‚é
+		# æ›¸ãè¾¼ã¿ã«æˆåŠŸã—ãŸã‚‰æ²ç¤ºæ¿æ§‹æˆè¦ç´ ã‚’æ›´æ–°ã™ã‚‹
 		if ($err == $ZP::E_SUCCESS) {
 			if (!$Sys->Equal('FASTMODE', 1)) {
 				require './module/varda.pl';
@@ -66,28 +66,28 @@ sub BBSCGI
 		}
 	}
 	else {
-		# ƒXƒŒƒbƒhì¬‰æ–Ê•\¦
+		# ã‚¹ãƒ¬ãƒƒãƒ‰ä½œæˆç”»é¢è¡¨ç¤º
 		if ($err == $ZP::E_PAGE_THREAD) {
 			PrintBBSThreadCreate($CGI, $Page);
 			$err = $ZP::E_SUCCESS;
 		}
-		# cookieŠm”F‰æ–Ê•\¦
+		# cookieç¢ºèªç”»é¢è¡¨ç¤º
 		elsif ($err == $ZP::E_PAGE_COOKIE) {
 			PrintBBSCookieConfirm($CGI, $Page);
 			$err = $ZP::E_SUCCESS;
 		}
-		# Œg‘Ñ‚©‚ç‚ÌƒXƒŒƒbƒhì¬‰æ–Ê•\¦
+		# æºå¸¯ã‹ã‚‰ã®ã‚¹ãƒ¬ãƒƒãƒ‰ä½œæˆç”»é¢è¡¨ç¤º
 		elsif ($err == $ZP::E_PAGE_THREADMOBILE) {
 			PrintBBSMobileThreadCreate($CGI, $Page);
 			$err = $ZP::E_SUCCESS;
 		}
-		# ƒGƒ‰[‰æ–Ê•\¦
+		# ã‚¨ãƒ©ãƒ¼ç”»é¢è¡¨ç¤º
 		else {
 			PrintBBSError($CGI, $Page, $err);
 		}
 	}
 	
-	# Œ‹‰Ê‚Ì•\¦
+	# çµæœã®è¡¨ç¤º
 	$Page->Flush('', 0, 0);
 	
 	return $err;
@@ -95,18 +95,18 @@ sub BBSCGI
 
 #------------------------------------------------------------------------------------------------------------
 #
-#	bbs.cgi‰Šú‰»
+#	bbs.cgiåˆæœŸåŒ–
 #	-------------------------------------------------------------------------------------
 #	@param	$CGI
 #	@param	$Page
-#	@return	‚È‚µ
+#	@return	ãªã—
 #
 #------------------------------------------------------------------------------------------------------------
 sub Initialize
 {
 	my ($CGI, $Page) = @_;
 	
-	# g—pƒ‚ƒWƒ…[ƒ‹‚Ì‰Šú‰»
+	# ä½¿ç”¨ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«ã®åˆæœŸåŒ–
 	require './module/melkor.pl';
 	require './module/isildur.pl';
 	require './module/radagast.pl';
@@ -120,7 +120,7 @@ sub Initialize
 	my $Cookie = RADAGAST->new;
 	my $Threads = BILBO->new;
 	
-	# ƒVƒXƒeƒ€î•ñİ’è
+	# ã‚·ã‚¹ãƒ†ãƒ æƒ…å ±è¨­å®š
 	return $ZP::E_SYSTEM_ERROR if ($Sys->Init());
 	
 	my $Form = SAMWISE->new($Sys->Get('BBSGET'));
@@ -135,14 +135,14 @@ sub Initialize
 		'THREADS'	=> $Threads,
 	);
 	
-	# –²‚ªL‚ª‚è‚ñ‚®
+	# å¤¢ãŒåºƒãŒã‚Šã‚“ã
 	$Sys->Set('MainCGI', $CGI);
 	
-	# formî•ñİ’è
+	# formæƒ…å ±è¨­å®š
 	$Form->DecodeForm(1);
 	
-	# ƒzƒXƒgî•ñİ’è(DNS‹tˆø‚«)
-	#•Ï”‰Šú‰»ƒ`ƒFƒbƒN‚ğ‘}“üB
+	# ãƒ›ã‚¹ãƒˆæƒ…å ±è¨­å®š(DNSé€†å¼•ã)
+	#å¤‰æ•°åˆæœŸåŒ–ãƒã‚§ãƒƒã‚¯ã‚’æŒ¿å…¥ã€‚
 	if(!defined $ENV{'REMOTE_HOST'} || $ENV{'REMOTE_HOST'} eq '') {
 		$ENV{'REMOTE_HOST'} = $Conv->GetRemoteHost();
 	}
@@ -160,7 +160,7 @@ sub Initialize
 	$Sys->Set('BBS_ABS', $Conv->MakePath($Sys->Get('BBSPATH_ABS'), $Sys->Get('BBS')));
 	$Sys->Set('BBS_REL', $Conv->MakePath($Sys->Get('BBSPATH'), $Sys->Get('BBS')));
 	
-	# Œg‘Ñ‚Ìê‡‚Í‹@íî•ñ‚ğİ’è
+	# æºå¸¯ã®å ´åˆã¯æ©Ÿç¨®æƒ…å ±ã‚’è¨­å®š
 	if ($client & $ZP::C_MOBILE_IDGET) {
 		my $product = $Conv->GetProductInfo($client);
 		
@@ -171,12 +171,12 @@ sub Initialize
 		$Sys->Set('KOYUU', $product);
 	}
 	
-	# SETTING.TXT‚Ì“Ç‚İ‚İ
+	# SETTING.TXTã®èª­ã¿è¾¼ã¿
 	if (!$Set->Load($Sys)) {
 		return $ZP::E_POST_NOTEXISTBBS;
 	}
 	
-	# Œg‘Ñ‚©‚ç‚ÌƒXƒŒƒbƒhì¬ƒtƒH[ƒ€•\¦
+	# æºå¸¯ã‹ã‚‰ã®ã‚¹ãƒ¬ãƒƒãƒ‰ä½œæˆãƒ•ã‚©ãƒ¼ãƒ è¡¨ç¤º
 	# $S->Equal('AGENT', 'O') && 
 	if ($Form->Equal('mb', 'on') && $Form->Equal('thread', 'on')) {
 		return $ZP::E_PAGE_THREADMOBILE;
@@ -187,11 +187,11 @@ sub Initialize
 	my $resmax = $Set->Get('BBS_RES_MAX') || $Sys->Get('RESMAX');
 	$Sys->Set('RESMAX', $resmax);
 	
-	# formî•ñ‚Ékey‚ª‘¶İ‚µ‚½‚çƒŒƒX‘‚«‚İ
+	# formæƒ…å ±ã«keyãŒå­˜åœ¨ã—ãŸã‚‰ãƒ¬ã‚¹æ›¸ãè¾¼ã¿
 	if ($Form->IsExist('key'))	{ $Sys->Set('MODE', 2); }
 	else						{ $Sys->Set('MODE', 1); }
 	
-	# ƒXƒŒƒbƒhì¬ƒ‚[ƒh‚ÅMESSAGE‚ª–³‚¢FƒXƒŒƒbƒhì¬‰æ–Ê
+	# ã‚¹ãƒ¬ãƒƒãƒ‰ä½œæˆãƒ¢ãƒ¼ãƒ‰ã§MESSAGEãŒç„¡ã„ï¼šã‚¹ãƒ¬ãƒƒãƒ‰ä½œæˆç”»é¢
 	if ($Sys->Equal('MODE', 1)) {
 		if (!$Form->IsExist('MESSAGE')) {
 			return $ZP::E_PAGE_THREAD;
@@ -200,26 +200,26 @@ sub Initialize
 		$Sys->Set('KEY', $Form->Get('key'));
 	}
 	
-	# cookie‚Ì‘¶İƒ`ƒFƒbƒN(PC‚Ì‚İ)
+	# cookieã®å­˜åœ¨ãƒã‚§ãƒƒã‚¯(PCã®ã¿)
 	if ($client & $ZP::C_PC) {
 		if ($Set->Equal('SUBBBS_CGI_ON', 1)) {
-			# ŠÂ‹«•Ï”æ“¾¸”s
+			# ç’°å¢ƒå¤‰æ•°å–å¾—å¤±æ•—
 			if (!$Cookie->Init()) {
 				return $ZP::E_PAGE_COOKIE;
 			}
 			
-			# –¼‘O—“cookie
+			# åå‰æ¬„cookie
 			if ($Set->Equal('BBS_NAMECOOKIE_CHECK', 'checked') && !$Cookie->IsExist('NAME')) {
 				return $ZP::E_PAGE_COOKIE;
 			}
-			# ƒ[ƒ‹—“cookie
+			# ãƒ¡ãƒ¼ãƒ«æ¬„cookie
 			if ($Set->Equal('BBS_MAILCOOKIE_CHECK', 'checked') && !$Cookie->IsExist('MAIL')) {
 				return $ZP::E_PAGE_COOKIE;
 			}
 		}
 	}
 	
-	# subject‚Ì“Ç‚İ‚İ
+	# subjectã®èª­ã¿è¾¼ã¿
 	$Threads->Load($Sys);
 	
 	return $ZP::E_SUCCESS;
@@ -227,11 +227,11 @@ sub Initialize
 
 #------------------------------------------------------------------------------------------------------------
 #
-#	bbs.cgiƒXƒŒƒbƒhì¬ƒy[ƒW•\¦
+#	bbs.cgiã‚¹ãƒ¬ãƒƒãƒ‰ä½œæˆãƒšãƒ¼ã‚¸è¡¨ç¤º
 #	-------------------------------------------------------------------------------------
 #	@param	$CGI
 #	@param	$Page
-#	@return	‚È‚µ
+#	@return	ãªã—
 #
 #------------------------------------------------------------------------------------------------------------
 sub PrintBBSThreadCreate
@@ -253,17 +253,17 @@ sub PrintBBSThreadCreate
 	my $code = $Sys->Get('ENCODE');
 	my $cgipath = $Sys->Get('CGIPATH');
 	
-	# HTMLƒwƒbƒ_‚Ìo—Í
+	# HTMLãƒ˜ãƒƒãƒ€ã®å‡ºåŠ›
 	$Page->Print("Content-type: text/html\n\n");
 	$Page->Print("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http://www.w3.org/TR/html4/loose.dtd\">\n");
-	$Page->Print("<html lang=\"ja\">\n");
+	$Page->Print("<html lang=\"en\">\n");
 	$Page->Print("<head>\n");
 	$Page->Print(' <meta http-equiv="Content-Type" content="text/html;charset=Shift_JIS">'."\n\n");
 	$Caption->Print($Page, undef);
 	$Page->Print(" <title>$title</title>\n\n");
 	$Page->Print("</head>\n<!--nobanner-->\n");
 	
-	# <body>ƒ^ƒOo—Í
+	# <body>ã‚¿ã‚°å‡ºåŠ›
 	{
 		my @work;
 		$work[0] = $Set->Get('BBS_BG_COLOR');
@@ -279,24 +279,24 @@ sub PrintBBSThreadCreate
 	}
 
 	$Page->Print("<div align=\"center\">");
-	# ŠÅ”Â‰æ‘œ•\¦‚ ‚è
+	# çœ‹æ¿ç”»åƒè¡¨ç¤ºã‚ã‚Š
 	if ($image ne '') {
-		# ŠÅ”Â‰æ‘œ‚©‚ç‚ÌƒŠƒ“ƒN‚ ‚è
+		# çœ‹æ¿ç”»åƒã‹ã‚‰ã®ãƒªãƒ³ã‚¯ã‚ã‚Š
 		if ($link ne '') {
 			$Page->Print("<a href=\"$link\"><img src=\"$image\" border=\"0\" alt=\"$image\"></a><br>");
 		}
-		# ŠÅ”Â‰æ‘œ‚ÉƒŠƒ“ƒN‚Í‚È‚µ
+		# çœ‹æ¿ç”»åƒã«ãƒªãƒ³ã‚¯ã¯ãªã—
 		else {
 			$Page->Print("<img src=\"$image\" border=\"0\"><br>");
 		}
 	}
 	$Page->Print("</div>");
 
-	# ƒwƒbƒ_ƒe[ƒuƒ‹‚Ì•\¦
+	# ãƒ˜ãƒƒãƒ€ãƒ†ãƒ¼ãƒ–ãƒ«ã®è¡¨ç¤º
 	$Caption->Load($Sys, 'HEAD');
 	$Caption->Print($Page, $Set);
 	
-	# ƒXƒŒƒbƒhì¬ƒtƒH[ƒ€‚Ì•\¦
+	# ã‚¹ãƒ¬ãƒƒãƒ‰ä½œæˆãƒ•ã‚©ãƒ¼ãƒ ã®è¡¨ç¤º
 	{
 		my $tblCol = $Set->Get('BBS_MAKETHREAD_COLOR');
 		my $name = $Cookie->Get('NAME', '', 'utf8');
@@ -309,16 +309,16 @@ sub PrintBBSThreadCreate
 <table border="1" cellspacing="7" cellpadding="3" width="95%" bgcolor="$tblCol" align="center">
  <tr>
   <td>
-  <b>ƒXƒŒƒbƒhV‹Kì¬</b><br>
+  <b>Create New Thread</b><br>
   <center>
   <form method="POST" action="./bbs.cgi?guid=ON">
   <input type="hidden" name="bbs" value="$bbs"><input type="hidden" name="time" value="$tm">
   <table border="0">
    <tr>
     <td align="left">
-    ƒ^ƒCƒgƒ‹F<input type="text" name="subject" size="25">@<input type="submit" value="V‹KƒXƒŒƒbƒhì¬"><br>
-    –¼‘OF<input type="text" name="FROM" size="19" value="$name">
-    E-mail<font size="1">iÈ—ª‰Âj</font>F<input type="text" name="mail" size="19" value="$mail"><br>
+    Subject: <input type="text" name="subject" size="25"> <input type="submit" value="Post"><br>
+    Name: <input type="text" name="FROM" size="19" value="$name" placeholder="Anonymous">
+    E-mail<font size="1"> (Optional) </font> <input type="text" name="mail" size="19" value="$mail"><br>
     <textarea rows="5" cols="64" name="MESSAGE"></textarea>
     </td>
    </tr>
@@ -340,11 +340,11 @@ HTML
 
 #------------------------------------------------------------------------------------------------------------
 #
-#	bbs.cgiƒXƒŒƒbƒhì¬ƒy[ƒW(Œg‘Ñ)•\¦
+#	bbs.cgiã‚¹ãƒ¬ãƒƒãƒ‰ä½œæˆãƒšãƒ¼ã‚¸(æºå¸¯)è¡¨ç¤º
 #	-------------------------------------------------------------------------------------
 #	@param	$CGI	
 #	@param	$Page	THORIN
-#	@return	‚È‚µ
+#	@return	ãªã—
 #
 #------------------------------------------------------------------------------------------------------------
 sub PrintBBSMobileThreadCreate
@@ -369,24 +369,24 @@ sub PrintBBSMobileThreadCreate
 	$Banner->Print($Page, 100, 2, 1);
 	
 	$Page->Print("</center>\n");
-	$Page->Print("ƒ^ƒCƒgƒ‹<br><input type=text name=subject><br>");
-	$Page->Print("–¼‘O<br><input type=text name=FROM><br>");
-	$Page->Print("ƒ[ƒ‹<br><input type=text name=mail><br>");
+	$Page->Print("Title<br><input type=text name=subject><br>");
+	$Page->Print("Name<br><input type=text name=FROM><br>");
+	$Page->Print("E-mail<br><input type=text name=mail><br>");
 	$Page->Print("<textarea name=MESSAGE></textarea><br>");
 	$Page->Print("<input type=hidden name=bbs value=$bbs>");
 	$Page->Print("<input type=hidden name=time value=$tm>");
 	$Page->Print("<input type=hidden name=mb value=on>");
-	$Page->Print("<input type=submit value=\"ƒXƒŒƒbƒhì¬\">");
+	$Page->Print("<input type=submit value=\"Thread Creation\">");
 	$Page->Print("</form></body></html>");
 }
 
 #------------------------------------------------------------------------------------------------------------
 #
-#	bbs.cgiƒNƒbƒL[Šm”Fƒy[ƒW•\¦
+#	bbs.cgiã‚¯ãƒƒã‚­ãƒ¼ç¢ºèªãƒšãƒ¼ã‚¸è¡¨ç¤º
 #	-------------------------------------------------------------------------------------
 #	@param	$CGI	
 #	@param	$Page	THORIN
-#	@return	‚È‚µ
+#	@return	ãªã—
 #
 #------------------------------------------------------------------------------------------------------------
 sub PrintBBSCookieConfirm
@@ -415,7 +415,7 @@ sub PrintBBSCookieConfirm
 	my $subject = &$sanitize($Form->Get('subject'));
 	my $key = &$sanitize($Form->Get('key'));
 	
-	# cookieî•ñ‚Ìo—Í
+	# cookieæƒ…å ±ã®å‡ºåŠ›
 	$Cookie->Set('NAME', $name, 'utf8')	if ($Set->Equal('BBS_NAMECOOKIE_CHECK', 'checked'));
 	$Cookie->Set('MAIL', $mail, 'utf8')	if ($Set->Equal('BBS_MAILCOOKIE_CHECK', 'checked'));
 	$Cookie->Out($Page, $Set->Get('BBS_COOKIEPATH'), 60 * 24 * 30);
@@ -429,13 +429,13 @@ sub PrintBBSCookieConfirm
 
  <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
 
- <title>¡ ‘‚«‚İŠm”F ¡</title>
+ <title>â–  Post Confirmation â– </title>
 
 </head>
 <!--nobanner-->
 HTML
 	
-	# <body>ƒ^ƒOo—Í
+	# <body>ã‚¿ã‚°å‡ºåŠ›
 	{
 		my @work;
 		$work[0] = $Set->Get('BBS_THREAD_COLOR');
@@ -449,21 +449,21 @@ HTML
 	}
 	
 	$Page->Print(<<HTML);
-<font size="4" color="#FF0000"><b>‘‚«‚±‚İ•ƒNƒbƒL[Šm”F</b></font>
+<font size="4" color="#FF0000"><b>æ›¸ãã“ã¿ï¼†ã‚¯ãƒƒã‚­ãƒ¼ç¢ºèª</b></font>
 <blockquote style="margin-top:4em;">
- –¼‘OF $name<br>
- E-mailF $mail<br>
- “à—eF<br>
+ Name: $name<br>
+ E-mail: $mail<br>
+ Message: <br>
  $msg<br>
 </blockquote>
 
 <div style="font-weight:bold;">
-“ŠeŠm”F<br>
-E“ŠeÒ‚ÍA“Še‚ÉŠÖ‚µ‚Ä”­¶‚·‚éÓ”C‚ª‘S‚Ä“ŠeÒ‚É‹A‚·‚±‚Æ‚ğ³‘ø‚µ‚Ü‚·B<br>
-E“ŠeÒ‚ÍA˜b‘è‚Æ–³ŠÖŒW‚ÈL‚Ì“Še‚ÉŠÖ‚µ‚ÄA‘Š‰‚Ì”ï—p‚ğx•¥‚¤‚±‚Æ‚ğ³‘ø‚µ‚Ü‚·<br>
-E“ŠeÒ‚ÍA“Še‚³‚ê‚½“à—e‚É‚Â‚¢‚ÄAŒf¦”Â‰^‰cÒ‚ªƒRƒs[A•Û‘¶Aˆø—pA“]Ú“™‚Ì—˜—p‚·‚é‚±‚Æ‚ğ‹–‘ø‚µ‚Ü‚·B<br>
-@‚Ü‚½AŒf¦”Â‰^‰cÒ‚É‘Î‚µ‚ÄA’˜ìÒlŠiŒ ‚ğˆêØsg‚µ‚È‚¢‚±‚Æ‚ğ³‘ø‚µ‚Ü‚·B<br>
-E“ŠeÒ‚ÍAŒf¦”Â‰^‰cÒ‚ªw’è‚·‚é‘æOÒ‚É‘Î‚µ‚ÄA’˜ì•¨‚Ì—˜—p‹–‘ø‚ğˆêØ‚µ‚È‚¢‚±‚Æ‚ğ³‘ø‚µ‚Ü‚·B<br>
+Post Confirmation<br>
+ãƒ»You agree that that content is the responsibility of the poster.<br>
+ãƒ»You agree not to advertise.<br>
+ãƒ»You agree that by posting, you give operators a royalty-free license to copy, save, quote, and repost the posted content.<br>
+I also agree not to exercise any moral rights against the BBS operator.<br>
+ãƒ»The contributor agrees not to grant any license to use the copyrighted material to any third party designated by the BBS operator.<br>
 </div>
 
 <form method="POST" action="./bbs.cgi?guid=ON">
@@ -478,22 +478,22 @@ HTML
 	$Page->HTMLInput('hidden', 'bbs', $bbs);
 	$Page->HTMLInput('hidden', 'time', $tm);
 	
-	# ƒŒƒX‘‚«‚İƒ‚[ƒh‚Ìê‡‚Íkey‚ğİ’è‚·‚é
+	# ãƒ¬ã‚¹æ›¸ãè¾¼ã¿ãƒ¢ãƒ¼ãƒ‰ã®å ´åˆã¯keyã‚’è¨­å®šã™ã‚‹
 	if ($Sys->Equal('MODE', 2)) {
 		$Page->HTMLInput('hidden', 'key', $key);
 	}
 	
 	$Page->Print(<<HTML);
-<input type="submit" value="ã‹L‘S‚Ä‚ğ³‘ø‚µ‚Ä‘‚«‚Ş"><br>
+<input type="submit" value="I agree to all above."><br>
 </form>
 
 <p>
-•ÏX‚·‚éê‡‚Í–ß‚éƒ{ƒ^ƒ“‚Å–ß‚Á‚Ä‘‚«’¼‚µ‚Ä‰º‚³‚¢B
+If you want to change it, please use the back button to go back and rewrite it.
 </p>
 
 <p>
-Œ»İAr‚ç‚µ‘Îô‚ÅƒNƒbƒL[‚ğİ’è‚µ‚Ä‚¢‚È‚¢‚Æ‘‚«‚±‚İ‚Å‚«‚È‚¢‚æ‚¤‚É‚µ‚Ä‚¢‚Ü‚·B<br>
-<font size="2">(cookie‚ğİ’è‚·‚é‚Æ‚±‚Ì‰æ–Ê‚Í‚Å‚È‚­‚È‚è‚Ü‚·B)</font><br>
+Currently, we are preventing writing without setting a cookie to prevent vandalism.<br>
+<font size="2">(If you set a cookie, this screen will not appear.)</font><br>
 </p>
 
 </body>
@@ -504,11 +504,11 @@ HTML
 
 #------------------------------------------------------------------------------------------------------------
 #
-#	bbs.cgiƒWƒƒƒ“ƒvƒy[ƒW•\¦
+#	bbs.cgiã‚¸ãƒ£ãƒ³ãƒ—ãƒšãƒ¼ã‚¸è¡¨ç¤º
 #	-------------------------------------------------------------------------------------
 #	@param	$CGI
 #	@param	$Page
-#	@return	‚È‚µ
+#	@return	ãªã—
 #
 #------------------------------------------------------------------------------------------------------------
 sub PrintBBSJump
@@ -521,15 +521,15 @@ sub PrintBBSJump
 	my $Conv = $CGI->{'CONV'};
 	my $Cookie = $CGI->{'COOKIE'};
 	
-	# Œg‘Ñ—p•\¦
+	# æºå¸¯ç”¨è¡¨ç¤º
 	if ($Form->Equal('mb', 'on') || ($Sys->Get('CLIENT') & $ZP::C_MOBILEBROWSER) ) {
 		my $bbsPath = $Conv->MakePath($Sys->Get('CGIPATH').'/r.cgi/'.$Form->Get('bbs').'/'.$Form->Get('key').'/l10');
 		$Page->Print("Content-type: text/html\n\n");
-		$Page->Print('<!--nobanner--><html><body>‘‚«‚İŠ®—¹‚Å‚·<br>');
-		$Page->Print("<a href=\"$bbsPath\">‚±‚¿‚ç</a>");
-		$Page->Print("‚©‚çŒf¦”Â‚Ö–ß‚Á‚Ä‚­‚¾‚³‚¢B\n");
+		$Page->Print('<!--nobanner--><html><body>æ›¸ãè¾¼ã¿å®Œäº†ã§ã™<br>');
+		$Page->Print("<a href=\"$bbsPath\">ã“ã¡ã‚‰</a>");
+		$Page->Print("ã‹ã‚‰æ²ç¤ºæ¿ã¸æˆ»ã£ã¦ãã ã•ã„ã€‚\n");
 	}
-	# PC—p•\¦
+	# PCç”¨è¡¨ç¤º
 	else {
 		my $bbsPath = $Conv->MakePath($Sys->Get('BBS_REL'));
 		my $name = $Form->Get('NAME', '');
@@ -543,15 +543,15 @@ sub PrintBBSJump
 		$Page->Print(<<HTML);
 <html>
 <head>
-	<title>‘‚«‚±‚İ‚Ü‚µ‚½B</title>
+	<title>æ›¸ãã“ã¿ã¾ã—ãŸã€‚</title>
 <meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
 <meta http-equiv="Refresh" content="5;URL=$bbsPath/">
 </head>
 <!--nobanner-->
 <body>
-‘‚«‚±‚İ‚ªI‚í‚è‚Ü‚µ‚½B<br>
+Post successful!<br>
 <br>
-‰æ–Ê‚ğØ‚è‘Ö‚¦‚é‚Ü‚Å‚µ‚Î‚ç‚­‚¨‘Ò‚¿‰º‚³‚¢B<br>
+Redirecting now...<br>
 <br>
 <br>
 <br>
@@ -560,7 +560,7 @@ sub PrintBBSJump
 HTML
 	
 	}
-	# ’m—“•\¦(•\¦‚³‚¹‚½‚­‚È‚¢ê‡‚ÍƒRƒƒ“ƒgƒAƒEƒg‚©ğŒ‚ğ0‚É)
+	# å‘ŠçŸ¥æ¬„è¡¨ç¤º(è¡¨ç¤ºã•ã›ãŸããªã„å ´åˆã¯ã‚³ãƒ¡ãƒ³ãƒˆã‚¢ã‚¦ãƒˆã‹æ¡ä»¶ã‚’0ã«)
 	if (0) {
 		require './module/denethor.pl';
 		my $Banner = DENETHOR->new;
@@ -572,12 +572,12 @@ HTML
 
 #------------------------------------------------------------------------------------------------------------
 #
-#	bbs.cgiƒGƒ‰[ƒy[ƒW•\¦
+#	bbs.cgiã‚¨ãƒ©ãƒ¼ãƒšãƒ¼ã‚¸è¡¨ç¤º
 #	-------------------------------------------------------------------------------------
 #	@param	$CGI
 #	@param	$Page
 #	@param	$err
-#	@return	‚È‚µ
+#	@return	ãªã—
 #
 #------------------------------------------------------------------------------------------------------------
 sub PrintBBSError
