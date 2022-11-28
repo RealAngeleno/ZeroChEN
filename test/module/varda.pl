@@ -713,9 +713,9 @@ sub PrintResponse
 		for (my $k = 0; $k < $dispLine; $k++) {
 			$Page->Print("$dispBuff[$k]<br>");
 		}
-		$Page->Print("<font color=\"green\">Omitted... to read the whole thing");
+		$Page->Print("<font color=\"green\">Comment too long... to read the whole thing, click ");
 		$Page->Print("<a href=\"$path\" target=\"_blank\">here</a>");
-		$Page->Print("Click</font><br><br></dd>\n");
+		$Page->Print(".</font><br><br></dd>\n");
 	}
 }
 
