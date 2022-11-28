@@ -416,7 +416,7 @@ sub PrintReadFoot
 		
 		# 新着の表示
 		if ($rmax > $Dat->Size()) {
-			my $dispStr = ($Dat->Size() == $elem[2] ? 'Check for new replies' : 'Read more');
+			my $dispStr = ($Dat->Size() == $elem[2] ? 'Display only new replies' : 'Read more');
 			my $pathNew = $Conv->CreatePath($Sys, 0, $bbs, $key, "$elem[2]-");
 			$Page->Print("<center><a href=\"$pathNew\">$dispStr</a></center>\n");
 			$Page->Print("<hr>\n\n");
