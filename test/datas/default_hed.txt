@@ -1,10 +1,10 @@
 <div align="center" style="margin: 1.2em 0;">
-<font color="red">ƒNƒŠƒbƒN‚Å‹~‚¦‚é–½‚ªc‚È‚¢‚Å‚·(M¥ƒÖ¥L)¼¬·°İ</font>
+<font color="red">A click can save a live? Nah (ï½€ï½¥Ï‰ï½¥Â´)</font>
 </div>
 
-<b>Œf¦”Âg—pã‚Ì’ˆÓ</b>
+<b>Notes on using the board</b>
 <blockquote style="margin-top:0;font-weight:bold;">
-¥“]‚ñ‚Å‚à‹ƒ‚©‚È‚¢<br>
-¥o‚³‚ê‚½‚à‚Ì‚Íc‚³‚¸H‚×‚é<br>
-¥Perlg‚¢‚ğ‘¸d‚·‚é<br>
+ï½¥Don't cry when you fall<br>
+ï½¥Eat everything that's served<br>
+ï½¥Respect Perl users<br>
 </blockquote>
