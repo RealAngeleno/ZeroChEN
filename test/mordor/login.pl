@@ -126,7 +126,7 @@ $Page->Print(<<HTML);
      <tr>
       <td colspan="2" align="center">
       <hr>
-      <input type="submit" value="　Log in　">
+      <input type="submit" value="Log in">
       </td>
      </tr>
     </table>
