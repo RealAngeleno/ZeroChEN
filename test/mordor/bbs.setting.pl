@@ -1,6 +1,6 @@
 #============================================================================================================
 #
-#	掲示板管理 - 掲示板設定 モジュール 
+#	掲示板管理 - 掲示板設定 モジュール
 #	bbs.setting.pl
 #	---------------------------------------------------------------------------
 #	2004.06.01 start
@@ -178,20 +178,20 @@ sub SetMenuList
 {
 	my ($Base, $pSys, $bbs) = @_;
 	
-	$Base->SetMenu('設定情報', "'bbs.setting','DISP','SETINFO'");
+	$Base->SetMenu('Setup Information', "'bbs.setting','DISP','SETINFO'");
 	
 	# 管理グループ設定権限のみ
 	if ($pSys->{'SECINFO'}->IsAuthority($pSys->{'USER'}, $ZP::AUTH_BBSSETTING, $bbs)){
 		$Base->SetMenu('<hr>', '');
-		$Base->SetMenu('基本設定', "'bbs.setting','DISP','SETBASE'");
-		$Base->SetMenu('カラー設定', "'bbs.setting','DISP','SETCOLOR'");
-		$Base->SetMenu('制限・規制設定', "'bbs.setting','DISP','SETLIMIT'");
-		$Base->SetMenu('その他設定', "'bbs.setting','DISP','SETOTHER'");
+		$Base->SetMenu('Base', "'bbs.setting','DISP','SETBASE'");
+		$Base->SetMenu('Colors/Theming', "'bbs.setting','DISP','SETCOLOR'");
+		$Base->SetMenu('Limits', "'bbs.setting','DISP','SETLIMIT'");
+		$Base->SetMenu('Other', "'bbs.setting','DISP','SETOTHER'");
 		$Base->SetMenu('<hr>', '');
-		$Base->SetMenu('設定インポート', "'bbs.setting','DISP','SETIMPORT'");
+		$Base->SetMenu('Import Settings', "'bbs.setting','DISP','SETIMPORT'");
 	}
 	$Base->SetMenu('<hr>', '');
-	$Base->SetMenu('システム管理へ戻る', "'sys.bbs','DISP','LIST'");
+	$Base->SetMenu('Back to System Management', "'sys.bbs','DISP','LIST'");
 }
 
 #------------------------------------------------------------------------------------------------------------
@@ -265,26 +265,26 @@ sub PrintBaseSetting
 	my $setRefCushion	= $Setting->Get('BBS_REFERER_CUSHION');
 	
 	$Page->Print("<center><table cellspcing=2 width=100%>");
-	$Page->Print("<tr><td colspan=2>各設定値を入力して[設定]ボタンを押してください。</td></tr>");
+	$Page->Print("<tr><td colspan=2>Enter each setting value and press Submit.</td></tr>");
 	$Page->Print("<tr><td colspan=2><hr></td></tr>");
-	$Page->Print("<tr><td class=\"DetailTitle\">サブタイトル</td><td>");
+	$Page->Print("<tr><td class=\"DetailTitle\">Subtitle</td><td>");
 	$Page->Print("<input type=text size=80 name=BBS_SUBTITLE value=\"$setSubTitle\"></td></tr>");
-	$Page->Print("<tr><td class=\"DetailTitle\">index看板画像</td><td>");
+	$Page->Print("<tr><td class=\"DetailTitle\">Index logo image</td><td>");
 	$Page->Print("<input type=text size=80 name=BBS_TITLE_PICTURE value=\"$setKanban\"></td></tr>");
-	$Page->Print("<tr><td class=\"DetailTitle\">index看板リンク</td><td>");
+	$Page->Print("<tr><td class=\"DetailTitle\">Index logo link</td><td>");
 	$Page->Print("<input type=text size=80 name=BBS_TITLE_LINK value=\"$setKnabanLink\"></td></tr>");
-	$Page->Print("<tr><td class=\"DetailTitle\">index背景画像</td><td>");
+	$Page->Print("<tr><td class=\"DetailTitle\">Index background image</td><td>");
 	$Page->Print("<input type=text size=80 name=BBS_BG_PICTURE value=\"$setBackPict\"></td></tr>");
-	$Page->Print("<tr><td class=\"DetailTitle\">名無しさん</td><td>");
+	$Page->Print("<tr><td class=\"DetailTitle\">Anonymous name</td><td>");
 	$Page->Print("<input type=text size=80 name=BBS_NONAME_NAME value=\"$setNoName\"></td></tr>");
-	$Page->Print("<tr><td class=\"DetailTitle\">削除文言</td><td>");
+	$Page->Print("<tr><td class=\"DetailTitle\">Delete name</td><td>");
 	$Page->Print("<input type=text size=80 name=BBS_DELETE_NAME value=\"$setAbone\"></td></tr>");
-	$Page->Print("<tr><td class=\"DetailTitle\">cookie保存パス</td><td>");
+	$Page->Print("<tr><td class=\"DetailTitle\">Cookie storage path</td><td>");
 	$Page->Print("<input type=text size=80 name=BBS_COOKIEPATH value=\"$setCookiePath\"></td></tr>");
-	$Page->Print("<tr><td class=\"DetailTitle\">リファラクッション</td><td>");
+	$Page->Print("<tr><td class=\"DetailTitle\">Referral cushion</td><td>");
 	$Page->Print("<input type=text size=80 name=BBS_REFERER_CUSHION value=\"$setRefCushion\"></td></tr>");
 	$Page->Print("<tr><td colspan=2><hr></td></tr>");
-	$Page->Print("<tr><td colspan=2 align=left><input type=button value=\"　設定　\"");
+	$Page->Print("<tr><td colspan=2 align=left><input type=button value=\"Submit\"");
 	$Page->Print("onclick=\"DoSubmit('bbs.setting','FUNC','SETBASE');\"></td></tr></table>");
 }
 
@@ -334,63 +334,62 @@ sub PrintColorSetting
 	$setCap			= $Setting->Get('BBS_CAP_COLOR');
 	
 	$Page->Print("<center><table cellspcing=2 width=100%>");
-	$Page->Print("<tr><td colspan=6>各設定色を入力して[設定]ボタンを押してください。</td></tr>");
+	$Page->Print("<tr><td colspan=6>Enter each setting color and press the [Set] button.</td></tr>");
 	$Page->Print("<tr><td colspan=6><hr></td></tr>");
-	$Page->Print("<tr><td class=\"DetailTitle\">index背景色</td><td>");
+	$Page->Print("<tr><td class=\"DetailTitle\">indexBackgroundColor</td><td>");
 	$Page->Print("<input type=text size=10 name=BBS_BG_COLOR value=\"$setIndexBG\">");
 	$Page->Print("</td><td bgcolor=$setIndexBG></td>");
-	$Page->Print("<td class=\"DetailTitle\">テキスト色</td><td>");
+	$Page->Print("<td class=\"DetailTitle\">Text color</td><td>");
 	$Page->Print("<input type=text size=10 name=BBS_TEXT_COLOR value=\"$setText\">");
-	$Page->Print("</td><td><font color=$setText>テキスト</font></td></tr>\n");
-	$Page->Print("<tr><td class=\"DetailTitle\">indexメニュー背景色</td><td>");
+	$Page->Print("</td><td><font color=$setText>Text</font></td></tr>\n");
+	$Page->Print("<tr><td class=\"DetailTitle\">indexMenu background color</td><td>");
 	$Page->Print("<input type=text size=10 name=BBS_MENU_COLOR value=\"$setMenuBG\">");
 	$Page->Print("</td><td bgcolor=$setMenuBG></td>");
-	$Page->Print("<td class=\"DetailTitle\">名前色</td><td>");
+	$Page->Print("<td class=\"DetailTitle\">Name Color</td><td>");
 	$Page->Print("<input type=text size=10 name=BBS_NAME_COLOR value=\"$setName\">");
-	$Page->Print("</td><td><font color=$setName>名前</font></td></tr>\n");
-	$Page->Print("<tr><td class=\"DetailTitle\">スレッド作成背景色</td><td>");
+	$Page->Print("</td><td><font color=$setName>Name</font></td></tr>\n");
+	$Page->Print("<tr><td class=\"DetailTitle\">Thread creation background color</td><td>");
 	$Page->Print("<input type=text size=10 name=BBS_MAKETHREAD_COLOR value=\"$setCreateBG\">");
 	$Page->Print("</td><td bgcolor=$setCreateBG></td>");
-	$Page->Print("<td class=\"DetailTitle\">リンク色</td><td>");
+	$Page->Print("<td class=\"DetailTitle\">Link Color</td><td>");
 	$Page->Print("<input type=text size=10 name=BBS_LINK_COLOR value=\"$setLink\">");
-	$Page->Print("</td><td><font color=$setLink>リンク</font></td></tr>\n");
-	$Page->Print("<tr><td class=\"DetailTitle\">スレッド背景色</td><td>");
+	$Page->Print("</td><td><font color=$setLink>Link</font></td></tr>\n");
+	$Page->Print("<tr><td class=\"DetailTitle\">Thread background color</td><td>");
 	$Page->Print("<input type=text size=10 name=BBS_THREAD_COLOR value=\"$setThreadBG\">");
 	$Page->Print("</td><td bgcolor=$setThreadBG></td>");
-	$Page->Print("<td class=\"DetailTitle\">リンク色(アンカー時)</td><td>");
+	$Page->Print("<td class=\"DetailTitle\">Link color (when anchored)</td><td>");
 	$Page->Print("<input type=text size=10 name=BBS_ALINK_COLOR value=\"$setLinkA\">");
-	$Page->Print("</td><td><font color=$setLinkA>リンク(アンカー)</font></td></tr>\n");
-	$Page->Print("<tr><td class=\"DetailTitle\">indexタイトル色</td><td>");
-	$Page->Print("<input type=text size=10 name=BBS_TITLE_COLOR value=\"$setIndexTitle\">");
-	$Page->Print("</td><td><font color=$setIndexTitle>indexタイトル</font></td>");
-	$Page->Print("<td class=\"DetailTitle\">リンク色(訪問済み)</td><td>");
+	$Page->Print("</td><td><font color=$setLinkA>link (anchor)</font></td></tr>\n");
+	$Page->Print("<tr><td class=\"DetailTitle\">index title color</td><td>");
+	$Page->Print("</td><td><font color=$setIndexTitle>index title</font></td>");
+	$Page->Print("<td class=\"DetailTitle\">Link Color (Visit)</td><td>");
 	$Page->Print("<input type=text size=10 name=BBS_VLINK_COLOR value=\"$setLinkV\">");
-	$Page->Print("</td><td><font color=$setLinkV>リンク(訪問済み)</font></td></tr>\n");
-	$Page->Print("<tr><td class=\"DetailTitle\">スレッドタイトル色</td><td>");
+	$Page->Print("</td><td><font color=$setLinkV>Link (visited)</font></td></tr>\n");
+	$Page->Print("<tr><td class=\"DetailTitle\">Thread Title Color</td><td>");
 	$Page->Print("<input type=text size=10 name=BBS_SUBJECT_COLOR value=\"$setThreadTitle\">");
-	$Page->Print("</td><td><font color=$setThreadTitle>スレッドタイトル</font></td>");
-	$Page->Print("<td class=\"DetailTitle\">キャップ色</td><td>");
+	$Page->Print("</td><td><font color=$setThreadTitle>Thread Title</font></td>");
+	$Page->Print("<td class=\"DetailTitle\">Cap color</td><td>");
 	$Page->Print("<input type=text size=10 name=BBS_CAP_COLOR value=\"$setCap\">");
-	$Page->Print("</td><td><font color=$setName><font color=$setCap>名前</font></font></td></tr>\n");
+	$Page->Print("</td><td><font color=$setName><font color=$setCap>Name</font></font></td></tr>\n");
 	$Page->Print("<tr><td colspan=6><hr></td></tr>");
 	
 	# スレッドプレビューの表示
 	if (1) {
-		$Page->Print("<tr><td class=\"DetailTitle\" colspan=3>indexプレビュー</td>");
-		$Page->Print("<td class=\"DetailTitle\" colspan=3>スレッドプレビュー</td></tr>");
+		$Page->Print("<tr><td class=\"DetailTitle\" colspan=3>index preview</td>");
+		$Page->Print("<td class=\"DetailTitle\" colspan=3>Thread Preview</td></tr>");
 		$Page->Print("<tr><td colspan=3 bgcolor=$setIndexBG>");
-		$Page->Print("<center><font color=$setIndexTitle>indexタイトル</font><br>");
-		$Page->Print("<table width=100% cellspacing=7 bgcolor=$setMenuBG border><td>ヘッダ</td></table><br>");
-		$Page->Print("<table width=100% cellspacing=7 bgcolor=$setMenuBG border><td>メニュー</td></table><br>");
+		$Page->Print("<center><font color=$setIndexTitle>index title</font><br>");
+		$Page->Print("<table width=100% cellspacing=7 bgcolor=$setMenuBG border><td>Header</		td></table><br>");
+		$Page->Print("<table width=100% cellspacing=7 bgcolor=$setMenuBG border><td>Menu</td></table><br>");
 		$Page->Print("<table width=100% cellspacing=7 bgcolor=$setThreadBG border><td>");
-		$Page->Print("<font color=$setThreadTitle>スレッドタイトル</font><br><br>");
-		$Page->Print("<font color=$setText>テキスト</font><br></td></table><br>");
-		$Page->Print("<table width=100% cellspacing=7 bgcolor=$setCreateBG border><td>スレッド作成</td>");
+		$Page->Print("<font color=$setThreadTitle>Thread Title</font><br><br>");
+		$Page->Print("<font color=$setText>Text</font><br></td></table><br>");
+		$Page->Print("<table width=100% cellspacing=7 bgcolor=$setCreateBG border><td>Create thread</td>");
 		$Page->Print("</table><br></center></td>");
 		$Page->Print("<td colspan=3 bgcolor=$setThreadBG valign=top><font color=$setThreadTitle>");
-		$Page->Print("スレッドタイトル</font><br><br>1 <font color=$setName>名前＠<font color=$setCap>キャップ ★</font></font><br>");
-		$Page->Print("　<font color=$setLink><u>http://---</u></font><br>");
-		$Page->Print("　<font color=$setLinkV><u>http://---</u></font><br>");
+		$Page->Print("Thread Title</font><br><br>1 <font color=$setName>Name@<font color=$setCap>名前</font></font><br>" );
+		$Page->Print("<font color=$setLink><u>http://---</u></font><br>");
+		$Page->Print("<font color=$setLinkV><u>http://---</u></font><br>");
 		$Page->Print("</td></tr>");
 		$Page->Print("<tr><td colspan=6><hr></td></tr>");
 	}
@@ -454,51 +453,51 @@ sub PrintLimitSetting
 	my $selROon			= ($setReadOnly eq 'on' ? 'selected' : '');
 	
 	$Page->Print("<center><table cellspcing=2 width=100%>");
-	$Page->Print("<tr><td colspan=4>各設定値を入力して[設定]ボタンを押してください。</td></tr>");
+	$Page->Print("<tr><td colspan=4>Enter each setting value and press Submit.</td></tr>");
 	$Page->Print("<tr><td colspan=4><hr></td></tr>");
 	
-	$Page->Print("<tr><td class=\"DetailTitle\">タイトル文字数</td><td>");
+	$Page->Print("<tr><td class=\"DetailTitle\">Max title length</td><td>");
 	$Page->Print("<input type=text size=10 name=BBS_SUBJECT_COUNT value=\"$setSubjectMax\"></td>");
-	$Page->Print("<td class=\"DetailTitle\">メール文字数</td><td>");
+	$Page->Print("<td class=\"DetailTitle\">Max email length</td><td>");
 	$Page->Print("<input type=text size=10 name=BBS_MAIL_COUNT value=\"$setMailMax\"></td></tr>");
-	$Page->Print("<tr><td class=\"DetailTitle\">名前文字数</td><td>");
+	$Page->Print("<tr><td class=\"DetailTitle\">Max name length</td><td>");
 	$Page->Print("<input type=text size=10 name=BBS_NAME_COUNT value=\"$setNameMax\"></td>");
-	$Page->Print("<td class=\"DetailTitle\">本文文字数</td><td>");
+	$Page->Print("<td class=\"DetailTitle\">Text length</td><td>");
 	$Page->Print("<input type=text size=10 name=BBS_MESSAGE_COUNT value=\"$setContMax\"></td></tr>");
-	$Page->Print("<tr><td class=\"DetailTitle\">レス1行最大文字数</td><td>");
+	$Page->Print("<tr><td class=\"DetailTitle\">Maximum number of characters per line</td><td>");
 	$Page->Print("<input type=text size=10 name=BBS_COLUMN_NUMBER value=\"$setLineLength\"></td>");
-	$Page->Print("<td class=\"DetailTitle\">datファイル最大サイズ（KB）</td><td>");
+	$Page->Print("<td class=\"DetailTitle\">dat file maximum size (KB)</td><td>");
 	$Page->Print("<input type=text size=10 name=BBS_DATMAX value=\"$setDatMax\"></tr>");
-	$Page->Print("<tr><td class=\"DetailTitle\">書き込み可能\行数(偶数行)</td><td>");
+	$Page->Print("<tr><td class=\"DetailTitle\">Max amount of lines</td><td>");
 	$Page->Print("<input type=text size=10 name=BBS_LINE_NUMBER value=\"$setLineMax\"></td>");
-	$Page->Print("<td class=\"DetailTitle\">最大スレッド数(無記入=".$Sys->Get('SUBMAX').")</td><td>");
+	$Page->Print("<td class=\"DetailTitle\">Max Threads (".$Sys->Get('SUBMAX').")</td><td>");
 	$Page->Print("<input type=text size=10 name=BBS_SUBJECT_MAX value=\"$setSubMax\"></td></tr>");
-	$Page->Print("<tr><td class=\"DetailTitle\">名無しチェック</td><td>");
+	$Page->Print("<tr><td class=\"DetailTitle\">Require names</td><td>");
 	$Page->Print("<input type=checkbox name=NANASHI_CHECK $setNoName value=on>有効</td>");
-	$Page->Print("<td class=\"DetailTitle\">最大レス数(無記入=".$Sys->Get('RESMAX').")</td><td>");
+	$Page->Print("<td class=\"DetailTitle\">Maximum Resume Count???????".$Sys->Get('RESMAX').")</td><td>");
 	$Page->Print("<input type=text size=10 name=BBS_RES_MAX value=\"$setResMax\"></td></tr>");
 	
-	$Page->Print("<tr><td class=\"DetailTitle\">掲示板書き込み制限</td><td><select name=BBS_READONLY>");
-	$Page->Print("<option value=on $selROon>読取専用");
-	$Page->Print("<option value=caps $selROcaps>キャップのみ可能\");
-	$Page->Print("<option value=none $selROnone>書き込み可能\");
+	$Page->Print("<tr><td class=\"DetailTitle\">Read only?</td><td><select name=BBS_READONLY>");
+	$Page->Print("<option value=on $selROon>Read Only");
+	$Page->Print("<option value=caps $selROcaps>Caps Only");
+	$Page->Print("<option value=none $selROnone>Writable");
 	$Page->Print("</select></td>");
-	$Page->Print("<td class=\"DetailTitle\">DNSBLチェック</td><td>");
+	$Page->Print("<td class=\"DetailTitle\">DNSBL check</td><td>");
 	$Page->Print("<input type=checkbox name=BBS_PROXY_CHECK $setProxy value=on>有効</td></tr>");
-	$Page->Print("<tr><td class=\"DetailTitle\">スレッド作成制限(キャップ)</td><td>");
+	$Page->Print("<tr><td class=\"DetailTitle\">DISALLOW NON CAPITAL LETTERS</td><td>");
 	$Page->Print("<input type=checkbox name=BBS_THREADCAPONLY $setCapOnly value=on>キャップのみ可能\</td>");
-	$Page->Print("<td class=\"DetailTitle\">海外ホスト規制</td><td>");
-	$Page->Print("<input type=checkbox name=BBS_JP_CHECK $setOverSea value=on>有効</td></tr>");
-	$Page->Print("<tr><td class=\"DetailTitle\">スレッド作成制限(携帯)</td><td>");
-	$Page->Print("<input type=checkbox name=BBS_THREADMOBILE $setThreadMb value=on>携帯から許可</td>");
+	$Page->Print("<td class=\"DetailTitle\">Block non-Japanese IPs?</td><td>");
+	$Page->Print("<input type=checkbox name=BBS_JP_CHECK $setOverSea value=on>Enable</td></tr>");
+	$Page->Print("<tr><td class=\"DetailTitle\">Thread Creation Limit (Mobile)</td><td>");
+	$Page->Print("<input type=checkbox name=BBS_THREADMOBILE $setThreadMb value=on>Allow from mobileﾂ</td>");
 	$Page->Print("</tr>");
 	
 	$Page->Print("<tr><td colspan=4><hr></td></tr>");
 	
-	$Page->Print("<tr><td class=\"DetailTitle\" colspan=4>連続書き込み規制</td></tr>");
+	$Page->Print("<tr><td class=\"DetailTitle\" colspan=4>Post timeout control??????</td></tr>");
 	$Page->Print("<tr><td colspan=4>");
-	$Page->Print("直近<input type=text size=5 name=timecount value=\"$setContinueMax\" style=\"text-align: right\">書き込みのうち、");
-	$Page->Print("一人が<input type=text size=5 name=timeclose value=\"$setWriteMax\" style=\"text-align: right\">回まで書き込み可");
+	$Page->Print("Of the <input type=text size=5 name=timecount value=\"$setContinueMax\" style=\"text-align: right\">most recent posts, ");
+	$Page->Print("A user can write up to <input type=text size=5 name=timeclose value=\"$setWriteMax\" style=\"text-align: right\"> times");
 	$Page->Print("</td></tr>");
 	
 	$Page->Print("<tr><td class=\"DetailTitle\" colspan=4>Samba規制</td></tr>");
