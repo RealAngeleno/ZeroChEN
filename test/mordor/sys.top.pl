@@ -200,8 +200,8 @@ $Page->Print(<<HTML);
     <a href="javascript:SetOption('DISPST_NOTICE', $or2);$common">NEXT &gt;&gt;</a>
     </td>
     <td align=right colspan="2">
-    表\示数 <input type=text name="DISPNUM_NOTICE" size="4" value="$dispNum">
-    <input type=button value="　表\示　" onclick="$common">
+    Display Number <input type=text name="DISPNUM_NOTICE" size="4" value="$dispNum">
+    <input type=button value="　Post　" onclick="$common">
     </td>
    </tr>
    <tr>
@@ -250,7 +250,7 @@ HTML
 $Page->Print(<<HTML);
    <tr>
     <td colspan="4" align="left">
-    <input type="button" class="delete" value="　削除　" onclick="DoSubmit('sys.top','FUNC','DELETE')">
+    <input type="button" class="delete" value="　Delete　" onclick="DoSubmit('sys.top','FUNC','DELETE')">
     </td>
    </tr>
   </table>
