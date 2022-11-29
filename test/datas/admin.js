@@ -1,23 +1,23 @@
 var postflag = false;
 
 //----------------------------------------------------------------------------------------
-//	submitˆ—
+//	submit process
 //----------------------------------------------------------------------------------------
 function DoSubmit(modName, mode, subMode)
 {
-	// •t‰Áî•ñİ’è
-	document.ADMIN.MODULE.value		= modName;				// ƒ‚ƒWƒ…[ƒ‹–¼
-	document.ADMIN.MODE.value		= mode;					// ƒƒCƒ“ƒ‚[ƒh
-	document.ADMIN.MODE_SUB.value	= subMode;				// ƒTƒuƒ‚[ƒh
+	// ä»˜åŠ æƒ…å ±è¨­å®š
+	document.ADMIN.MODULE.value		= modName;				// ãƒ¢ã‚¸ãƒ¥ãƒ¼ãƒ«å
+	document.ADMIN.MODE.value		= mode;					// ãƒ¡ã‚¤ãƒ³ãƒ¢ãƒ¼ãƒ‰
+	document.ADMIN.MODE_SUB.value	= subMode;				// ã‚µãƒ–ãƒ¢ãƒ¼ãƒ‰
 	
 	postflag = true;
 	
-	// POST‘—M
+	// POSTé€ä¿¡
 	document.ADMIN.submit();
 }
 
 //----------------------------------------------------------------------------------------
-//	ƒIƒvƒVƒ‡ƒ“İ’è
+//	ã‚ªãƒ—ã‚·ãƒ§ãƒ³è¨­å®š
 //----------------------------------------------------------------------------------------
 function SetOption(key, val)
 {
