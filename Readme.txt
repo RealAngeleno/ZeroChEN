@@ -2,6 +2,8 @@ ZeroChEN
 
 ZeroChEN is an English translation of 0ch+, a Japanese textboard script modeled off of 2ch.
 
+Translations are currently around 55% done. Almost the entirity of the front facing portion is complete.
+
 
 Below is the original README for 0ch+
 ----------------------------------
