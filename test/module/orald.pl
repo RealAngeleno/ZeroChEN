@@ -168,7 +168,7 @@ sub Print
 <html lang="en-us">
 <head>
  
- <meta http-equiv="Content-Type" content="text/html; charset=UTF_*">
+ <meta http-equiv="Content-Type" content="text/html; charset=UTF_8">
  
  <title>ERROR!</title>
  
