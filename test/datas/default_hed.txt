@@ -1,5 +1,5 @@
 <div align="center" style="margin: 1.2em 0;">
-<font color="red">A click can save a live? Nah (｀･ω･´)</font>
+<font color="red">A click can save a life? Nah (｀･ω･´)</font>
 </div>
 
 <b>Notes on using the board</b>
