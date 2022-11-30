@@ -84,7 +84,7 @@ sub DoPrint
 	}
 	elsif ($subMode eq 'COMPLETE') {												# スレッド処理完了画面
 		$Sys->Set('_TITLE', 'Process Complete');
-		$BASE->PrintComplete('過去ログ処理', $this->{'LOG'});
+		$BASE->PrintComplete('Past log processing', $this->{'LOG'});
 	}
 	elsif ($subMode eq 'FALSE') {													# スレッド処理失敗画面
 		$Sys->Set('_TITLE', 'Process Failed');
@@ -240,9 +240,9 @@ sub PrintThreadList
 		my @attrstr = ();
 		#push @attrstr, '停止' if ($Threads->GetAttr($id, 'stop'));
 		#push @attrstr, '停止' if ($isstop);
-		push @attrstr, '浮上' if ($Threads->GetAttr($id, 'float'));
-		push @attrstr, '不落' if ($Threads->GetAttr($id, 'nopool'));
-		push @attrstr, 'sage進行' if ($Threads->GetAttr($id, 'sagemode'));
+		push @attrstr, 'float' if ($Threads->GetAttr($id, 'float'));
+		push @attrstr, 'nopool' if ($Threads->GetAttr($id, 'nopool'));
+		push @attrstr, 'sage mode' if ($Threads->GetAttr($id, 'sagemode'));
 		$Page->Print("<td>@attrstr</td></tr>\n");
 	}
 	$common		= "onclick=\"DoSubmit('bbs.pool','DISP'";
@@ -250,11 +250,11 @@ sub PrintThreadList
 	
 	$Page->Print("<tr><td colspan=5><hr></td></tr>\n");
 	$Page->Print("<tr><td colspan=5 align=left>");
-	$Page->Print("<input type=button value=\"　更新　\" $common2,'UPDATE')\"> ")	if ($isUpdate);
-	$Page->Print("<input type=button value=\" 全更新 \" $common2,'UPDATEALL')\"> ")	if ($isUpdate);
-	$Page->Print("<input type=button value=\"　復帰　\" $common,'REPARE')\"> ")		if ($isRepare);
-	$Page->Print("<input type=button value=\"過去ログ化\" $common,'CREATE')\"> ")	if ($isCreate);
-	$Page->Print("<input type=button value=\"　削除　\" $common,'DELETE')\" class=\"delete\"> ")		if ($isDelete);
+	$Page->Print("<input type=button value=\" Update \" $common2,'UPDATE')\"> ") if ($isUpdate);
+	$Page->Print("<input type=button value=\" Update All \" $common2,'UPDATEALL')\"> ") if ($isUpdate);
+	$Page->Print("<input type=button value=\"　Return \"$common,'REPARE')\"> ") if ($isRepare);
+	$Page->Print("<input type=button value=\"Past Logged\" $common,'CREATE')\"> ") if ($isCreate);
+	$Page->Print("<input type=button value=\" Delete \" $common,'DELETE')\" class=\"delete\"> ") if ($isDelete);
 	$Page->Print("</td></tr>\n");
 	$Page->Print("</table><br>");
 	
@@ -725,7 +725,7 @@ sub CreateKAKOLog
 <html lang="en-us">
 <head>
 
- <meta http-equiv="Content-Type" content="text/html;charset=UTF_8">
+ <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 
 HTML
 	
