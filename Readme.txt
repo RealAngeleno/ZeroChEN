@@ -1,4 +1,10 @@
+ZeroChEN
 
+ZeroChEN is an English translation of 0ch+, a Japanese textboard script modeled off of 2ch.
+
+
+Below is the original README for 0ch+
+----------------------------------
 
 Zero-Channel Plus Ver. 0.7.5 - Readme.txt
 
@@ -195,3 +201,16 @@ Persistent session data in CGI applications
     Author: Mark Stosberg <mark@summersault.com>
     License: Artistic License 1.0
     CPAN: http://search.cpan.org/dist/CGI
+    
+    
+    ----------------------------------------------
+    ADDENUM
+    	>Why am I getting error 500s?
+	This is due to either two things, a misconfigured Apache/NGINX config or a permissions error.
+
+	If a permissions error, make sure that
+	the root folder is 777
+	/test is 777
+	all .cgi files are 755
+	all folders inside of test are 777.
+	users.cgi (/test/info/users.cgi) is 777.
