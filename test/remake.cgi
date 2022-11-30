@@ -158,7 +158,7 @@ sub PrintBBSJump
 		$Page->Print("Content-type: text/html\n\n<html><head><title>");
 		$Page->Print('index has been updated.</title><!--nobanner-->');
 		$Page->Print('<meta http-equiv="Content-Type" content="text/html; ');
-		$Page->Print("charset=UTF_8\"><meta content=0;URL=$bbsPath/ ");
+		$Page->Print("charset=UTF-8\"><meta content=0;URL=$bbsPath/ ");
 		$Page->Print('http-equiv=refresh></head><body>indexを更新しました。');
 		$Page->Print('<br><br>Please wait a moment before switching screens.');
 		$Page->Print('<br><br><br><br><br><hr>');
