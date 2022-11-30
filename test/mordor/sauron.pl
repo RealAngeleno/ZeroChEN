@@ -152,10 +152,10 @@ sub PrintHTML
 	$Page->Print("Content-type: text/html\n\n");
 	$Page->Print(<<HTML);
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="ja">
+<html lang="en-us">
 <head>
  
- <title>ぜろちゃんねるプラス管理 - [ $ttl ]</title>
+ <title>ZeroChEN Management - [ $ttl ]</title>
  
 HTML
 	
@@ -177,7 +177,7 @@ sub PrintCSS
 	$data = $Sys->Get('DATA');
 	
 $Page->Print(<<HTML);
- <meta http-equiv=Content-Type content="text/html;charset=Shift_JIS">
+ <meta http-equiv=Content-Type content="text/html;charset=UTF-8">
  
  <meta http-equiv="Content-Script-Type" content="text/javascript">
  <meta http-equiv="Content-Style-Type" content="text/css">
@@ -221,13 +221,13 @@ HTML
 	if ($mode == 1) {
 		
 $Page->Print(<<HTML);
- <a href="javascript:DoSubmit('sys.top','DISP','NOTICE');">トップ</a> |
- <a href="javascript:DoSubmit('sys.bbs','DISP','LIST');">掲示板</a> |
- <a href="javascript:DoSubmit('sys.user','DISP','LIST');">ユーザー</a> |
- <a href="javascript:DoSubmit('sys.cap','DISP','LIST');">キャップ</a> |
- <a href="javascript:DoSubmit('sys.capg','DISP','LIST');">共通キャップグループ</a> |
- <a href="javascript:DoSubmit('sys.setting','DISP','INFO');">システム設定</a> |
- <a href="javascript:DoSubmit('sys.edit','DISP','BANNER_PC');">各種編集</a> |
+  <a href="javascript:DoSubmit('sys.top','DISP','NOTICE');">Top</a> |
+  <a href="javascript:DoSubmit('sys.bbs','DISP','LIST');">Board</a> |
+  <a href="javascript:DoSubmit('sys.user','DISP','LIST');">User</a> |
+  <a href="javascript:DoSubmit('sys.cap','DISP','LIST');">Cap</a> |
+  <a href="javascript:DoSubmit('sys.capg','DISP','LIST');">Common cap group</a> |
+  <a href="javascript:DoSubmit('sys.setting','DISP','INFO');">System Settings</a> |
+  <a href="javascript:DoSubmit('sys.edit','DISP','BANNER_PC');">Various edits</a> |
 HTML
 		
 	}
@@ -235,14 +235,14 @@ HTML
 	elsif ($mode == 2) {
 		
 $Page->Print(<<HTML);
- <a href="javascript:DoSubmit('bbs.thread','DISP','LIST');">スレッド</a> |
- <a href="javascript:DoSubmit('bbs.pool','DISP','LIST');">プール</a> |
- <a href="javascript:DoSubmit('bbs.kako','DISP','LIST');">過去ログ</a> |
- <a href="javascript:DoSubmit('bbs.setting','DISP','SETINFO');">掲示板設定</a> |
- <a href="javascript:DoSubmit('bbs.edit','DISP','HEAD');">各種編集</a> |
- <a href="javascript:DoSubmit('bbs.user','DISP','LIST');">管理グループ</a> |
- <a href="javascript:DoSubmit('bbs.cap','DISP','LIST');">キャップグループ</a> |
- <a href="javascript:DoSubmit('bbs.log','DISP','INFO');">ログ閲覧</a> |
+  <a href="javascript:DoSubmit('bbs.thread','DISP','LIST');">Thread</a> |
+  <a href="javascript:DoSubmit('bbs.pool','DISP','LIST');">Pool</a> |
+  <a href="javascript:DoSubmit('bbs.kako','DISP','LIST');">Past log</a> |
+  <a href="javascript:DoSubmit('bbs.setting','DISP','SETINFO');">Board settings</a> |
+  <a href="javascript:DoSubmit('bbs.edit','DISP','HEAD');">Various edits</a> |
+  <a href="javascript:DoSubmit('bbs.user','DISP','LIST');">Admin Group</a> |
+  <a href="javascript:DoSubmit('bbs.cap','DISP','LIST');">Cap group</a> |
+  <a href="javascript:DoSubmit('bbs.log','DISP','INFO');">View log</a> |
 HTML
 		
 	}
@@ -250,14 +250,14 @@ HTML
 	elsif ($mode == 3) {
 		
 $Page->Print(<<HTML);
- <a href="javascript:DoSubmit('thread.res','DISP','LIST');">レス一覧</a> |
- <a href="javascript:DoSubmit('thread.del','DISP','LIST');">削除レス一覧</a> |
+  <a href="javascript:DoSubmit('thread.res','DISP','LIST');">List of responses</a> |
+  <a href="javascript:DoSubmit('thread.del','DISP','LIST');">Remove list</a> |
 HTML
 		
 	}
 	
 $Page->Print(<<HTML);
- <a href="javascript:DoSubmit('login','','');">ログオフ</a>
+ <a href="javascript:DoSubmit('login','','');">Log out</a>
 </div>
  
 <div class="MainHead" align="right">0ch+ BBS System Manager</div>
@@ -417,10 +417,10 @@ $Page->Print(<<HTML);
     <td>
     
     <div class="oExcuted">
-     $processNameを正常に完了しました。
+     $processName completed successfully.
     </div>
    
-    <div class="LogExport">処理ログ</div>
+    <div class="LogExport">Export Log</div>
     <hr>
     <blockquote class="LogExport">
 HTML
@@ -468,32 +468,32 @@ $Page->Print(<<HTML);
 HTML
 	
 	if ($ecode == 1000) {
-		$Page->Print("     ERROR:$ecode - 本機能\の処理を実行する権限がありません。\n");
+	$Page->Print(" ERROR: $ecode - You do not have permission to process this function.\n");
 	}
 	elsif ($ecode == 1001) {
-		$Page->Print("     ERROR:$ecode - 入力必須項目が空欄になっています。\n");
+	$Page->Print(" ERROR:$ecode - required field is blank.\n");
 	}
 	elsif ($ecode == 1002) {
-		$Page->Print("     ERROR:$ecode - 設定項目に規定外の文字が使用されています。\n");
+	$Page->Print(" ERROR: $ecode - Illegal characters used in settings.\n");
 	}
 	elsif ($ecode == 2000) {
-		$Page->Print("     ERROR:$ecode - 掲示板ディレクトリの作成に失敗しました。<br>\n");
-		$Page->Print("     パーミッション、または既に同名の掲示板が作成されていないかを確認してください。\n");
+	$Page->Print(" ERROR:$ecode - Failed to create bulletin board directory.<br>\n");
+	$Page->Print(" Please check your permissions or if a bulletin board with the same name has already been created.\n");
 	}
 	elsif ($ecode == 2001) {
-		$Page->Print("     ERROR:$ecode - SETTING.TXTの生成に失敗しました。\n");
+	$Page->Print(" ERROR: $ecode - Failed to generate SETTING.TXT.\n");
 	}
 	elsif ($ecode == 2002) {
-		$Page->Print("     ERROR:$ecode - 掲示板構\成要素の生成に失敗しました。\n");
+	$Page->Print(" ERROR:$ecode - Failed to generate message board component.\n");
 	}
 	elsif ($ecode == 2003) {
-		$Page->Print("     ERROR:$ecode - 過去ログ初期情報の生成に失敗しました。\n");
+	$Page->Print(" ERROR:$ecode - Failed to generate initial log information.\n");
 	}
 	elsif ($ecode == 2004) {
-		$Page->Print("     ERROR:$ecode - 掲示板情報の更新に失敗しました。\n");
+	$Page->Print(" ERROR:$ecode - Failed to update bulletin board information.\n");
 	}
 	else {
-		$Page->Print("     ERROR:$ecode - 不明なエラーが発生しました。\n");
+	$Page->Print(" ERROR:$ecode - An unknown error occurred.\n");
 	}
 	
 $Page->Print(<<HTML);
