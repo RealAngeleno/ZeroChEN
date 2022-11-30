@@ -185,9 +185,9 @@ sub PrintReadHead
 	$Page->Print("Content-type: text/html\n\n");
 $Page->Print(<<HTML);
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html lang="ja">
+<html lang="en-us">
 <head>
-<meta http-equiv=Content-Type content="text/html;charset=Shift_JIS">
+<meta http-equiv=Content-Type content="text/html;charset=UTF-8">
 <meta http-equiv="Cache-Control" content="no-cache">
 HTML
 	
@@ -430,7 +430,7 @@ sub PrintReadError
 	my ($Sys, $Page, $err) = @_;
 	my $code;
 	
-	$code = 'Shift_JIS';
+	$code = 'UTF-8';
 	
 	# HTMLヘッダの出力
 	$Page->Print("Content-type: text/html\n\n");
