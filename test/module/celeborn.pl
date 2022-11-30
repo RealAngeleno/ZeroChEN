@@ -430,7 +430,7 @@ sub OutputIndex
 	
 	$Page->Print(<<HTML);
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="ja">
+<html lang="en-us">
 <head>
 
  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
@@ -440,7 +440,7 @@ HTML
 	$Caption->Print($Page, undef);
 	
 	$Page->Print(<<HTML);
- <title>過去ログ倉庫 - $board$path</title>
+ <title>Past log warehouse - $board$path</title>
 
 </head>
 <!--nobanner-->
