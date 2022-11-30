@@ -96,7 +96,7 @@ sub Initialize
 		'CONV'		=> $Conv,
 		'DAT'		=> $Dat,
 		'PAGE'		=> $Page,
-		'CODE'		=> 'UTF_8',
+		'CODE'		=> 'UTF-8',
 	);
 	
 	# システム初期化
@@ -191,7 +191,7 @@ sub PrintReadHead
 <html lang="en-us">
 <head>
 
- <meta http-equiv=Content-Type content="text/html;charset=UTF_8">
+ <meta http-equiv=Content-Type content="text/html;charset=UTF-8">
  <meta http-equiv="Content-Style-Type" content="text/css">
 
 HTML
