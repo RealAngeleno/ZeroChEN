@@ -334,7 +334,7 @@ sub PrintColorSetting
 	$setCap			= $Setting->Get('BBS_CAP_COLOR');
 	
 	$Page->Print("<center><table cellspcing=2 width=100%>");
-	$Page->Print("<tr><td colspan=6>Enter each setting color and press the [Set] button.</td></tr>");
+	$Page->Print("<tr><td colspan=6>Enter each setting color then press Save.</td></tr>");
 	$Page->Print("<tr><td colspan=6><hr></td></tr>");
 	$Page->Print("<tr><td class=\"DetailTitle\">indexBackgroundColor</td><td>");
 	$Page->Print("<input type=text size=10 name=BBS_BG_COLOR value=\"$setIndexBG\">");
@@ -573,21 +573,21 @@ sub PrintOtherSetting
 	$setConfirm			= ($setConfirm eq '1' ? 'checked' : '');
 	
 	$Page->Print("<center><table cellspcing=2 width=100%>");
-	$Page->Print("<tr><td colspan=4>各設定値を入力して[設定]ボタンを押してください。</td></tr>");
+	$Page->Print("<tr><td colspan=4>Enter each setting value then press Save.</td></tr>");
 	$Page->Print("<tr><td colspan=4><hr></td></tr>");
 	
-	$Page->Print("<tr><td class=\"DetailTitle\">ID表\示</td><td><select name=ID_DISP>");
-	$Page->Print("<option value=BBS_FORCE_ID $selIDforce>強制ID");
-	$Page->Print("<option value=BBS_ID_DISP $selIDdisp>任意ID");
-	$Page->Print("<option value=BBS_NO_ID $selIDnone>ID表\示無し");
-	$Page->Print("<option value=BBS_DISP_IP1 $selIDhost>ホスト表\示");
-	$Page->Print("<option value=BBS_DISP_IP2 $selIDsakhalin>発信元表\示(sakhalin)");
-	$Page->Print("<option value=BBS_DISP_IP3 $selIDsiberia>発信元表\示(siberia)");
+	$Page->Print("<tr><td class=\"DetailTitle\">ID Display</td><td><select name=ID_DISP>");
+	$Page->Print("<option value=BBS_FORCE_ID $selIDforce>Force ID (e.g. ID:kC89Lv3M)");
+	$Page->Print("<option value=BBS_ID_DISP $selIDdisp>Arbitrary ID (e.g. ID:kC89Lv3M)");
+	$Page->Print("<option value=BBS_NO_ID $selIDnone>No IDs");
+	$Page->Print("<option value=BBS_DISP_IP1 $selIDhost>Show hostname (e.g. 192.168.0.1.HOSTNAME)");
+	$Page->Print("<option value=BBS_DISP_IP2 $selIDsakhalin>Display bare IP addresses(sakhalin) (e.g. HOST:192.168.0.1)");
+	$Page->Print("<option value=BBS_DISP_IP3 $selIDsiberia>Display bare IP addresses(siberia) (e.g. HOST:192.168.0.1)");
 	$Page->Print("</select></td>");
 	$Page->Print("<td class=\"DetailTitle\">機種識別子(ID末尾)</td><td>");
 	$Page->Print("<input type=checkbox name=BBS_SLIP $setIPSave value=on>付加する</td></tr>");
 	
-	$Page->Print("<tr><td class=\"DetailTitle\">曜日文字</td><td>");
+	$Page->Print("<tr><td class=\"DetailTitle\">Day of the week characters</td><td>");
 	$Page->Print("<input type=text size=20 name=BBS_YMD_WEEKS value=\"$setWeek\"></td>");
 	$Page->Print("<td class=\"DetailTitle\"><s>文字参照</s></td><td>");
 	$Page->Print("<input type=checkbox name=BBS_UNICODE $setUnicode value=on>使用可能</td>");
