@@ -387,16 +387,16 @@ sub PrintColorSetting
 		$Page->Print("<table width=100% cellspacing=7 bgcolor=$setCreateBG border><td>Create thread</td>");
 		$Page->Print("</table><br></center></td>");
 		$Page->Print("<td colspan=3 bgcolor=$setThreadBG valign=top><font color=$setThreadTitle>");
-		$Page->Print("Thread Title</font><br><br>1 <font color=$setName>Name@<font color=$setCap>名前</font></font><br>" );
+		$Page->Print("Thread Title</font><br><br>1 <font color=$setName>Name@<font color=$setCap>Name</font></font><br>" );
 		$Page->Print("<font color=$setLink><u>http://---</u></font><br>");
 		$Page->Print("<font color=$setLinkV><u>http://---</u></font><br>");
 		$Page->Print("</td></tr>");
 		$Page->Print("<tr><td colspan=6><hr></td></tr>");
 	}
 	$Page->Print("<tr><td colspan=6 align=left>");
-	$Page->Print("<input type=button value=\"　設定　\" onclick=\"DoSubmit");
+	$Page->Print("<input type=button value=\"　Save　\" onclick=\"DoSubmit");
 	$Page->Print("('bbs.setting','FUNC','SETCOLOR');\"> ");
-	$Page->Print("<input type=button value=\"　確認　\" onclick=\"DoSubmit");
+	$Page->Print("<input type=button value=\"　Preview　\" onclick=\"DoSubmit");
 	$Page->Print("('bbs.setting','DISP','SETCOLORC');\">");
 	$Page->Print("</td></tr></table><br>");
 }
@@ -473,19 +473,19 @@ sub PrintLimitSetting
 	$Page->Print("<td class=\"DetailTitle\">Max Threads (".$Sys->Get('SUBMAX').")</td><td>");
 	$Page->Print("<input type=text size=10 name=BBS_SUBJECT_MAX value=\"$setSubMax\"></td></tr>");
 	$Page->Print("<tr><td class=\"DetailTitle\">Require names</td><td>");
-	$Page->Print("<input type=checkbox name=NANASHI_CHECK $setNoName value=on>有効</td>");
-	$Page->Print("<td class=\"DetailTitle\">Maximum Resume Count???????".$Sys->Get('RESMAX').")</td><td>");
+	$Page->Print("<input type=checkbox name=NANASHI_CHECK $setNoName value=on>Enable</td>");
+	$Page->Print("<td class=\"DetailTitle\">Maximum Post Count (1000)".$Sys->Get('RESMAX').")</td><td>");
 	$Page->Print("<input type=text size=10 name=BBS_RES_MAX value=\"$setResMax\"></td></tr>");
 	
-	$Page->Print("<tr><td class=\"DetailTitle\">Read only?</td><td><select name=BBS_READONLY>");
+	$Page->Print("<tr><td class=\"DetailTitle\">Read Only</td><td><select name=BBS_READONLY>");
 	$Page->Print("<option value=on $selROon>Read Only");
-	$Page->Print("<option value=caps $selROcaps>Caps Only");
+	$Page->Print("<option value=caps $selROcaps>Capcodes Only?????");
 	$Page->Print("<option value=none $selROnone>Writable");
 	$Page->Print("</select></td>");
 	$Page->Print("<td class=\"DetailTitle\">DNSBL check</td><td>");
-	$Page->Print("<input type=checkbox name=BBS_PROXY_CHECK $setProxy value=on>有効</td></tr>");
+	$Page->Print("<input type=checkbox name=BBS_PROXY_CHECK $setProxy value=on>Enable</td></tr>");
 	$Page->Print("<tr><td class=\"DetailTitle\">DISALLOW NON CAPITAL LETTERS</td><td>");
-	$Page->Print("<input type=checkbox name=BBS_THREADCAPONLY $setCapOnly value=on>キャップのみ可能\</td>");
+	$Page->Print("<input type=checkbox name=BBS_THREADCAPONLY $setCapOnly value=on>Enable\</td>");
 	$Page->Print("<td class=\"DetailTitle\">Block non-Japanese IPs?</td><td>");
 	$Page->Print("<input type=checkbox name=BBS_JP_CHECK $setOverSea value=on>Enable</td></tr>");
 	$Page->Print("<tr><td class=\"DetailTitle\">Thread Creation Limit (Mobile)</td><td>");
@@ -494,32 +494,32 @@ sub PrintLimitSetting
 	
 	$Page->Print("<tr><td colspan=4><hr></td></tr>");
 	
-	$Page->Print("<tr><td class=\"DetailTitle\" colspan=4>Post timeout control??????</td></tr>");
+	$Page->Print("<tr><td class=\"DetailTitle\" colspan=4>Flood Control</td></tr>");
 	$Page->Print("<tr><td colspan=4>");
 	$Page->Print("Of the <input type=text size=5 name=timecount value=\"$setContinueMax\" style=\"text-align: right\">most recent posts, ");
-	$Page->Print("A user can write up to <input type=text size=5 name=timeclose value=\"$setWriteMax\" style=\"text-align: right\"> times");
+	$Page->Print("a single IP address can be up to <input type=text size=5 name=timeclose value=\"$setWriteMax\" style=\"text-align: right\"> of the posts. (Set the second number higher than the first to disable)");
 	$Page->Print("</td></tr>");
 	
-	$Page->Print("<tr><td class=\"DetailTitle\" colspan=4>Samba規制</td></tr>");
+	$Page->Print("<tr><td class=\"DetailTitle\" colspan=4>Samba Regulation</td></tr>");
 	$Page->Print("<tr><td colspan=4>");
-	$Page->Print("一度書き込んだ人は<input type=text size=5 name=BBS_SAMBATIME value=\"$setSambaTime\" style=\"text-align: right\">秒(0で無効)経たないと書き込めません。(無記入=".$Sys->Get('DEFSAMBA').")<br>");
-	$Page->Print("指定秒数を待たず何度も書き込もうとした場合は<input type=text size=5 name=BBS_HOUSHITIME value=\"$setHoushiTime\" style=\"text-align: right\">分間書き込みを禁止します。(無記入=".$Sys->Get('DEFHOUSHI').")");
+	$Page->Print("A person that tries to post more than once in <input type=text size=5 name=BBS_SAMBATIME value=\"$setSambaTime\" style=\"text-align: right\"> seconds (0 to disable) will be blocked from posting. (blank=".$Sys->Get('DEFSAMBA').")<br>");
+	$Page->Print("If a person tries to post too many times without waiting, then temporarily block the user from posting for <input type=text size=5 name=BBS_HOUSHITIME value=\"$setHoushiTime\" style=\"text-align: right\"> minutes. (blank=".$Sys->Get('DEFHOUSHI').")");
 	$Page->Print("</td></tr>");
 	
-	$Page->Print("<tr><td class=\"DetailTitle\" colspan=4>スレッド立てすぎ規制 (時間非依存)</td></tr>");
+	$Page->Print("<tr><td class=\"DetailTitle\" colspan=4>Thread overload restriction (time-independent)</td></tr>");
 	$Page->Print("<tr><td colspan=4>");
-	$Page->Print("直近<input type=text size=5 name=BBS_THREAD_TATESUGI value=\"$setTateClose\" style=\"text-align: right\">スレッド(0で無効)のうち、");
+	$Page->Print("A single user can be the OP of the last <input type=text size=5 name=BBS_THREAD_TATESUGI value=\"$setTateClose\" style=\"text-align: right\">threads (0 to disable),");
 	$Page->Print("一人が<input type=text size=5 name=BBS_TATESUGI_COUNT2 value=\"$setTateCount2\" style=\"text-align: right\">スレッドまで立てられる");
 	$Page->Print("</td></tr>");
 	
-	$Page->Print("<tr><td class=\"DetailTitle\" colspan=4>スレッド立てすぎ規制 (時間依存)</td></tr>");
+	$Page->Print("<tr><td class=\"DetailTitle\" colspan=4>Thread overload restriction (time dependent)</td></tr>");
 	$Page->Print("<tr><td colspan=4>");
-	$Page->Print("<input type=text size=5 name=BBS_TATESUGI_HOUR value=\"$setTateHour\" style=\"text-align: right\">時間(0で無効)に");
-	$Page->Print("全体で<input type=text size=5 name=BBS_TATESUGI_COUNT value=\"$setTateCount\" style=\"text-align: right\">スレッドまで立てられる");
+	$Page->Print("Within <input type=text size=5 name=BBS_TATESUGI_HOUR value=\"$setTateHour\" style=\"text-align: right\">");
+	$Page->Print(" hours (0 to disable), up to <input type=text size=5 name=BBS_TATESUGI_COUNT value=\"$setTateCount\" style=\"text-align: right\"> new threads can be made.");
 	$Page->Print("</td></tr>");
 	
 	$Page->Print("<tr><td colspan=4><hr></td></tr>");
-	$Page->Print("<tr><td colspan=4 align=left><input type=button value=\"　設定　\"");
+	$Page->Print("<tr><td colspan=4 align=left><input type=button value=\"　Save　\"");
 	$Page->Print("onclick=\"DoSubmit('bbs.setting','FUNC','SETLIMIT');\"></td></tr></table>");
 }
 
