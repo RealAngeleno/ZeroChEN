@@ -20,7 +20,7 @@
 207<>海外串<>JPドメイン以外からのスレッド作成を規制しています。
 # 200～掲示板規制
 500<>スレッド立てすぎ<>スレッド立てすぎです。もうちょいもちついてください。
-501<>連続投稿<>連続投稿ですか？？
+501<>Consecutive Posts<>You've made way too many consecutive posts. Slow down??
 502<>Double post<>Did you attempt to post the same thing twice??
 503<>もまいらもちつけ。<>もうちょっと落ち着いて書きこみしてください。{!WAIT!}秒ぐらい。
 504<>スレッド規制<>現在この板のスレッド作成はキャップのみ可能です。<br>管理人に相談してください。。。
