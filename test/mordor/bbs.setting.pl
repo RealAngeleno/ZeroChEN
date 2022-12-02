@@ -578,7 +578,7 @@ sub PrintOtherSetting
 	
 	$Page->Print("<tr><td class=\"DetailTitle\">ID Display</td><td><select name=ID_DISP>");
 	$Page->Print("<option value=BBS_FORCE_ID $selIDforce>Force ID (e.g. ID:kC89Lv3M)");
-	$Page->Print("<option value=BBS_ID_DISP $selIDdisp>Arbitrary ID (e.g. ID:kC89Lv3M)");
+	$Page->Print("<option value=BBS_ID_DISP $selIDdisp>Only display ID if no e-mail is entered.");
 	$Page->Print("<option value=BBS_NO_ID $selIDnone>No IDs");
 	$Page->Print("<option value=BBS_DISP_IP1 $selIDhost>Show hostname (e.g. 192.168.0.1.HOSTNAME)");
 	$Page->Print("<option value=BBS_DISP_IP2 $selIDsakhalin>Display bare IP addresses(sakhalin) (e.g. HOST:192.168.0.1)");
