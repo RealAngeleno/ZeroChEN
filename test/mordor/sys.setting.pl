@@ -570,30 +570,30 @@ sub PrintPlusViewSetting
 	my $common = "onclick=\"DoSubmit('sys.setting','FUNC','VIEW');\"";
 	
 	$Page->Print("<center><table border=0 cellspacing=2 width=100%>");
-	$Page->Print("<tr><td colspan=2>各項目を設定して[設定]ボタンを押してください。</td></tr>");
+	$Page->Print("<tr><td colspan=2>Set each item and press the Save button.</td></tr>");
 	$Page->Print("<tr><td colspan=2><hr></td></tr>\n");
 	
-	$Page->Print("<tr bgcolor=silver><td colspan=2 class=\"DetailTitle\">Read.cgi関連</td></tr>\n");
-	$Page->Print("<tr><td>ofuda.ccのアカウント名を入力 <small>(未入力でカウンター非表\示)</small></td>");
-	$Page->Print("<td><input type=text size=60 name=COUNTER value=\"$Counter\"></td></tr>\n");
-	$Page->Print("<tr><td>PR欄の表\示文字列 <small>(未入力でPR欄非表\示)</small></td>");
+	$Page->Print("<tr bgcolor=silver><td colspan=2 class=\"DetailTitle\">Read.cgi Settings</td></tr>\n");
+#Ofuda.cc	$Page->Print("<tr><td>ofuda.ccのアカウント名を入力 <small>(未入力でカウンター非表\示)</small></td>");
+#	$Page->Print("<td><input type=text size=60 name=COUNTER value=\"$Counter\"></td></tr>\n");
+	$Page->Print("<tr><td>PR Text<small>(Disabled if field is empty)</small></td>");
 	$Page->Print("<td><input type=text size=60 name=PRTEXT value=\"$Prtext\"></td></tr>\n");
-	$Page->Print("<tr><td>PR欄のリンクURL</td>");
+	$Page->Print("<tr><td>PR Link (url)</td>");
 	$Page->Print("<td><input type=text size=60 name=PRLINK value=\"$Prlink\"></td></tr>\n");
 	
-	$Page->Print("<tr bgcolor=silver><td colspan=2 class=\"DetailTitle\">告知欄表\示</td></tr>\n");
-	$Page->Print("<tr><td>index.htmlの告知欄を表\示する</td>");
+	$Page->Print("<tr bgcolor=silver><td colspan=2 class=\"DetailTitle\">Notices</td></tr>\n");
+	$Page->Print("<tr><td>Display notices from index.html</td>");
 	$Page->Print("<td><input type=checkbox name=BANNERINDEX $bannerindex value=on></td></tr>\n");
-	$Page->Print("<tr><td>index.html以外の告知欄を表\示する</td>");
+	$Page->Print("<tr><td>Display notices from places other than index.html</td>");
 	$Page->Print("<td><input type=checkbox name=BANNER $banner value=on></td></tr>\n");
 	
-	$Page->Print("<tr bgcolor=silver><td colspan=2 class=\"DetailTitle\">msec表\示</td></tr>\n");
-	$Page->Print("<tr><td>ミリ秒まで表\示する</small></td>");
+	$Page->Print("<tr bgcolor=silver><td colspan=2 class=\"DetailTitle\">Millisecond Display</td></tr>\n");
+	$Page->Print("<tr><td>Timestamp up to the millisecond</small></td>");
 	$Page->Print("<td><input type=checkbox name=MSEC $msec value=on></td></tr>\n");
 	
 	$Page->Print("<tr><td colspan=2><hr></td></tr>\n");
 	$Page->Print("<tr><td colspan=2 align=left>");
-	$Page->Print("<input type=button value=\"　設定　\" $common></td></tr>\n");
+	$Page->Print("<input type=button value=\"　Save　\" $common></td></tr>\n");
 	$Page->Print("</table>");
 	
 }
@@ -637,30 +637,30 @@ sub PrintPlusSecSetting
 	$common = "onclick=\"DoSubmit('sys.setting','FUNC','SEC');\"";
 	
 	$Page->Print("<center><table border=0 cellspacing=2 width=100%>");
-	$Page->Print("<tr><td colspan=2>各項目を設定して[設定]ボタンを押してください。</td></tr>");
+	$Page->Print("<tr><td colspan=2>Set each item and press the Save button.</td></tr>");
 	$Page->Print("<tr><td colspan=2><hr></td></tr>\n");
 	
-	$Page->Print("<tr bgcolor=silver><td colspan=2 class=\"DetailTitle\">２重かきこですか？？</td></tr>\n");
-	$Page->Print("<tr><td>同じIPからの書き込みの文字数が変化しない場合規制する</td>");
+	$Page->Print("<tr bgcolor=silver><td colspan=2 class=\"DetailTitle\">Duplicate posts</td></tr>\n");
+	$Page->Print("<tr><td>Prevent someone with the same IP from posting a duplicate post</td>");
 	$Page->Print("<td><input type=checkbox name=KAKIKO $kakiko value=on></td></tr>\n");
 	
-	$Page->Print("<tr bgcolor=silver><td colspan=2 class=\"DetailTitle\">短時間投稿規制</td></tr>\n");
-	$Page->Print("<tr><td>短時間投稿規制秒数を入力(0で規制無効)</td>");
+	$Page->Print("<tr bgcolor=silver><td colspan=2 class=\"DetailTitle\">Short-Term Posting Restrictions</td></tr>\n");
+	$Page->Print("<tr><td>Enter the number of seconds for short-time posting restrictions (0 to disable restrictions)</td>");
 	$Page->Print("<td><input type=text size=60 name=SAMBATM value=\"$Samba\"></td></tr>\n");
 	
-	$Page->Print("<tr bgcolor=silver><td colspan=2 class=\"DetailTitle\">Samba規制</td></tr>\n");
-	$Page->Print("<tr><td>Samba待機秒数デフォルト値を入力(0で規制無効)<br>");
-	$Page->Print("<small>Sambaの設定は掲示板ごとに設定できます</small></td>");
+	$Page->Print("<tr bgcolor=silver><td colspan=2 class=\"DetailTitle\">Samba</td></tr>\n");
+	$Page->Print("<tr><td>Seconds after making or attempting a post that Samba should trigger:<br>");
+	$Page->Print("<small>Samba settings can be configured for each board</small></td>");
 	$Page->Print("<td><input type=text size=60  name=DEFSAMBA value=\"$DefSamba\"></td></tr>\n");
-	$Page->Print("<tr><td>Samba奉仕時間(分)デフォルト値を入力</td>");
+	$Page->Print("<tr><td>Time that a user should be temporarily blocked if Samba is repedately triggered (minutes):</td>");
 	$Page->Print("<td><input type=text size=60 name=DEFHOUSHI value=\"$DefHoushi\"></td></tr>\n");
 	
-	$Page->Print("<tr bgcolor=silver><td colspan=2 class=\"DetailTitle\">新仕様トリップ</td></tr>\n");
-	$Page->Print("<tr><td>新仕様トリップ(12桁=SHA-1)を有効にする</td>");
+	$Page->Print("<tr bgcolor=silver><td colspan=2 class=\"DetailTitle\">New Specification Trip</td></tr>\n");
+	$Page->Print("<tr><td>Enable new specification trip (up to 12 digits = SHA-1)</td>");
 	$Page->Print("<td><input type=checkbox name=TRIP12 $trip12 value=on></td></tr>\n");
 	
-	$Page->Print("<tr bgcolor=silver><td colspan=2 class=\"DetailTitle\">DNSBL設定</td></tr>\n");
-	$Page->Print("<tr><td colspan=2>適用するDNSBLにチェックをいれてください<br>\n");
+	$Page->Print("<tr bgcolor=silver><td colspan=2 class=\"DetailTitle\">DNSBL Settings</td></tr>\n");
+	$Page->Print("<tr><td colspan=2>Check which block list you would like to use (check none to disable).<br>\n");
 	$Page->Print("<input type=checkbox name=BBQ $bbq value=on>");
 	$Page->Print("<a href=\"http://bbq.uso800.net/\" target=\"_blank\">BBQ</a>\n");
 	$Page->Print("<input type=checkbox name=BBX $bbx value=on>BBX\n");
@@ -668,7 +668,7 @@ sub PrintPlusSecSetting
 	
 	$Page->Print("<tr><td colspan=2><hr></td></tr>\n");
 	$Page->Print("<tr><td colspan=2 align=left>");
-	$Page->Print("<input type=button value=\"　設定　\" $common></td></tr>\n");
+	$Page->Print("<input type=button value=\"　Save　\" $common></td></tr>\n");
 	$Page->Print("</table>");
 	
 }
@@ -701,7 +701,7 @@ sub PrintPluginSetting
 		my ($id, $file, $class, $name, $expl, $valid);
 		
 		$Page->Print("<center><table border=0 cellspacing=2 width=100%>");
-		$Page->Print("<tr><td colspan=5>有効にする機能\にチェックを入れてください。</td></tr>\n");
+		$Page->Print("<tr><td colspan=5>Check the features you want to enable.</td></tr>\n");
 		$Page->Print("<tr><td colspan=5><hr></td></tr>\n");
 		$Page->Print("<tr>");
 		$Page->Print("<td class=\"DetailTitle\">Order</td>");
@@ -731,17 +731,17 @@ sub PrintPluginSetting
 		}
 		$Page->Print("<tr><td colspan=5><hr></td></tr>\n");
 		$Page->Print("<tr><td colspan=5 align=left>");
-		$Page->Print("<input type=button value=\"　設定　\" $common,'SET_PLUGIN');\"> ");
+		$Page->Print("<input type=button value=\"　Set　\" $common,'SET_PLUGIN');\"> ");
 	}
 	else {
 		$Page->Print("<center><table border=0 cellspacing=2 width=100%>");
 		$Page->Print("<tr><td><hr></td></tr>\n");
-		$Page->Print("<tr><td><b>プラグインは存在しません。</b></td></tr>\n");
+		$Page->Print("<tr><td><b>Plugin does not exist</b></td></tr>\n");
 		$Page->Print("<tr><td><hr></td></tr>\n");
 		$Page->Print("<tr><td align=left>");
 	}
 		$Page->Print("<input type=hidden name=PLGID value=\"\">");
-		$Page->Print("<input type=button value=\"　更新　\" $common,'UPDATE_PLUGIN');\">");
+		$Page->Print("<input type=button value=\"　Update　\" $common,'UPDATE_PLUGIN');\">");
 	$Page->Print("</td></tr>");
 	$Page->Print("</table>");
 }
