@@ -401,7 +401,7 @@ sub PrintReadFoot
 	
 	# 時間制限がある場合は説明表示
 	if ($Sys->Get('LIMTIME')) {
-		$Page->Print('(08:00PM - 02:00AM You cannot read it all at once???????)');
+		$Page->Print('(Linking is prohibited from 08:00PM to 02:00AM)');
 	}
 	$Page->Print("<hr>\n");
 	
