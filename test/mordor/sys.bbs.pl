@@ -236,7 +236,7 @@ sub PrintBBSList
 	$Page->Print("<tr><td style=\"width:20\"> </th>");
 	$Page->Print("<td class=\"DetailTitle\" style=\"width:150\">BBS Name</th>");
 	$Page->Print("<td class=\"DetailTitle\" style=\"width:100\">Category</th>");
-	$Page->Print("<td class=\"DetailTitle\" style=\"width:250\">SubScription</th></tr>\n");
+	$Page->Print("<td class=\"DetailTitle\" style=\"width:250\">Description</th></tr>\n");
 	
 	foreach $id (@bbsSet) {
 		# 所属掲示板のみ表示
@@ -569,9 +569,9 @@ sub PrintCategoryDelete
 	$Page->Print("<tr><td colspan=2><hr></td></tr>");
 	$Page->Print("<tr><td bgcolor=yellow colspan=2><b><font color=red>");
 	$Page->Print("NOTE: Deleted categories cannot be restored.</b><br>");
-	$Page->Print("※注：所属している掲示板のカテゴリは強制的に「一般」になります。</td></tr>");
+	$Page->Print("※NOTE: Boards with this catagory will be changed to general!</td></tr>");
 	$Page->Print("<tr><td colspan=2><hr></td></tr>");
-	$Page->Print("<tr><td colspan=2 align=left><input type=button value=\"　削除　\" ");
+	$Page->Print("<tr><td colspan=2 align=left><input type=button value=\"Delete\" ");
 	$Page->Print("onclick=\"DoSubmit('sys.bbs','FUNC','CATDEL')\" class=\"delete\"></td></tr>");
 	$Page->Print("</table>");
 }
