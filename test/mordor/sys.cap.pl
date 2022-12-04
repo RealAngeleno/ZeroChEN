@@ -138,11 +138,11 @@ sub SetMenuList
 	my ($Base, $pSys) = @_;
 	
 	# 共通表示メニュー
-	$Base->SetMenu('キャップ一覧', "'sys.cap','DISP','LIST'");
+	$Base->SetMenu('Cap List', "'sys.cap','DISP','LIST'");
 	
 	# システム管理権限のみ
 	if ($pSys->{'SECINFO'}->IsAuthority($pSys->{'USER'}, $ZP::AUTH_SYSADMIN, '*')) {
-		$Base->SetMenu('キャップ登録', "'sys.cap','DISP','CREATE'");
+		$Base->SetMenu('Create Cap', "'sys.cap','DISP','CREATE'");
 	}
 }
 
@@ -187,8 +187,8 @@ sub PrintCapList
 	$Page->Print(");$common\">&lt;&lt; PREV</a> | <a href=\"javascript:SetOption('DISPST', ");
 	$Page->Print("" . ($dispSt + $dispNum) . ");$common\">NEXT &gt;&gt;</a></b>");
 	$Page->Print("</td><td colspan=2 align=right>");
-	$Page->Print("表\示数<input type=text name=DISPNUM size=4 value=$dispNum>");
-	$Page->Print("<input type=button value=\"　表\示　\" onclick=\"$common\"></td></tr>\n");
+	$Page->Print("Display Number<input type=text name=DISPNUM size=4 value=$dispNum>");
+	$Page->Print("<input type=button value=\"　Display　\" onclick=\"$common\"></td></tr>\n");
 	$Page->Print("<tr><td colspan=5><hr></td></tr>\n");
 	$Page->Print("<tr><th style=\"width:30\">　</th>");
 	$Page->Print("<td class=\"DetailTitle\" style=\"width:100\">Cap Display Name</td>");
@@ -280,21 +280,21 @@ sub PrintCapSetting
 	}
 	
 	$Page->Print("<center><table border=0 cellspacing=2>");
-	$Page->Print("<tr><td colspan=2>各項目を設定して[設定]ボタンを押してください。</td></tr>");
+	$Page->Print("<tr><td colspan=2>Set each item then press Save.</td></tr>");
 	$Page->Print("<tr><td colspan=2><hr></td></tr>\n");
 	
-	$Page->Print("<tr><td class=\"DetailTitle\">キャップ表\示名</td><td>");
+	$Page->Print("<tr><td class=\"DetailTitle\">Cap Name</td><td>");
 	$Page->Print("<input type=text size=30 name=NAME value=\"$name\"></td></tr>");
-	$Page->Print("<tr><td class=\"DetailTitle\">パスワード</td><td>");
+	$Page->Print("<tr><td class=\"DetailTitle\">Password</td><td>");
 	$Page->Print("<input type=password size=30 name=PASS value=\"$pass\"></td></tr>");
-	$Page->Print("<tr><td class=\"DetailTitle\">キャップフルネーム</td><td>");
+	$Page->Print("<tr><td class=\"DetailTitle\">Cap Full Name</td><td>");
 	$Page->Print("<input type=text size=30 name=FULL value=\"$full\"></td></tr>");
-	$Page->Print("<tr><td class=\"DetailTitle\">説明</td><td>");
+	$Page->Print("<tr><td class=\"DetailTitle\">Description</td><td>");
 	$Page->Print("<input type=text size=30 name=EXPL value=\"$expl\"></td></tr>");
-	$Page->Print("<tr><td class=\"DetailTitle\">専用ID(要権限)</td><td>");
+	$Page->Print("<tr><td class=\"DetailTitle\">Custom ID (authorization required)</td><td>");
 	$Page->Print("<input type=text size=30 name=CUSTOMID value=\"$customid\"></td></tr>");
 	$Page->Print("<tr><td class=\"DetailTitle\" colspan=2 valign=absmiddle>");
-	$Page->Print("<input type=checkbox name=SYSAD $sysad value=on>システム共通権限</td></tr>");
+	$Page->Print("<input type=checkbox name=SYSAD $sysad value=on>System Common Authority</td></tr>");
 	
 	$Page->HTMLInput('hidden', 'SELECT_CAP', $Form->Get('SELECT_CAP'));
 	
@@ -304,7 +304,7 @@ sub PrintCapSetting
 	
 	$Page->Print("<tr><td colspan=2><hr></td></tr>\n");
 	$Page->Print("<tr><td colspan=2 align=center>");
-	$Page->Print("<input type=button value=\"　設定　\" $common></td></tr>\n");
+	$Page->Print("<input type=button value=\"　Save　\" $common></td></tr>\n");
 	$Page->Print("</table>");
 }
 
@@ -337,9 +337,9 @@ sub PrintCapDelete
 	$Page->Print("<tr><td colspan=3><hr></td></tr>");
 	
 	$Page->Print("<tr bgcolor=silver>");
-	$Page->Print("<td class=\"DetailTitle\" style=\"width:150\">User Name</td>");
-	$Page->Print("<td class=\"DetailTitle\" style=\"width:150\">User Full Name</td>");
-	$Page->Print("<td class=\"DetailTitle\" style=\"width:200\">Explanation</td></td>\n");
+	$Page->Print("<td class=\"DetailTitle\" style=\"width:150\">Cap Name</td>");
+	$Page->Print("<td class=\"DetailTitle\" style=\"width:150\">Cap Full Name</td>");
+	$Page->Print("<td class=\"DetailTitle\" style=\"width:200\">Description</td></td>\n");
 	
 	# キャップリストを出力
 	foreach $id (@userSet) {
