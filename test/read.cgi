@@ -476,7 +476,7 @@ HTML
 	$Page->Print(<<HTML);
 <div style="margin-top:4em;">
 READ.CGI - $ver<br>
-<a href="http://zerochplus.sourceforge.jp/">0chPlus</a>
+<a href="https://github.com/RealAngeleno/ZeroChEN/">ZeroChEN</a>
 </div>
 
 </body>
@@ -704,7 +704,7 @@ sub PrintDiscovery
 
 <div style="margin-top:4em;">
 READ.CGI - $ver<br>
-<a href="http://zerochplus.sourceforge.jp/">0chPlus</a>
+<a href="https://github.com/RealAngeleno/ZeroChEN/">ZeroChEN</a>
 </div>
 
 </body>
