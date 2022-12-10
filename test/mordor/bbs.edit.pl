@@ -89,7 +89,7 @@ sub DoPrint
 	}
 	elsif ($subMode eq 'COMPLETE') {												# 設定完了画面
 		$Sys->Set('_TITLE', 'Process Complete');
-		$BASE->PrintComplete('各種編集処理', $this->{'LOG'});
+		$BASE->PrintComplete('Process Complete', $this->{'LOG'});
 	}
 	elsif ($subMode eq 'FALSE') {													# 設定失敗画面
 		$Sys->Set('_TITLE', 'Process Failed');
@@ -189,7 +189,7 @@ sub SetMenuList
 	}
 	# 管理グループ設定権限のみ
 	if ($pSys->{'SECINFO'}->IsAuthority($pSys->{'USER'}, $ZP::AUTH_NGWORDS, $bbs)) {
-		$Base->SetMenu("NGワードの編集","'bbs.edit','DISP','NGWORD'");
+		$Base->SetMenu("Editing NG Words","'bbs.edit','DISP','NGWORD'");
 		$bAuth = 1;
 	}
 	if ($bAuth) {
@@ -264,8 +264,8 @@ sub PrintHeaderEdit
 	if ($isAuth) {
 		$common = "onclick=\"DoSubmit('bbs.edit'";
 		$Page->Print("<tr><td colspan=2 align=left>");
-		$Page->Print("<input type=button value=\"　変更　\" $common,'FUNC','HEAD')\"> ");
-		$Page->Print("<input type=button value=\"　確認　\" $common,'DISP','HEAD')\">");
+		$Page->Print("<input type=button value=\"Save\" $common,'FUNC','HEAD')\"> ");
+		$Page->Print("<input type=button value=\"Preview\" $common,'DISP','HEAD')\">");
 		$Page->Print("</td></tr>\n");
 	}
 	$Page->Print("</table><br>");
@@ -332,8 +332,8 @@ sub PrintFooterEdit
 	if ($isAuth) {
 		$common = "onclick=\"DoSubmit('bbs.edit'";
 		$Page->Print("<tr><td colspan=2 align=left>");
-		$Page->Print("<input type=button value=\"　Change　\" $common,'FUNC','FOOT')\"> ");
-		$Page->Print("<input type=button value=\"　Display　\" $common,'DISP','FOOT')\">");
+		$Page->Print("<input type=button value=\"Save\" $common,'FUNC','FOOT')\"> ");
+		$Page->Print("<input type=button value=\"　Preview　\" $common,'DISP','FOOT')\">");
 		$Page->Print("</td></tr>\n");
 	}
 	$Page->Print("</table><br>");
@@ -368,7 +368,7 @@ sub PrintMETAEdit
 	
 	$Page->Print("<center><table border=0 cellspacing=2 width=100%>");
 	$Page->Print("<tr><td colspan=2><hr></td></tr>\n");
-	$Page->Print("<tr><td class=\"DetailTitle\">内容編集</td><td>");
+	$Page->Print("<tr><td class=\"DetailTitle\">Edit Contents</td><td>");
 	$Page->Print("<textarea name=META_TEXT rows=11 cols=80 wrap=off>");
 	
 	# フッタ内容テキストの表示
@@ -384,7 +384,7 @@ sub PrintMETAEdit
 	if ($isAuth) {
 		$common = "onclick=\"DoSubmit('bbs.edit'";
 		$Page->Print("<tr><td colspan=2 align=left>");
-		$Page->Print("<input type=button value=\"　変更　\" $common,'FUNC','META')\">");
+		$Page->Print("<input type=button value=\"Save\" $common,'FUNC','META')\">");
 		$Page->Print("</td></tr>\n");
 	}
 	$Page->Print("</table><br>");
@@ -423,20 +423,20 @@ sub PrintValidUserEdit
 	$Page->Print("<center><table border=0 cellspacing=2 width=100%>");
 	$Page->Print("<tr><td colspan=2><hr></td></tr>\n");
 	
-	$Page->Print("<tr><td class=\"DetailTitle\">記法</td><td style=\"font-size: 14px\">");
-	$Page->Print("・ホスト名(正規表\現)<br>");
+	$Page->Print("<tr><td class=\"DetailTitle\">Notation</td><td style=\"font-size: 14px\">");
+	$Page->Print("・Host name (Regular expression)<br>");
 	$Page->Print("<b style=\"margin-left: 20px\">\\.host\\d+\\.jp\$</b><br>");
-	$Page->Print("・IPアドレス(範囲指定あり)<br>");
+	$Page->Print("・IP address (range specified)<br>");
 	$Page->Print("<b style=\"margin-left: 20px\">192.168.0.123</b><br>");
 	$Page->Print("<b style=\"margin-left: 20px\">192.168.1.0-192.168.10.255</b><br>");
 	$Page->Print("<b style=\"margin-left: 20px\">192.168.0.0/16</b><br>");
-	$Page->Print("・端末固有番号<br>");
+	$Page->Print("・Unique Terminal Number<br>");
 	$Page->Print("<b style=\"margin-left: 20px\">12345678901234_xx</b> (au)<br>");
 	$Page->Print("<b style=\"margin-left: 20px\">AbCd123</b> (docomo)<br>");
 	$Page->Print("<span style=\"margin-left: 20px\">その他</span><br>");
 	$Page->Print("</td></tr>\n");
 	
-	$Page->Print("<tr><td class=\"DetailTitle\">対象ホスト・<br>端末識別子一覧</td><td>");
+	$Page->Print("<tr><td class=\"DetailTitle\">Target Host・<br>Terminal Identifier List</td><td>");
 	$Page->Print("<textarea name=VALID_USERS rows=10 cols=70 wrap=off>");
 	
 	my $sanitize = sub {
@@ -452,16 +452,16 @@ sub PrintValidUserEdit
 	
 	$Page->Print("</textarea></td></tr>\n");
 	
-	$Page->Print("<tr><td class=\"DetailTitle\">ユーザ種別</td><td>");
-	$Page->Print("<select name=VALID_TYPE>");
-	$Page->Print("<option value=enable $kind[0]>限定ユーザ</option>");
-	$Page->Print("<option value=disable $kind[1]>規制ユーザ</option>");
-	$Page->Print("</select></td></tr>\n");
-	$Page->Print("<tr><td class=\"DetailTitle\">規制方法</td><td>");
-	$Page->Print("<select name=VALID_METHOD>");
-	$Page->Print("<option value=host $kind[2]>ホスト表\示</option>");
-	$Page->Print("<option value=disable $kind[3]>書き込み不可</option>");
-	$Page->Print("</select></td></tr>\n");
+    $Page->Print("<tr><td class=\"DetailTitle\">User type</td><td>");
+    $Page->Print("<select name=VALID_TYPE>");
+    $Page->Print("<option value=enable $kind[0]>Limited Users</option>");
+    $Page->Print("<option value=disable $kind[1]>Regulatory Users</option>");
+    $Page->Print("</select></td></tr>\n");
+    $Page->Print("<tr><td class=\"DetailTitle\">Regulation method</td><td>");
+    $Page->Print("<select name=VALID_METHOD>");
+    $Page->Print("<option value=host $kind[2]>Display host</option>");
+    $Page->Print("<option value=disable $kind[3]>disable write</option>");
+    $Page->Print("</select></td></tr>\n");
 	
 	$Page->Print("<tr><td colspan=2><hr></td></tr>\n");
 	
@@ -469,7 +469,7 @@ sub PrintValidUserEdit
 	if ($isAuth) {
 		$common = "onclick=\"DoSubmit('bbs.edit'";
 		$Page->Print("<tr><td colspan=2 align=left>");
-		$Page->Print("<input type=button value=\"　設定　\" $common,'FUNC','USER')\">");
+		$Page->Print("<input type=button value=\"Save\" $common,'FUNC','USER')\">");
 		$Page->Print("</td></tr>\n");
 	}
 	$Page->Print("</table><br>");
@@ -509,8 +509,8 @@ sub PrintNGWordsEdit
 	
 	$Page->Print("<center><table border=0 cellspacing=2 width=100%>");
 	$Page->Print("<tr><td colspan=2><hr></td></tr>\n");
-	$Page->Print("<tr><td class=\"DetailTitle\">NGワード一覧");
-	$Page->Print("<br><br>NGワード<br>NGワード&lt;&gt;置換文字列</td><td>");
+	$Page->Print("<tr><td class=\"DetailTitle\">NG Word List");
+	$Page->Print("<br><br>NG Word<br>NG Word&lt;&gt;Replacement String</td><td>");
 	$Page->Print("<textarea name=NG_WORDS rows=10 cols=70 wrap=off>");
 	
 	my $sanitize = sub {
@@ -528,22 +528,22 @@ sub PrintNGWordsEdit
 	
 	$Page->Print("</textarea></td></tr>\n");
 	
-	$Page->Print("<tr><td class=\"DetailTitle\">NGワード処理</td><td>");
-	$Page->Print("<select name=NG_METHOD>");
-	$Page->Print("<option value=disable $kind[0]>書き込み不可</option>");
-	$Page->Print("<option value=host $kind[1]>ホスト表\示</option>");
-	$Page->Print("<option value=delete $kind[2]>NGワード削除</option>");
-	$Page->Print("<option value=substitute $kind[3]>NGワード置換</option>");
-	$Page->Print("</select></td></tr>\n");
-	$Page->Print("<tr><td class=\"DetailTitle\">デフォルト置換文字列</td><td>");
-	$Page->Print("<input type=text name=NG_SUBSTITUTE value=\"$kind[4]\" size=60></td></tr>\n");
-	$Page->Print("<tr><td colspan=2><hr></td></tr>\n");
+    $Page->Print("<tr><td class=\"DetailTitle\">NG word processing</td><td>");
+    $Page->Print("<select name=NG_METHOD>");
+    $Page->Print("<option value=disable $kind[0]>disable write</option>");
+    $Page->Print("<option value=host $kind[1]>Display host</option>");
+    $Page->Print("<option value=delete $kind[2]>delete bad words</option>");
+    $Page->Print("<option value=substitute $kind[3]>NG word substitution</option>");
+    $Page->Print("</select></td></tr>\n");
+    $Page->Print("<tr><td class=\"DetailTitle\">default replacement string</td><td>");
+    $Page->Print("<input type=text name=NG_SUBSTITUTE value=\"$kind[4]\" size=60></td></tr>\n");
+    $Page->Print("<tr><td colspan=2><hr></td></tr>\n");
 	
 	# 権限によって表示を抑制
 	if ($isAuth) {
 		$common = "onclick=\"DoSubmit('bbs.edit'";
 		$Page->Print("<tr><td colspan=2 align=left>");
-		$Page->Print("<input type=button value=\"　設定　\" $common,'FUNC','NGWORD')\">");
+		$Page->Print("<input type=button value=\"Save\" $common,'FUNC','NGWORD')\">");
 		$Page->Print("</td></tr>\n");
 	}
 	$Page->Print("</table><br>");
@@ -579,8 +579,8 @@ sub PrintLastEdit
 	$resmaxz	=~ s/([0-9])/"\x82".chr(0x4f+$1)/eg; # 全角数字
 	$resmaxz1	=~ s/([0-9])/"\x82".chr(0x4f+$1)/eg; # 全角数字
 	
-	$data = "$resmaxz1<><>Over $resmax Thread<>このスレッドは$resmaxzを超えました。<br>";
-	$data .= 'もう書けないので、新しいスレッドを立ててくださいです。。。<>';
+    $data = "$resmaxz1<><>Over $resmax Thread<>This thread has exceeded $resmaxz.<br>";
+    $data .= 'Cannot post anymore in this thread, so please make a new thread...<>';
 	if (! $Form->IsExist('LAST_FROM')) {
 		# 1000.txtの読み込み
 		$path = $SYS->Get('BBSPATH') . '/' . $SYS->Get('BBS') . '/1000.txt';
@@ -658,8 +658,8 @@ sub PrintLastEdit
 	$Page->Print("<tr><td>");
 	
 	# プレビュー表示
-	$Page->Print("<dt>$resmax1 名前：<b><font color=green>$elem[0]</font></b>")			if ($elem[1] eq '');
-	$Page->Print("<dt>$resmax1 名前：<b><a href=\"mailto:$elem[1]\">$elem[0]</a></b>")	if ($elem[1] ne '');
+	$Page->Print("<dt>$resmax1 Name：<b><font color=green>$elem[0]</font></b>")			if ($elem[1] eq '');
+	$Page->Print("<dt>$resmax1 Name：<b><a href=\"mailto:$elem[1]\">$elem[0]</a></b>")	if ($elem[1] ne '');
 	$Page->Print("：$elem[2]</dt><dd>$elem[3]<br><br></dd>");
 	@elem = ('', '', '', '', '') if (! $isLast);
 	
@@ -671,29 +671,29 @@ sub PrintLastEdit
 		$elem[$_] =~ s/"/&quot;/g;
 	}
 	
-	$Page->Print("</td></tr></table></dl></td></tr>");
-	$Page->Print("<tr><td class=\"DetailTitle\" colspan=2>内容編集</td></tr>");
-	$Page->Print("<tr><td class=\"DetailTitle\">名前</td><td>");
-	$Page->Print("<input type=text size=60 name=LAST_FROM value=\"$elem[0]\"><br>");
-	$Page->Print("<input type=checkbox name=SANIT_NAME value=on>エスケープ(サニタイズ)を行う。無効でHTML直接編集</td></tr>\n");
-	$Page->Print("<tr><td class=\"DetailTitle\">メール</td><td>");
-	$Page->Print("<input type=text size=60 name=LAST_mail value=\"$elem[1]\"><br>");
-	$Page->Print("<input type=checkbox name=SANIT_MAIL value=on>エスケープ(サニタイズ)を行う。無効でHTML直接編集</td></tr>\n");
-	$Page->Print("<tr><td class=\"DetailTitle\">日付・ID</td><td>");
-	$Page->Print("<input type=text size=60 name=LAST_date value=\"$elem[2]\"><br>");
-	$Page->Print("<input type=checkbox name=SANIT_DATE value=on>エスケープ(サニタイズ)を行う。無効でHTML直接編集</td></tr>\n");
-	$Page->Print("<tr><td class=\"DetailTitle\">本文</td><td>");
-	$Page->Print("<textarea name=LAST_MESSAGE rows=10 cols=70 wrap=off>");
-	$Page->Print("$elem[3]</textarea><br>");
-	$Page->Print("<input type=checkbox name=SANIT_TEXT value=on>エスケープ(サニタイズ)を行う。無効でHTML直接編集</td></tr>\n");
-	$Page->Print("<tr><td colspan=2><hr></td></tr>\n");
+    $Page->Print("</td></tr></table></dl></td></tr>");
+    $Page->Print("<tr><td class=\"DetailTitle\" colspan=2>Edit Content</td></tr>");
+    $Page->Print("<tr><td class=\"DetailTitle\">Name</td><td>");
+    $Page->Print("<input type=text size=60 name=LAST_FROM value=\"$elem[0]\"><br>");
+    $Page->Print("<input type=checkbox name=SANIT_NAME value=on> Escape (sanitize). Disable and edit HTML directly</td></tr>\n");
+    $Page->Print("<tr><td class=\"DetailTitle\">Email</td><td>");
+    $Page->Print("<input type=text size=60 name=LAST_mail value=\"$elem[1]\"><br>");
+    $Page->Print("<input type=checkbox name=SANIT_MAIL value=on> Escape (sanitize). Disable and edit HTML directly</td></tr>\n");
+    $Page->Print("<tr><td class=\"DetailTitle\">Date/ID</td><td>");
+    $Page->Print("<input type=text size=60 name=LAST_date value=\"$elem[2]\"><br>");
+    $Page->Print("<input type=checkbox name=SANIT_DATE value=on> Escape (sanitize). Disable and edit HTML directly</td></tr>\n");
+    $Page->Print("<tr><td class=\"DetailTitle\">Body</td><td>");
+    $Page->Print("<textarea name=LAST_MESSAGE rows=10 cols=70 wrap=off>");
+    $Page->Print("$elem[3]</textarea><br>");
+    $Page->Print("<input type=checkbox name=SANIT_TEXT value=on> Escape (sanitize). Disable and edit HTML directly</td></tr>\n");
+    $Page->Print("<tr><td colspan=2><hr></td></tr>\n");
 	
 	# 権限によって表示を抑制
 	if ($isAuth) {
 		$common = "onclick=\"DoSubmit('bbs.edit'";
 		$Page->Print("<tr><td colspan=2 align=left>");
-		$Page->Print("<input type=button value=\"　変更　\" $common,'FUNC','LAST')\"> ");
-		$Page->Print("<input type=button value=\"　確認　\" $common,'DISP','LAST')\">");
+		$Page->Print("<input type=button value=\"Save\" $common,'FUNC','LAST')\"> ");
+		$Page->Print("<input type=button value=\"Preview\" $common,'DISP','LAST')\">");
 		$Page->Print("</td></tr>\n");
 	}
 	$Page->Print("</table><br>");
@@ -729,17 +729,17 @@ sub FunctionTextEdit
 	if ($mode == 1) {
 		$readKey = 'HEAD';
 		$formKey = 'HEAD_TEXT';
-		push @$pLog, 'head.txtを設定しました。';
+		push @$pLog, 'Successfully set head.txt';
 	}
 	elsif ($mode == 2) {
 		$readKey = 'FOOT';
 		$formKey = 'FOOT_TEXT';
-		push @$pLog, 'foot.txtを設定しました。';
+		push @$pLog, 'Successfully set foot.txt';
 	}
 	elsif ($mode == 3) {
 		$readKey = 'META';
 		$formKey = 'META_TEXT';
-		push @$pLog, 'meta.txtを設定しました。';
+		push @$pLog, 'Successfully set meta.txt';
 	}
 	
 	require './module/legolas.pl';
@@ -796,13 +796,13 @@ sub FunctionValidUserEdit
 		s/>/&gt;/g;
 		return $_;
 	};
-	push @$pLog, '■以下のユーザを指定';
+	push @$pLog, '■Specify the following users';
 	foreach (@validUsers) {
 		$vUsers->Add($_);
 		push @$pLog, '　　' . &$sanitize($_);
 	}
-	push @$pLog, '■指定ユーザ種別：' . $Form->Get('VALID_TYPE');
-	push @$pLog, '■指定ユーザ処置：' . $Form->Get('VALID_METHOD');
+	push @$pLog, '■Specified User Type: ' . $Form->Get('VALID_TYPE');
+	push @$pLog, '■Specified User Action: ' . $Form->Get('VALID_METHOD');
 	
 	$vUsers->Save($Sys);
 	
@@ -850,14 +850,14 @@ sub FunctionNGWordEdit
 		s/>/&gt;/g;
 		return $_;
 	};
-	push @$pLog, '■NGワードとして以下を設定';
+	push @$pLog, '■Set the following as NG words';
 	foreach (@ngWords) {
 		my ($word, $repl) = split(/<>/, $_, -1);
 		if ($Words->Add($word, $repl)) {
 			push @$pLog, '　　'.&$sanitize($word).(defined $repl ? &$sanitize("<>$repl") : '');
 		}
 	}
-	push @$pLog, '■NGワード処置：' . $Form->Get('NG_METHOD');
+	push @$pLog, '■NG Word Settings：' . $Form->Get('NG_METHOD');
 	
 	$Words->Save($Sys);
 	
@@ -903,7 +903,7 @@ sub FunctionLastEdit
 	# 全て空欄の場合は1000.txtを削除しデフォルト1001を使用
 	if ($forCheck eq ''){
 		unlink $lastPath;
-		push @$pLog, '■1000.txtを破棄してデフォルトの1001を使用します。';
+		push @$pLog, '■Discard 1000.txt and use default 1001.';
 	}
 	# 値が設定された場合は1000.txtを作成する
 	else {
@@ -951,7 +951,7 @@ sub FunctionLastEdit
 			close($f_last);
 		}
 		
-		push @$pLog, '■1000.txtを設定しました。';
+		push @$pLog, '■Successfully set 1000.txt';
 	}
 	
 	return 0;
