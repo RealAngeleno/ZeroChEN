@@ -8,7 +8,7 @@
 106<>Too many links<>Your post contains too many links!
 150<>No Subject<>You did not enter a subject! Go enter one!
 151<>No Text<>You did not enter any text!
-152<>名前が無い<>名前いれてちょ。
+152<>No Name<>You did not enter a name.
 # 200～掲示板規制
 200<>スレッド停止<>このスレッドは停止されてます。もう書けない。。。
 201<>書き込み限界<>{!RESMAX!}を超えてます。このスレッドにはもう書けない。。。
