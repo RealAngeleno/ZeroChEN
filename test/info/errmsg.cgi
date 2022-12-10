@@ -1,13 +1,13 @@
 # 100～入力内容
-100<>サブジェクト長すぎ<>サブジェクトが長すぎます！
-101<>名前長すぎ<>名前が長すぎます！
-102<>メール長すぎ<>メールアドレスが長すぎます！
-103<>本文長すぎ<>本文が長すぎます！
-104<>1行長すぎ<>長すぎる行があります！
-105<>改行多すぎ<>改行が多すぎます！
-106<>アンカー多すぎ<>レスアンカーリンクが多すぎます！
+100<>Subjec too long<>Your subject is too long!
+101<>Name too long!<>Your name is too long!
+102<>E-mail too long<>Your e-mail address is too long!
+103<>Text too long<>Text too long!
+104<>1 Line too long<>There is a line in your post that is too long!
+105<>Too many line breaks<>There are too many line breaks in your post!
+106<>Too many links<>Your post contains too many links!
 150<>No Subject<>You did not enter a subject! Go enter one!
-151<>本文が無い<>本文がありません！
+151<>No Text<>You did not enter any text!
 152<>名前が無い<>名前いれてちょ。
 # 200～掲示板規制
 200<>スレッド停止<>このスレッドは停止されてます。もう書けない。。。
@@ -20,11 +20,11 @@
 207<>海外串<>JPドメイン以外からのスレッド作成を規制しています。
 # 200～掲示板規制
 500<>スレッド立てすぎ<>スレッド立てすぎです。もうちょいもちついてください。
-501<>Consecutive Posts<>You made way too many consecutive posts. Slow down??
+501<>Consecutive Posts<>You've made way too many consecutive posts. Slow down??
 502<>Double post<>Did you attempt to post the same thing twice??
 503<>もまいらもちつけ。<>もうちょっと落ち着いて書きこみしてください。{!WAIT!}秒ぐらい。
 504<>スレッド規制<>現在この板のスレッド作成はキャップのみ可能です。<br>管理人に相談してください。。。
-505<>Samba規制1<>{!SAMBATIME!} sec たたないと書けません。({!SAMBA!}回目、{!WAIT!} sec しかたってない)<br>\n<br>\n今のところ、キャップ以外に回避する方法はありません。\n
+505<>Samba 1<>Samba Timeout: You cannot until post until {!SAMBATIME!} seconds pass from your last attempted post! (Times triggered: {!SAMBA!}. {!WAIT!} seconds were remaining)<br>\n<br>\nUsers with capcodes may be exempt from this.\n
 506<>Samba規制2<>連打しないでください。もうそろそろ規制リストに入れますよ。。(￣ー￣)ニヤリッ<br>\n<br>\n\n
 507<>Samba規制3<>もうずっと書けませんよ。<br>\n<br>\nあなたは、規制リストに追加されました。<br><br>\n【解除する方法】<br>\n{!WAIT!}分以上初心者の方々を優しく導いてあげてください。<br>\nこれ以外に解除の方法はありません。<br>\n
 508<>Samba規制中<>まだ書けませんよ。<br><br>　　　　あなたは、規制リストに追加されています。 <br><br>　　　　【解除する方法】<br>　　　　{!WAIT!}分以上初心者の方々を優しく導いてあげてください。<br>　　　　これ以外に解除の方法はありません。<br>---------- 
