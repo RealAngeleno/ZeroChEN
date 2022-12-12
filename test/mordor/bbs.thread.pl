@@ -191,14 +191,14 @@ sub SetMenuList
 {
 	my ($Base, $pSys, $bbs) = @_;
 	
-	$Base->SetMenu('スレッド一覧', "'bbs.thread','DISP','LIST'");
+	$Base->SetMenu('Thread List', "'bbs.thread','DISP','LIST'");
 	
 	# スレッドdat落ち権限のみ
 	if ($pSys->{'SECINFO'}->IsAuthority($pSys->{'USER'}, $ZP::AUTH_THREADPOOL, $bbs)) {
-		$Base->SetMenu('一括DAT落ち', "'bbs.thread','DISP','AUTOPOOL'");
+		$Base->SetMenu('Thread Auto Pooling', "'bbs.thread','DISP','AUTOPOOL'");
 	}
 	$Base->SetMenu('<hr>', '');
-	$Base->SetMenu('システム管理へ戻る', "'sys.bbs','DISP','LIST'");
+	$Base->SetMenu('Back to system administration', "'sys.bbs','DISP','LIST'");
 }
 
 #------------------------------------------------------------------------------------------------------------
@@ -252,8 +252,8 @@ sub PrintThreadList
 	$Page->Print(");$common\">&lt;&lt; PREV</a> | <a href=\"javascript:SetOption('DISPST', ");
 	$Page->Print("" . ($dispSt + $dispNum) . ");$common\">NEXT &gt;&gt;</a></b>");
 	$Page->Print("</td><td colspan=2 align=right>");
-	$Page->Print("表\示数<input type=text name=DISPNUM size=4 value=$dispNum>");
-	$Page->Print("<input type=button value=\"　表\示　\" onclick=\"$common\"></td></tr>\n");
+	$Page->Print("Display Number<input type=text name=DISPNUM size=4 value=$dispNum>");
+	$Page->Print("<input type=button value=\"　Save　\" onclick=\"$common\"></td></tr>\n");
 	$Page->Print("<tr><td colspan=5><hr></td></tr>\n");
 	$Page->Print("<tr><th style=\"width:30px\"><a href=\"javascript:toggleAll('THREADS')\">全</a></th>");
 	$Page->Print("<td class=\"DetailTitle\" style=\"width:250px\">Thread Title</td>");
@@ -290,7 +290,7 @@ sub PrintThreadList
 		$Page->Print("<td><input type=checkbox name=THREADS value=$id></td>");
 		if ($isResEdit || $isResAbone) {
 			if (! ($subj =~ /[^\s　]/) || $subj eq '') {
-				$subj = '(空欄もしくは空白のみ)';
+				$subj = '(blank or blank only)';
 			}
 			$Page->Print("<td>$n: <a href=$common>$subj</a></td>");
 		}
@@ -299,10 +299,10 @@ sub PrintThreadList
 		}
 		$Page->Print("<td align=center>$id</td><td align=center>$res</td>");
 		my @attrstr = ();
-		push @attrstr, '停止' if ($isstop);
-		push @attrstr, '浮上' if ($Threads->GetAttr($id, 'float'));
-		push @attrstr, '不落' if ($Threads->GetAttr($id, 'nopool'));
-		push @attrstr, 'sage進行' if ($Threads->GetAttr($id, 'sagemode'));
+		push @attrstr, 'stop' if ($isstop);
+		push @attrstr, 'sticky' if ($Threads->GetAttr($id, 'float'));
+		push @attrstr, 'nopool' if ($Threads->GetAttr($id, 'nopool'));
+		push @attrstr, 'autosaged' if ($Threads->GetAttr($id, 'sagemode'));
 		$Page->Print("<td>@attrstr</td></tr>\n");
 	}
 	$common		= "onclick=\"DoSubmit('bbs.thread','DISP'";
@@ -310,25 +310,25 @@ sub PrintThreadList
 	
 	$Page->Print("<tr><td colspan=5><hr></td></tr>\n");
 	$Page->Print("<tr><td colspan=5 align=left>");
-#	$Page->Print("<input type=button value=\" コピー \" $common2,'COPY')\"> ");
-#	$Page->Print("<input type=button value=\"　移動　\" $common2,'MOVE')\"> ");
-	$Page->Print("<input type=button value=\"subject更新\" $common2,'UPDATE')\"> ")			if ($isUpdate);
-	$Page->Print("<input type=button value=\"subject再作成\" $common2,'UPDATEALL')\"> ")	if ($isUpdate);
-	$Page->Print("<input type=button value=\"　停止　\" $common,'STOP')\"> ")				if ($isStop);
-	$Page->Print("<input type=button value=\"　再開　\" $common,'RESTART')\"> ")			if ($isStop);
-	$Page->Print("<input type=button value=\"DAT落ち\" $common,'POOL')\"> ")				if ($isPool);
+#	$Page->Print("<input type=button value=\" copy \" $common2,'COPY')\"> ");
+#	$Page->Print("<input type=button value=\"　move　\" $common2,'MOVE')\"> ");
+	$Page->Print("<input type=button value=\"Update Subject\" $common2,'UPDATE')\"> ")			if ($isUpdate);
+	$Page->Print("<input type=button value=\"Update all Subjects\" $common2,'UPDATEALL')\"> ")	if ($isUpdate);
+	$Page->Print("<input type=button value=\"Stop\" $common,'STOP')\"> ")				if ($isStop);
+	$Page->Print("<input type=button value=\"Resume\" $common,'RESTART')\"> ")			if ($isStop);
+	$Page->Print("<input type=button value=\"Pool\" $common,'POOL')\"> ")				if ($isPool);
 	
 	if ($isStop) {
-		$Page->Print("属性: <select name=ATTR>");
-		$Page->Print("<option value=float>浮上");
-		$Page->Print("<option value=nopool>不落");
-		$Page->Print("<option value=sagemode>sage進行");
+		$Page->Print("Attributes: <select name=ATTR>");
+		$Page->Print("<option value=float>sticky");
+		$Page->Print("<option value=nopool>nopool");
+		$Page->Print("<option value=sagemode>autosage");
 		$Page->Print("</select> ");
-		$Page->Print("<input type=button value=\"付加\" $common,'ATTR')\"> ");
-		$Page->Print("<input type=button value=\"解除\" $common,'DEATTR')\"> ");
+		$Page->Print("<input type=button value=\"Add\" $common,'ATTR')\"> ");
+		$Page->Print("<input type=button value=\"Remove\" $common,'DEATTR')\"> ");
 	}
 	
-	$Page->Print("<input type=button value=\"　削除　\" $common,'DELETE')\" class=\"delete\"> ")				if ($isDelete);
+	$Page->Print("<input type=button value=\"DELETE\" $common,'DELETE')\" class=\"delete\"> ")				if ($isDelete);
 	$Page->Print("</td></tr>\n");
 	$Page->Print("</table><br>");
 	
@@ -353,7 +353,7 @@ sub PrintThreadStop
 	my ($common, $text);
 	
 	$SYS->Set('_TITLE', ($mode ? 'Thread Stop' : 'Thread Restart'));
-	$text = ($mode ? '停止' : '再開');
+	$text = ($mode ? 'Stop' : 'Resume');
 	
 	require './module/baggins.pl';
 	$Threads = BILBO->new;
@@ -383,7 +383,7 @@ sub PrintThreadStop
 	
 	if ($mode) {
 		$Page->Print("<tr><td bgcolor=yellow colspan=3><b><font color=red>");
-		$Page->Print("※注：停止したスレッドは[再開]で停止状態を解除できます。</b><br>");
+		$Page->Print("*Note: Suspended threads can be unsuspended by clicking [Resume].</b><br>");
 		$Page->Print("<tr><td colspan=3><hr></td></tr>\n");
 	}
 	$Page->Print("<tr><td colspan=3 align=left>");
@@ -408,7 +408,7 @@ sub PrintThreadAttr
 	
 	$Sys->Set('_TITLE', ($mode ? 'Thread Add Attribute' : 'Thread Remove Attribute'));
 	
-	my %alist = ('float'=>'浮上', 'nopool'=>'不落', 'sagemode'=>'sage進行');
+	my %alist = ('float'=>'sticky', 'nopool'=>'nopool', 'sagemode'=>'autosage');
 	my $attr = $Form->Get('ATTR');
 	my $name = $attr;
 	$name = $alist{$attr} if (defined $alist{$name});
@@ -490,10 +490,10 @@ sub PrintThreadPooling
 	
 	$Page->Print("<tr><td colspan=3><hr></td></tr>\n");
 	$Page->Print("<tr><td bgcolor=yellow colspan=3><b><font color=red>");
-	$Page->Print("※注：DAT落ちしたスレッドは[DAT落ちスレッド]画面で復帰できます。</b><br>");
+	$Page->Print("*Note: You can restore the threads that have dropped DAT on the [Failing DAT Threads] screen.</b><br>");
 	$Page->Print("<tr><td colspan=3><hr></td></tr>\n");
 	$Page->Print("<tr><td colspan=3 align=left>");
-	$Page->Print("<input type=button value=\"DAT落ち\" onclick=\"$common\"> ");
+	$Page->Print("<input type=button value=\"DAT Pool\" onclick=\"$common\"> ");
 	$Page->Print("</td></tr>\n");
 	$Page->Print("</table><br>");
 }
@@ -522,12 +522,12 @@ sub PrintThreadDelete
 	@threadList = $Form->GetAtArray('THREADS');
 	
 	$Page->Print("<center><table border=0 cellspacing=2 width=100%>");
-	$Page->Print("<tr><td colspan=3>以下のスレッドを削除します。</td></tr>");
+	$Page->Print("<tr><td colspan=3>Delete the thread below.</td></tr>");
 	$Page->Print("<tr><td colspan=3><hr></td></tr>\n");
 	$Page->Print("<tr>");
-	$Page->Print("<td class=\"DetailTitle\" style=\"width:250\">スレッド名</td>");
-	$Page->Print("<td class=\"DetailTitle\" style=\"width:100\">スレッドキー</td>");
-	$Page->Print("<td class=\"DetailTitle\" style=\"width:50\">レス数</td></td>\n");
+	$Page->Print("<td class=\"DetailTitle\" style=\"width:250\">Thread Name</td>");
+	$Page->Print("<td class=\"DetailTitle\" style=\"width:100\">Thread ID</td>");
+	$Page->Print("<td class=\"DetailTitle\" style=\"width:50\">Replies</td></td>\n");
 	
 	foreach $id (@threadList) {
 		$subj	= $Threads->Get('SUBJECT', $id);
@@ -541,10 +541,10 @@ sub PrintThreadDelete
 	
 	$Page->Print("<tr><td colspan=3><hr></td></tr>\n");
 	$Page->Print("<tr><td bgcolor=yellow colspan=3><b><font color=red>");
-	$Page->Print("※注：削除したスレッドを元に戻すことはできません。</b><br>");
+	$Page->Print("※NOTE: Deleted threads cannot be restored.</b><br>");
 	$Page->Print("<tr><td colspan=3><hr></td></tr>\n");
 	$Page->Print("<tr><td colspan=3 align=left>");
-	$Page->Print("<input type=button value=\"　削除　\" onclick=\"$common\" class=\"delete\"> ");
+	$Page->Print("<input type=button value=\"Delete\" onclick=\"$common\" class=\"delete\"> ");
 	$Page->Print("</td></tr>\n");
 	$Page->Print("</table><br>");
 }
