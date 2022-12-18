@@ -165,7 +165,7 @@ sub SetMenuList
 {
 	my ($Base, $pSys, $bbs) = @_;
 	
-	$Base->SetMenu('グループ一覧', "'bbs.user','DISP','LIST'");
+	$Base->SetMenu('Group List', "'bbs.user','DISP','LIST'");
 	
 	# 管理グループ設定権限のみ
 	if ($pSys->{'SECINFO'}->IsAuthority($pSys->{'USER'}, $ZP::AUTH_USERGROUP, $bbs)) {
@@ -593,7 +593,7 @@ sub FunctionGroupDelete
 		next if (! defined $Group->Get('NAME', $id));
 		if ($Group->GetBelong($Sys->Get('ADMIN')->{'USER'}) eq $id) {
 			push(@$pLog,
-				'※自分の所属グループのため「' . $Group->Get('NAME', $id) . '」を削除できませんでした。');
+				'※Due to you belonging to this group,「' . $Group->Get('NAME', $id) . '」could not be deleted.');
 		}
 		else {
 			push @$pLog, $Group->Get('NAME', $id) . '(' . $Group->Get('EXPL', $id) . ')';
