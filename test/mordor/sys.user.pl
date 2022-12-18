@@ -140,11 +140,11 @@ sub SetMenuList
 	my ($Base, $pSys) = @_;
 	
 	# 共通表示メニュー
-	$Base->SetMenu('ユーザー一覧', "'sys.user','DISP','LIST'");
+	$Base->SetMenu('User List', "'sys.user','DISP','LIST'");
 	
 	# システム管理権限のみ
 	if ($pSys->{'SECINFO'}->IsAuthority($pSys->{'USER'}, $ZP::AUTH_SYSADMIN, '*')) {
-		$Base->SetMenu('ユーザー登録', "'sys.user','DISP','CREATE'");
+		$Base->SetMenu('User Registration', "'sys.user','DISP','CREATE'");
 	}
 }
 
@@ -189,8 +189,8 @@ sub PrintUserList
 	$Page->Print(");$common\">&lt;&lt; PREV</a> | <a href=\"javascript:SetOption('DISPST', ");
 	$Page->Print("" . ($dispSt + $dispNum) . ");$common\">NEXT &gt;&gt;</a></b>");
 	$Page->Print("</td><td colspan=2 align=right>");
-	$Page->Print("表\示数<input type=text name=DISPNUM size=4 value=$dispNum>");
-	$Page->Print("<input type=button value=\"　表\示　\" onclick=\"$common\"></td></tr>\n");
+	$Page->Print("Display: <input type=text name=DISPNUM size=4 value=$dispNum>");
+	$Page->Print("<input type=button value=\"　Display　\" onclick=\"$common\"></td></tr>\n");
 	$Page->Print("<tr><td colspan=4><hr></td></tr>\n");
 	$Page->Print("<tr><th style=\"width:30\">　</th>");
 	$Page->Print("<td class=\"DetailTitle\" style=\"width:150\">User Name</td>");
@@ -228,7 +228,7 @@ sub PrintUserList
 	# システム権限有無による表示抑制
 	if ($isAuth) {
 		$Page->Print("<tr><td colspan=4 align=left>");
-		$Page->Print("<input type=button value=\"　削除　\" $common,'DELETE')\" class=\"delete\">");
+		$Page->Print("<input type=button value=\"　Delete　\" $common,'DELETE')\" class=\"delete\">");
 		$Page->Print("</td></tr>\n");
 	}
 	$Page->Print("</table>");
@@ -279,19 +279,19 @@ sub PrintUserSetting
 	}
 	
 	$Page->Print("<center><table border=0 cellspacing=2>");
-	$Page->Print("<tr><td colspan=2>各項目を設定して[設定]ボタンを押してください。</td></tr>");
+	$Page->Print("<tr><td colspan=2>Set each item and press save.</td></tr>");
 	$Page->Print("<tr><td colspan=2><hr></td></tr>\n");
 	
-	$Page->Print("<tr><td class=\"DetailTitle\">ユーザ名</td><td>");
+	$Page->Print("<tr><td class=\"DetailTitle\">Username</td><td>");
 	$Page->Print("<input type=text size=30 name=NAME value=\"$name\"></td></tr>");
-	$Page->Print("<tr><td class=\"DetailTitle\">パスワード</td><td>");
+	$Page->Print("<tr><td class=\"DetailTitle\">Password</td><td>");
 	$Page->Print("<input type=password size=30 name=PASS value=\"$pass\"></td></tr>");
-	$Page->Print("<tr><td class=\"DetailTitle\">ユーザフルネーム</td><td>");
+	$Page->Print("<tr><td class=\"DetailTitle\">User Full Name</td><td>");
 	$Page->Print("<input type=text size=30 name=FULL value=\"$full\"></td></tr>");
-	$Page->Print("<tr><td class=\"DetailTitle\">説明</td><td>");
+	$Page->Print("<tr><td class=\"DetailTitle\">Description</td><td>");
 	$Page->Print("<input type=text size=30 name=EXPL value=\"$expl\"></td></tr>");
 	$Page->Print("<tr><td class=\"DetailTitle\" colspan=2 valign=absmiddle>");
-	$Page->Print("<input type=checkbox name=SYSAD $sysad value=on>システム管理者権限</td></tr>");
+	$Page->Print("<input type=checkbox name=SYSAD $sysad value=on>System Administrator Authority</td></tr>");
 	
 	$Page->HTMLInput('hidden', 'SELECT_USER', $Form->Get('SELECT_USER'));
 	
@@ -301,7 +301,7 @@ sub PrintUserSetting
 	
 	$Page->Print("<tr><td colspan=2><hr></td></tr>\n");
 	$Page->Print("<tr><td colspan=2 align=center>");
-	$Page->Print("<input type=button value=\"　設定　\" $common></td></tr>\n");
+	$Page->Print("<input type=button value=\"　Save　\" $common></td></tr>\n");
 	$Page->Print("</table>");
 }
 
@@ -331,7 +331,7 @@ sub PrintUserDelete
 	@userSet = $Form->GetAtArray('USERS');
 	
 	$Page->Print("<center><table border=0 cellspacing=2 width=100%>");
-	$Page->Print("<tr><td colspan=3>以下のユーザを削除します。</td></tr>");
+	$Page->Print("<tr><td colspan=3>Delete the following users:</td></tr>");
 	$Page->Print("<tr><td colspan=3><hr></td></tr>");
 	
 	$Page->Print("<tr bgcolor=silver>");
@@ -353,10 +353,10 @@ sub PrintUserDelete
 	
 	$Page->Print("<tr><td colspan=3><hr></td></tr>");
 	$Page->Print("<tr><td bgcolor=yellow colspan=3><b><font color=red>");
-	$Page->Print("※注：削除したユーザを元に戻すことはできません。</b><br>");
-	$Page->Print("※注：Administratorと自分自身は削除できません。</td></tr>");
+	$Page->Print("NOTE: Deleted users cannot be restored!</b><br>");
+	$Page->Print("NOTE：You cannot delete administrator accounts or your own account.</td></tr>");
 	$Page->Print("<tr><td colspan=3><hr></td></tr>");
-	$Page->Print("<tr><td colspan=3 align=left><input type=button value=\"　削除　\" ");
+	$Page->Print("<tr><td colspan=3 align=left><input type=button value=\"　Delete　\" ");
 	$Page->Print("onclick=\"DoSubmit('sys.user','FUNC','DELETE')\" class=\"delete\"></td></tr>");
 	$Page->Print("</table>");
 }
@@ -430,11 +430,11 @@ sub FuncUserSetting
 	
 	# ログの設定
 	{
-		push @$pLog, "■ ユーザ [ $name ] " . ($mode ? '設定' : '作成');
-		push @$pLog, '　　　　パスワード：' . ($chg ? $pass : '変更なし');
-		push @$pLog, "　　　　フルネーム：$full";
-		push @$pLog, "　　　　説明：$expl";
-		push @$pLog, '　　　　システム管理：' . ($sysad ? '有り' : '無し');
+		push @$pLog, "■ User [ $name ] " . ($mode ? 'Settings' : 'Create');
+		push @$pLog, 'Password:' . ($chg ? $pass : 'No change');
+		push @$pLog, " Full name: $full";
+		push @$pLog, "Description: $expl";
+		push @$pLog, 'System administration:' . ($sysad? 'Yes' : 'No');
 	}
 	
 	return 0;
@@ -479,17 +479,17 @@ sub FuncUserDelete
 		next if (! defined $User->Get('NAME', $_));
 		# Administratorは削除不可
 		if ($_ eq '0000000001') {
-			push @$pLog, '□ ユーザ [ Administrator ] は削除できませんでした。';
+			push @$pLog, '□ User [ Administrator ] could not be deleted.';
 		}
 		# 自分自身も削除不可
 		elsif ($_ eq $id) {
 			my $name = $User->Get('NAME', $id);
-			push @$pLog, "□ ユーザ [ $name ] は自分自身のため削除できませんでした。";
+			push @$pLog, "□ User [ $name ] could not be deleted as you cannot delete yourself.";
 		}
 		# それ以外は削除可
 		else {
 			my $name = $User->Get('NAME', $_);
-			push @$pLog, "■ ユーザ [ $name ] を削除しました。";
+			push @$pLog, "■ Successfully deleted user [ $name ].";
 			$User->Delete($_);
 		}
 	}
