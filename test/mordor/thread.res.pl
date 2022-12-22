@@ -189,19 +189,19 @@ sub SetMenuList
 {
 	my ($Base, $pSys, $bbs) = @_;
 	
-	$Base->SetMenu('レス一覧', "'thread.res','DISP','LIST'");
+	$Base->SetMenu('Res List', "'thread.res','DISP','LIST'");
 	
 	# レス削除権限のみ
 	if ($pSys->{'SECINFO'}->IsAuthority($pSys->{'USER'}, $ZP::AUTH_RESDELETE, $bbs)){
-		$Base->SetMenu('レス一括削除', "'thread.res','DISP','DELLUMP'");
+		$Base->SetMenu('Bulk Delete', "'thread.res','DISP','DELLUMP'");
 	}
 	# 管理グループ権限のみ
 	if ($pSys->{'SECINFO'}->IsAuthority($pSys->{'USER'}, $ZP::AUTH_USERGROUP, $bbs)){
 	#	$Base->SetMenu('<hr>', '');
-	#	$Base->SetMenu('書き込みログ', "'thread.res','DISP','LOG_THREAD_WRITE'");
+	#	$Base->SetMenu('Write Log', "'thread.res','DISP','LOG_THREAD_WRITE'");
 	}
 	$Base->SetMenu('<hr>', '');
-	$Base->SetMenu('掲示板管理へ戻る', "'bbs.thread','DISP','LIST'");
+	$Base->SetMenu('Back to board management', "'bbs.thread','DISP','LIST'");
 }
 
 #------------------------------------------------------------------------------------------------------------
@@ -234,8 +234,8 @@ sub PrintResList
 	$common = "DoSubmit('thread.res','DISP','LIST');";
 	
 	$Page->Print("<center><dl><table border=0 cellspacing=2 width=100%>");
-	$Page->Print("<tr><td colspan=2 align=right>表\示書式：<input type=text name=DISP_FORMAT");
-	$Page->Print(" value=\"$format\"><input type=button value=\"　表\示　\" onclick=\"$common\">");
+	$Page->Print("<tr><td colspan=2 align=right>Display: <input type=text name=DISP_FORMAT");
+	$Page->Print(" value=\"$format\"><input type=button value=\"Display\" onclick=\"$common\">");
 	$Page->Print("</td></tr>\n<tr><td colspan=2><hr></td></tr>\n");
 	$Page->Print("<tr><th style=\"width:30\">　</th>");
 	$Page->Print("<td class=\"DetailTitle\" style=\"width:300\">Contents</td></tr>\n");
@@ -309,8 +309,8 @@ sub PrintResList
 	if ($isAbone) {
 		$common = "onclick=\"DoSubmit('thread.res','DISP'";
 		$Page->Print("<tr><td colspan=2 align=right>");
-		$Page->Print("<input type=button value=\"あぼ～ん\" $common,'ABONE')\"> ");
-		$Page->Print("<input type=button value=\"透明あぼ～ん\" $common,'DELETE')\">");
+		$Page->Print("<input type=button value=\"Soft-Delete\" $common,'ABONE')\"> ");
+		$Page->Print("<input type=button value=\"Delete\" $common,'DELETE')\">");
 		$Page->Print("</td></tr>\n");
 	}
 	$Page->Print("</table></dl><br>");
@@ -350,13 +350,13 @@ sub PrintResEdit
 	
 	$Page->Print("<center><table border=0 cellspacing=2 width=100%>");
 	$Page->Print("<tr><td colspan=2><hr></td></tr>");
-	$Page->Print("<tr><td class=\"DetailTitle\">名前</td><td>");
+	$Page->Print("<tr><td class=\"DetailTitle\">Name</td><td>");
 	$Page->Print("<input type=text size=50 value=\"$elem[0]\" name=FROM></td></tr>");
-	$Page->Print("<tr><td class=\"DetailTitle\">メール</td><td>");
+	$Page->Print("<tr><td class=\"DetailTitle\">E-Mail</td><td>");
 	$Page->Print("<input type=text size=50 value=\"$elem[1]\" name=mail></td></tr>");
-	$Page->Print("<tr><td class=\"DetailTitle\">日付・ID</td><td>");
+	$Page->Print("<tr><td class=\"DetailTitle\">Date・ID</td><td>");
 	$Page->Print("<input type=text size=50 value=\"$elem[2]\" name=_DATE_></td></tr>");
-	$Page->Print("<tr><td class=\"DetailTitle\">本文</td><td>");
+	$Page->Print("<tr><td class=\"DetailTitle\">Message</td><td>");
 	$Page->Print("<textarea name=MESSAGE cols=70 rows=10>$elem[3]</textarea></td></tr>");
 	$Page->Print("<tr><td colspan=2><hr></td></tr>");
 	
@@ -366,7 +366,7 @@ sub PrintResEdit
 	if ($isEdit) {
 		$common = "onclick=\"DoSubmit('thread.res','FUNC'";
 		$Page->Print("<tr><td colspan=2 align=right>");
-		$Page->Print("<input type=button value=\"　変更　\" $common,'EDIT')\"> ");
+		$Page->Print("<input type=button value=\"Edit\" $common,'EDIT')\"> ");
 		$Page->Print("</td></tr>\n");
 	}
 	$Page->Print("</table><br>");
@@ -397,7 +397,7 @@ sub PrintResDelete
 	$isAbone = $Sys->Get('ADMIN')->{'SECINFO'}->IsAuthority($Sys->Get('ADMIN')->{'USER'}, $ZP::AUTH_RESDELETE, $Sys->Get('BBS'));
 	
 	$Page->Print("<center><dl><table border=0 cellspacing=2 width=100%>");
-	$Page->Print("<tr><td>以下のレスを" . ($mode ? 'あぼ～ん' : '削除') . "します。</td></tr>\n");
+	$Page->Print("<tr><td>" . ($mode ? 'Soft Delete' : 'Delete') . " post(s)?</td></tr>\n");
 	$Page->Print("<tr><td><hr></td></tr>\n");
 	$Page->Print("<tr><td class=\"DetailTitle\">Contents</td></tr>\n");
 	
@@ -418,7 +418,7 @@ sub PrintResDelete
 		$common = "onclick=\"DoSubmit('thread.res','FUNC','";
 		$common = $common . ($mode ? 'ABONE' : 'DELETE') . "')\"";
 		$Page->Print("<tr><td align=right>");
-		$Page->Print("<input type=button value=\"　実行　\" $common> ");
+		$Page->Print("<input type=button value=\"Delete\" $common> ");
 		$Page->Print("</td></tr>\n");
 	}
 	$Page->Print("</table></dl><br>");
@@ -455,7 +455,7 @@ sub PrintResLumpDelete
 	
 	$Page->Print("<center><dl><table border=0 cellspacing=2 width=100%>");
 	$Page->Print("<tr><td colspan=2><hr></td></tr>\n");
-	$Page->Print("<tr><td class=\"DetailTitle\">削除レス書式</td><td>");
+	$Page->Print("<tr><td class=\"DetailTitle\">Delete res format</td><td>");
 	$Page->Print("<input type=text name=DEL_FORMAT size=40 value=$format></td></tr>\n");
 	$Page->Print("<tr><td colspan=2><hr></td></tr>\n");
 	
@@ -479,9 +479,9 @@ sub PrintResLumpDelete
 	if ($isAbone) {
 		$common = "onclick=\"DoSubmit('thread.res'";
 		$Page->Print("<tr><td align=right colspan=2>");
-		$Page->Print("<input type=button value=\"　確認　\" $common,'DISP','DELLUMP')\" style=\"float: left;\"> ");
-		$Page->Print("<input type=button value=\"あぼ～ん\" $common,'FUNC','ABONE')\"> ");
-		$Page->Print("<input type=button value=\"透明あぼ～ん\" $common,'FUNC','DELETE')\"> ");
+		$Page->Print("<input type=button value=\"Submit\" $common,'DISP','DELLUMP')\" style=\"float: left;\"> ");
+		$Page->Print("<input type=button value=\"Soft-Delete\" $common,'FUNC','ABONE')\"> ");
+		$Page->Print("<input type=button value=\"Delete\" $common,'FUNC','DELETE')\"> ");
 		$Page->Print("</td></tr>\n");
 	}
 	$Page->Print("</table></dl><br>");
@@ -536,7 +536,7 @@ sub FunctionResEdit
 	$Dat->Save($Sys);
 	
 	# ログの設定
-	push @$pLog, '番号[' . $Form->Get('SELECT_RES') . ']のレスを以下のように変更しました。';
+	push @$pLog, 'No: [' . $Form->Get('SELECT_RES') . '] will have the following modifications:';
 	foreach (@elem) {
 		push @$pLog, $_;
 	}
@@ -631,7 +631,7 @@ sub FunctionResDelete
 	# ログの設定
 	$delCnt = 0;
 	$abone	= '';
-	push @$pLog, '以下のレスを' . ($mode ? 'あぼ～ん' : '削除') . 'しました。';
+	push @$pLog, '' . ($mode ? 'soft-delete' : 'delete') . 'post(s)?';
 	foreach (@resSet) {
 		next if ($_ == 0);
 		if ($delCnt > 5) {
