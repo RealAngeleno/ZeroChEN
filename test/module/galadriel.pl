@@ -187,7 +187,7 @@ sub ConvertURL
 				# 自鯖以外
 				else {
 					if($1 eq 'http' || $1 eq 'https') {
-						$$text =~ s|$reg2|<a href="$1://$cushion$2" target="_blank">$1://$2</a>|;
+						$$text =~ s|$reg2|<a href="$1://$cushion$1://$2" target="_blank">$1://$2</a>|;
 					elsif ($cushion =~ m{^(?:jump\.x0\.to|nun\.nu)/$}) {
 						$$text =~ s|$reg2|<a href="http://$cushion$1://$2" target="_blank">$1://$2</a>|;
 					}
