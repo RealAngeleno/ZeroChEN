@@ -216,4 +216,4 @@ Persistent session data in CGI applications
 	all .cgi files are 755
 	all folders inside of test are 777.
 	users.cgi (/test/info/users.cgi) is 777.
-	Alternatively, you can chown everything to www-data.
+	Alternatively, you can chown everything to www-data if you are just trying things out.
