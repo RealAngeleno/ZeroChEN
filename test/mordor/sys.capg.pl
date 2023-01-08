@@ -72,7 +72,7 @@ sub DoPrint
 	}
 	elsif ($subMode eq 'COMPLETE') {												# グループ設定完了画面
 		$Sys->Set('_TITLE', 'Process Complete');
-		$BASE->PrintComplete('キャップグループ処理', $this->{'LOG'});
+		$BASE->PrintComplete('CAP Group Process Complete', $this->{'LOG'});
 	}
 	elsif ($subMode eq 'FALSE') {													# グループ設定失敗画面
 		$Sys->Set('_TITLE', 'Process Failed');
@@ -136,11 +136,11 @@ sub SetMenuList
 {
 	my ($Base, $pSys) = @_;
 	
-	$Base->SetMenu('グループ一覧', "'sys.capg','DISP','LIST'");
+	$Base->SetMenu('CAP Group List', "'sys.capg','DISP','LIST'");
 	
 	# 管理グループ設定権限のみ
 	if ($pSys->{'SECINFO'}->IsAuthority($pSys->{'USER'}, $ZP::AUTH_SYSADMIN, '*')) {
-		$Base->SetMenu('グループ登録', "'sys.capg','DISP','CREATE'");
+		$Base->SetMenu('Create New CAP Group', "'sys.capg','DISP','CREATE'");
 	}
 }
 
@@ -173,8 +173,8 @@ sub PrintGroupList
 	$Page->Print("<tr><td style=\"width:30\">　</td>");
 	$Page->Print("<td class=\"DetailTitle\" style=\"width:150\">Group Name</td>");
 	$Page->Print("<td class=\"DetailTitle\" style=\"width:200\">Subscription</td>");
-	$Page->Print("<td class=\"DetailTitle\" style=\"width:30\">Cap Color</td>");
-	$Page->Print("<td class=\"DetailTitle\" style=\"width:30\">Caps</td></tr>\n");
+	$Page->Print("<td class=\"DetailTitle\" style=\"width:30\">CAP Color</td>");
+	$Page->Print("<td class=\"DetailTitle\" style=\"width:30\">CAPs</td></tr>\n");
 	
 	# 権限取得
 	$isAuth = $Sys->Get('ADMIN')->{'SECINFO'}->IsAuthority($Sys->Get('ADMIN')->{'USER'}, $ZP::AUTH_CAPGROUP, $Sys->Get('BBS'));
@@ -207,7 +207,7 @@ sub PrintGroupList
 	# 権限によって表示を抑制
 	if ($isAuth) {
 		$Page->Print("<tr><td colspan=5 align=left>");
-		$Page->Print("<input type=button value=\"　削除　\" $common,'DELETE')\" class=\"delete\">");
+		$Page->Print("<input type=button value=\"Delete\" $common,'DELETE')\" class=\"delete\">");
 		$Page->Print("</td></tr>\n");
 	}
 	$Page->Print("</table>");
@@ -269,46 +269,46 @@ sub PrintGroupSetting
 	}
 	
 	$Page->Print("<center><br><table border=0 cellspacing=2 width=90%>");
-	$Page->Print("<tr><td colspan=2>各情報を入力して[設定]ボタンを押してください。</td></tr>");
-	$Page->Print("<tr><td colspan=2><hr></td></tr>");
-	$Page->Print("<tr><td class=\"DetailTitle\" colspan=2>基本情報</td></tr>");
-	$Page->Print("<tr><td colspan=2><table cellspcing=2>");
-	$Page->Print("<tr><td class=\"DetailTitle\">グループ名称</td><td>");
-	$Page->Print("<input name=GROUPNAME_CAP type=text size=50 value=\"$name\"></td></tr>");
-	$Page->Print("<tr><td class=\"DetailTitle\">説明</td><td>");
-	$Page->Print("<input name=GROUPSUBS_CAP type=text size=50 value=\"$expl\"></td></tr>");
-	$Page->Print("<tr><td class=\"DetailTitle\">キャップの色(無記入でデフォルト)</td><td>");
-	$Page->Print("<input name=GROUPCOLOR_CAP type=text size=50 value=\"$color\"></td></tr>");
-	$Page->Print("</table><br></td></tr>\n");
-	$Page->Print("<tr><td class=\"DetailTitle\" width=40%>権限情報</td>");
-	$Page->Print("<td class=\"DetailTitle\">所属キャップ</td></tr><tr><td valign=top>");
-	
-	# 権限一覧表示
-	$Page->Print("<input type=checkbox name=C_SUBJECT $authNum[0] value=on>タイトル文字数規制解除<br>");
-	$Page->Print("<input type=checkbox name=C_NAME $authNum[1] value=on>名前文字数規制解除<br>");
-	$Page->Print("<input type=checkbox name=C_MAIL $authNum[2] value=on>メール文字数規制解除<br>");
-	$Page->Print("<input type=checkbox name=C_CONTENTS $authNum[3] value=on>本文文字数規制解除<br>");
-	$Page->Print("<input type=checkbox name=C_CONTLINE $authNum[4] value=on>本文行数規制解除<br>");
-	$Page->Print("<input type=checkbox name=C_LINECOUNT $authNum[5] value=on>本文1行文字数規制解除<br>");
-	$Page->Print("<input type=checkbox name=C_NONAME $authNum[6] value=on>名無し規制解除<br>");
-	$Page->Print("<input type=checkbox name=C_THREAD $authNum[7] value=on>スレッド作成規制解除<br>");
-	$Page->Print("<input type=checkbox name=C_THREADCAP $authNum[8] value=on>スレッド作成可能\(キャップ)<br>");
-	$Page->Print("<input type=checkbox name=C_CONTINUAS $authNum[9] value=on>連続投稿規制解除<br>");
-	$Page->Print("<input type=checkbox name=C_DUPLICATE $authNum[10] value=on>二重書き込み規制解除<br>");
-	$Page->Print("<input type=checkbox name=C_SHORTWRITE $authNum[11] value=on>短時間投稿規制解除<br>");
-	$Page->Print("<input type=checkbox name=C_READONLY $authNum[12] value=on>読取専用規制解除<br>");
-	$Page->Print("<input type=checkbox name=C_CUSTOMID $authNum[23] value=on>専用ID許可<br>");
-	$Page->Print("<input type=checkbox name=C_IDDISP $authNum[13] value=on>ID非表\示<br>");
-	$Page->Print("<input type=checkbox name=C_NOSLIP $authNum[22] value=on>端末識別子非表\示<br>");
-	$Page->Print("<input type=checkbox name=C_HOSTDISP $authNum[14] value=on>本文ホスト非表\示<br>");
-	$Page->Print("<input type=checkbox name=C_MOBILETHREAD $authNum[15] value=on>携帯からのスレッド作成<br>");
-	$Page->Print("<input type=checkbox name=C_FIXHANLDLE $authNum[16] value=on>コテハン★表\示<br>");
-	$Page->Print("<input type=checkbox name=C_SAMBA $authNum[17] value=on>Samba規制解除<br>");
-	$Page->Print("<input type=checkbox name=C_PROXY $authNum[18] value=on>プロキシ規制解除<br>");
-	$Page->Print("<input type=checkbox name=C_JPHOST $authNum[19] value=on>海外ホスト規制解除<br>");
-	$Page->Print("<input type=checkbox name=C_NGUSER $authNum[20] value=on>ユーザー規制解除<br>");
-	$Page->Print("<input type=checkbox name=C_NGWORD $authNum[21] value=on>NGワード規制解除<br>");
-	$Page->Print("</td>\n<td valign=top>");
+	$Page->Print("<tr><td colspan=2>Fill out each field then press Save.</td></tr>");
+    $Page->Print("<tr><td colspan=2><hr></td></tr>");
+    $Page->Print("<tr><td class=\"DetailTitle\" colspan=2>Basic information</td></tr>");
+    $Page->Print("<tr><td colspan=2><table cellspcing=2>");
+    $Page->Print("<tr><td class=\"DetailTitle\">CAP Name</td><td>");
+    $Page->Print("<input name=GROUPNAME_CAP type=text size=50 value=\"$name\"></td></tr>");
+    $Page->Print("<tr><td class=\"DetailTitle\">Description</td><td>");
+    $Page->Print("<input name=GROUPSUBS_CAP type=text size=50 value=\"$expl\"></td></tr>");
+    $Page->Print("<tr><td class=\"DetailTitle\">CAP color (blank for default)</td><td>");
+    $Page->Print("<input name=GROUPCOLOR_CAP type=text size=50 value=\"$color\"></td></tr>");
+    $Page->Print("</table><br></td></tr>\n");
+    $Page->Print("<tr><td class=\"DetailTitle\" width=40%>Permissions</td>");
+    $Page->Print("<td class=\"DetailTitle\">affiliation cap</td></tr><tr><td valign=top>");
+
+    # list permissions
+    $Page->Print("<input type=checkbox name=C_SUBJECT $authNum[0] value=on>Exempt from title character limit<br>");
+    $Page->Print("<input type=checkbox name=C_NAME $authNum[1] value=on>Exempt from name character limit<br>");
+    $Page->Print("<input type=checkbox name=C_MAIL $authNum[2] value=on>Exempt from e-mail character limit<br>");
+    $Page->Print("<input type=checkbox name=C_CONTENTS $authNum[3] value=on>Exempt from message character limit<br>");
+    $Page->Print("<input type=checkbox name=C_CONTLINE $authNum[4] value=on>Exempt from message line limit (max lines)<br>");
+    $Page->Print("<input type=checkbox name=C_LINECOUNT $authNum[5] value=on>Exempt from limit for number of characters per line<br>");
+    $Page->Print("<input type=checkbox name=C_NONAME $authNum[6] value=on>Exempt from forced anonymity<br>");
+    $Page->Print("<input type=checkbox name=C_THREAD $authNum[7] value=on>Exempt from thread creation limits<br>");
+    $Page->Print("<input type=checkbox name=C_THREADCAP $authNum[8] value=on>Threadable\(cap)<br>");
+    $Page->Print("<input type=checkbox name=C_CONTINUAS $authNum[9] value=on>Exempt from post timeouts<br>");
+    $Page->Print("<input type=checkbox name=C_DUPLICATE $authNum[10] value=on>Can make duplicate posts<br>");
+    $Page->Print("<input type=checkbox name=C_SHORTWRITE $authNum[11] value=on>Short-time posting restriction<br>");
+    $Page->Print("<input type=checkbox name=C_READONLY $authNum[12] value=on>Unlock Read Only<br>");
+    $Page->Print("<input type=checkbox name=C_CUSTOMID $authNum[23] value=on>Custom ID<br>");
+    $Page->Print("<input type=checkbox name=C_IDDISP $authNum[13] value=on>ID hide/show<br>");
+    $Page->Print("<input type=checkbox name=C_NOSLIP $authNum[22] value=on>Hide Terminal Identifier<br>");
+    $Page->Print("<input type=checkbox name=C_HOSTDISP $authNum[14] value=on>Hide Body Host<br>");
+    $Page->Print("<input type=checkbox name=C_MOBILETHREAD $authNum[15] value=on>Can create threads from mobile<br>");
+    $Page->Print("<input type=checkbox name=C_FIXHANLDLE $authNum[16] value=on>Details★Display<br>");
+    $Page->Print("<input type=checkbox name=C_SAMBA $authNum[17] value=on>Exempt from Samba restrictions<br>");
+    $Page->Print("<input type=checkbox name=C_PROXY $authNum[18] value=on>Exempt from proxy restrictions<br>");
+    $Page->Print("<input type=checkbox name=C_JPHOST $authNum[19] value=on>Exempt from Japanese IP Only restrictions (if enabled)<br>");
+    $Page->Print("<input type=checkbox name=C_NGUSER $authNum[20] value=on>Unlock user??????<br>");
+    $Page->Print("<input type=checkbox name=C_NGWORD $authNum[21] value=on>Unrestrict NG words<br>");
+    $Page->Print("</td>\n<td valign=top>");
 	
 	# 所属ユーザ一覧表示
 	foreach $id (@userSet) {
@@ -336,7 +336,7 @@ sub PrintGroupSetting
 	$Page->Print("</td></tr>");
 	$Page->Print("<tr><td colspan=2><hr></td></tr>");
 	$Page->Print("<tr><td colspan=2 align=left>");
-	$Page->Print("<input type=submit value=\"　設定　\" $common></td></tr>");
+	$Page->Print("<input type=submit value=\"Save\" $common></td></tr>");
 	$Page->Print("</table><br>");
 }
 
@@ -365,7 +365,7 @@ sub PrintGroupDelete
 	@groupSet = $Form->GetAtArray('CAP_GROUPS');
 	
 	$Page->Print("<br><center><table border=0 cellspacing=2 width=100%>");
-	$Page->Print("<tr><td colspan=2>以下のキャップグループを削除します。</td></tr>");
+	$Page->Print("<tr><td colspan=2>Delete the following cap groups</td></tr>");
 	$Page->Print("<tr><td colspan=2><hr></td></tr>");
 	
 	$Page->Print("<tr>");
@@ -383,10 +383,10 @@ sub PrintGroupDelete
 	
 	$Page->Print("<tr><td colspan=2><hr></td></tr>");
 	$Page->Print("<tr><td bgcolor=yellow colspan=3><b><font color=red>");
-	$Page->Print("※注：削除したグループを元に戻すことはできません。</b><br>");
-	$Page->Print("※注：削除するグループに所属しているキャップはすべて未所属状態になります。</td></tr>");
+	$Page->Print("NOTE: Deleted groups cannot be restored.</b><br>");
+	$Page->Print("※NOTE: All caps belonging to the deleted group will be orphaned.</td></tr>");
 	$Page->Print("<tr><td colspan=2><hr></td></tr>");
-	$Page->Print("<tr><td colspan=2 align=left><input type=button value=\"　削除　\" ");
+	$Page->Print("<tr><td colspan=2 align=left><input type=button value=\"Delete\" ");
 	$Page->Print("onclick=\"DoSubmit('sys.capg','FUNC','DELETE')\" class=\"delete\"></td></tr>");
 	$Page->Print("</table>");
 }
@@ -500,12 +500,12 @@ sub FunctionGroupSetting
 	# 処理ログ
 	{
 		my $id;
-		push @$pLog, '■以下のキャップグループを登録しました。';
-		push @$pLog, "グループ名称：$name";
-		push @$pLog, "説明：$expl";
-		push @$pLog, "色：$color";
-		push @$pLog, "権限：$auth";
-		push @$pLog, '所属キャップ：';
+		push @$pLog, '■The following CAP groups have been registered:';
+		push @$pLog, "Group Name: $name";
+		push @$pLog, "Description: $expl";
+		push @$pLog, "Color: $color";
+		push @$pLog, "Authority: $auth";
+		push @$pLog, 'Affilated CAP: ';
 		foreach	$id (@belongUser){
 			push @$pLog, '　　> ' . $User->Get('NAME', $id);
 		}
