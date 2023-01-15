@@ -28,7 +28,7 @@
 506<>Samba規制2<>連打しないでください。もうそろそろ規制リストに入れますよ。。(￣ー￣)ニヤリッ<br>\n<br>\n\n
 507<>Samba規制3<>もうずっと書けませんよ。<br>\n<br>\nあなたは、規制リストに追加されました。<br><br>\n【解除する方法】<br>\n{!WAIT!}分以上初心者の方々を優しく導いてあげてください。<br>\nこれ以外に解除の方法はありません。<br>\n
 508<>Samba規制中<>まだ書けませんよ。<br><br>　　　　あなたは、規制リストに追加されています。 <br><br>　　　　【解除する方法】<br>　　　　{!WAIT!}分以上初心者の方々を優しく導いてあげてください。<br>　　　　これ以外に解除の方法はありません。<br>---------- 
-600<>NGワード<>NGワードが含まれてます。抜かないと書き込みできません。
+600<>NG Word<>Your post triggered the spam/word filter!
 601<>規制ユーザ<>アクセス規制中です！！({!HITS!})
 # 890～BEシステムエラー系
 890<>情報取得失敗<>BEユーザー情報の取得に失敗しました。
@@ -43,6 +43,6 @@
 # 950～システムエラー系
 950<>端末固有情報不明<>端末固有情報を送信してください。
 997<>ＰＲＯＸＹ規制<>公開ＰＲＯＸＹからの投稿は受け付けていません！！
-998<>ブラウザ変ですよん<>アクセス不正です。このCGIは外部からのアクセスは認めてないです。。
-999<>ブラウザ変ですよん<>フォーム情報が正しく読めないです。
+998<>Browser Acting Weird<>Access Fraud. This CGI does not allow external access...
+999<>Browser Acting Weird<>Cannot read the form information correctly. This is usually caused by navigating directly to the post form.
 990<>システムエラー<>システムが変です。サポート版で聞いたほうがいいかも。。
