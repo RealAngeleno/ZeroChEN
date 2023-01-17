@@ -198,7 +198,7 @@ sub SetMenuList
 		$Base->SetMenu('Limiters', "'sys.setting','DISP','LIMITTER'");
 		$Base->SetMenu('Other', "'sys.setting','DISP','OTHER'");
 		$Base->SetMenu('<hr>', '');
-		$Base->SetMenu('View', "'sys.setting','DISP','VIEW'");
+		$Base->SetMenu('System View', "'sys.setting','DISP','VIEW'");
 		$Base->SetMenu('Regulations', "'sys.setting','DISP','SEC'");
 		$Base->SetMenu('<hr>', '');
 		$Base->SetMenu('Extensions', "'sys.setting','DISP','PLUGIN'");
@@ -576,9 +576,9 @@ sub PrintPlusViewSetting
 	$Page->Print("<tr bgcolor=silver><td colspan=2 class=\"DetailTitle\">Read.cgi Settings</td></tr>\n");
 #Ofuda.cc	$Page->Print("<tr><td>ofuda.ccのアカウント名を入力 <small>(未入力でカウンター非表\示)</small></td>");
 #	$Page->Print("<td><input type=text size=60 name=COUNTER value=\"$Counter\"></td></tr>\n");
-	$Page->Print("<tr><td>PR Text<small>(Disabled if field is empty)</small></td>");
+	$Page->Print("<tr><td>PR (Promotion) Text<small>(Disabled if field is empty)</small></td>");
 	$Page->Print("<td><input type=text size=60 name=PRTEXT value=\"$Prtext\"></td></tr>\n");
-	$Page->Print("<tr><td>PR Link (url)</td>");
+	$Page->Print("<tr><td>PR (Promotion) Link (url)</td>");
 	$Page->Print("<td><input type=text size=60 name=PRLINK value=\"$Prlink\"></td></tr>\n");
 	
 	$Page->Print("<tr bgcolor=silver><td colspan=2 class=\"DetailTitle\">Notices</td></tr>\n");
