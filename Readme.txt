@@ -17,7 +17,7 @@ FAQ
 	Alternatively, you can chown everything to www-data if you not using it for a production environment.
 	
 Quick Start Guide
-	After properly setting permissions, navigate to ./test/admin.cgi and log in. The default username is "Administrator" and the default password is "zeroch." Make sure to change these.
+	After properly setting permissions, navigate to ./test/admin.cgi and log in. The default username is "Administrator" and the default password is 	"zeroch." Make sure to change these.
 ----------------------------------
 
 Zero-Channel Plus Ver. 0.7.5 - Readme.txt
