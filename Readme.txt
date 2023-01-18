@@ -2,10 +2,9 @@ ZeroChEN
 
 ZeroChEN is an English translation of 0ch+, a Japanese textboard script modeled off of 2ch.
 
-Translations are currently around 75% done. Almost the entirity of the front facing portion is complete.
+Translations are currently around 75% done. Almost the entirity of the front facing portion is complete. A little more than half of the back facing portion is complete.
 
-
-    ADDENUM
+FAQ
     	>Why am I getting error 500s?
 	This is due to either two things, a misconfigured Apache/NGINX config or a permissions error.
 
@@ -17,7 +16,8 @@ Translations are currently around 75% done. Almost the entirity of the front fac
 	users.cgi (/test/info/users.cgi) is 777.
 	Alternatively, you can chown everything to www-data if you not using it for a production environment.
 	
-Below is the original README for 0ch+
+Quick Start Guide
+	After properly setting permissions, navigate to ./test/admin.cgi and log in. The default username is "Administrator" and the default password is "zeroch." Make sure to change these.
 ----------------------------------
 
 Zero-Channel Plus Ver. 0.7.5 - Readme.txt
