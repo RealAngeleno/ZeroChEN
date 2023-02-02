@@ -1,5 +1,5 @@
 # 100～入力内容
-100<>Subjec too long<>Your subject is too long!
+100<>Subject too long<>Your subject is too long!
 101<>Name too long!<>Your name is too long!
 102<>E-mail too long<>Your e-mail address is too long!
 103<>Text too long<>Text too long!
@@ -9,9 +9,9 @@
 150<>No Subject<>You did not enter a subject! Go enter one!
 151<>No Text<>You did not enter any text!
 152<>No Name<>You did not enter a name.
-# 200～掲示板規制
-200<>スレッド停止<>このスレッドは停止されてます。もう書けない。。。
-201<>書き込み限界<>{!RESMAX!}を超えてます。このスレッドにはもう書けない。。。
+# 200～Board Restrictions
+200<>Thread Locked<>This thread has been locked. You can't post in this thread anymore...
+201<>Reply Limit<>Exceeded {!RESMAX!}! You can't post in this thread anymore...
 202<>スレッド移転<>このスレッドは移転されたようです。詳しくは（略
 203<>読取専用<>現在この掲示板は読取専用です。ここは待つしかない。。。
 204<>スレッド規制<>携帯からのスレッド作成はキャップのみ可能です。<br>PCから試してみてください。
