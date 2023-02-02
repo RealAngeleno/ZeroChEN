@@ -314,8 +314,8 @@ sub PrintThreadList
 #	$Page->Print("<input type=button value=\"　move　\" $common2,'MOVE')\"> ");
 	$Page->Print("<input type=button value=\"Update Subject\" $common2,'UPDATE')\"> ")			if ($isUpdate);
 	$Page->Print("<input type=button value=\"Update all Subjects\" $common2,'UPDATEALL')\"> ")	if ($isUpdate);
-	$Page->Print("<input type=button value=\"Stop\" $common,'STOP')\"> ")				if ($isStop);
-	$Page->Print("<input type=button value=\"Resume\" $common,'RESTART')\"> ")			if ($isStop);
+	$Page->Print("<input type=button value=\"Lock\" $common,'STOP')\"> ")				if ($isStop);
+	$Page->Print("<input type=button value=\"Unlock\" $common,'RESTART')\"> ")			if ($isStop);
 	$Page->Print("<input type=button value=\"Pool\" $common,'POOL')\"> ")				if ($isPool);
 	
 	if ($isStop) {
@@ -352,8 +352,8 @@ sub PrintThreadStop
 	my (@threadList, $Threads, $id, $subj, $res);
 	my ($common, $text);
 	
-	$SYS->Set('_TITLE', ($mode ? 'Thread Stop' : 'Thread Restart'));
-	$text = ($mode ? 'Stop' : 'Resume');
+	$SYS->Set('_TITLE', ($mode ? 'Lock Thread' : 'Unlock Thread'));
+	$text = ($mode ? 'Lock' : 'Unlock');
 	
 	require './module/baggins.pl';
 	$Threads = BILBO->new;
