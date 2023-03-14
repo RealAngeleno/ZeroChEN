@@ -596,11 +596,11 @@ sub PrintOtherSetting
 	$Page->Print("<input type=text size=8 name=BBS_TRIPCOLUMN value=\"$setTripColumn\"></td>");
 	$Page->Print("<td class=\"DetailTitle\">cookie確認</td><td>");
 	$Page->Print("<input type=checkbox name=SUBBBS_CGI_ON $setCookie value=on>確認あり</td></tr>");
-	$Page->Print("<tr><td class=\"DetailTitle\">indexスレッドプレビュー数</td><td>");
+	$Page->Print("<tr><td class=\"DetailTitle\">Number of threads to show on board index</td><td>");
 	$Page->Print("<input type=text size=8 name=BBS_THREAD_NUMBER value=\"$setThreadNum\"></td>");
 	$Page->Print("<td class=\"DetailTitle\">　　名前cookie保存</td><td>");
 	$Page->Print("<input type=checkbox name=BBS_NAMECOOKIE_CHECK $setNameCookie value=on>保存</td></tr>");
-	$Page->Print("<tr><td class=\"DetailTitle\">indexプレビューレス数</td><td>");
+	$Page->Print("<tr><td class=\"DetailTitle\">Number of responses to show per thread on the board index</td><td>");
 	$Page->Print("<input type=text size=8 name=BBS_CONTENTS_NUMBER value=\"$setContentNum\"></td>");
 	$Page->Print("<td class=\"DetailTitle\">　　メールcookie保存</td><td>");
 	$Page->Print("<input type=checkbox name=BBS_MAILCOOKIE_CHECK $setMailCookie value=on>保存</td></tr>");
