@@ -458,11 +458,11 @@ sub PrintLimitSetting
 	
 	$Page->Print("<tr><td class=\"DetailTitle\">Max title length</td><td>");
 	$Page->Print("<input type=text size=10 name=BBS_SUBJECT_COUNT value=\"$setSubjectMax\"></td>");
-	$Page->Print("<td class=\"DetailTitle\">Max email length</td><td>");
+	$Page->Print("<td class=\"DetailTitle\">Max e-mail length</td><td>");
 	$Page->Print("<input type=text size=10 name=BBS_MAIL_COUNT value=\"$setMailMax\"></td></tr>");
 	$Page->Print("<tr><td class=\"DetailTitle\">Max name length</td><td>");
 	$Page->Print("<input type=text size=10 name=BBS_NAME_COUNT value=\"$setNameMax\"></td>");
-	$Page->Print("<td class=\"DetailTitle\">Text length</td><td>");
+	$Page->Print("<td class=\"DetailTitle\">Maximum Message Length</td><td>");
 	$Page->Print("<input type=text size=10 name=BBS_MESSAGE_COUNT value=\"$setContMax\"></td></tr>");
 	$Page->Print("<tr><td class=\"DetailTitle\">Maximum number of characters per line</td><td>");
 	$Page->Print("<input type=text size=10 name=BBS_COLUMN_NUMBER value=\"$setLineLength\"></td>");
@@ -474,17 +474,17 @@ sub PrintLimitSetting
 	$Page->Print("<input type=text size=10 name=BBS_SUBJECT_MAX value=\"$setSubMax\"></td></tr>");
 	$Page->Print("<tr><td class=\"DetailTitle\">Require names</td><td>");
 	$Page->Print("<input type=checkbox name=NANASHI_CHECK $setNoName value=on>Enable</td>");
-	$Page->Print("<td class=\"DetailTitle\">Maximum Post Count (1000)".$Sys->Get('RESMAX').")</td><td>");
+	$Page->Print("<td class=\"DetailTitle\">Maximum Post Count (".$Sys->Get('RESMAX').")</td><td>");
 	$Page->Print("<input type=text size=10 name=BBS_RES_MAX value=\"$setResMax\"></td></tr>");
 	
 	$Page->Print("<tr><td class=\"DetailTitle\">Read Only</td><td><select name=BBS_READONLY>");
 	$Page->Print("<option value=on $selROon>Read Only");
-	$Page->Print("<option value=caps $selROcaps>Capcodes Only?????");
+	$Page->Print("<option value=caps $selROcaps>Capcodes Only");
 	$Page->Print("<option value=none $selROnone>Writable");
 	$Page->Print("</select></td>");
 	$Page->Print("<td class=\"DetailTitle\">DNSBL check</td><td>");
 	$Page->Print("<input type=checkbox name=BBS_PROXY_CHECK $setProxy value=on>Enable</td></tr>");
-	$Page->Print("<tr><td class=\"DetailTitle\">DISALLOW NON CAPITAL LETTERS</td><td>");
+	$Page->Print("<tr><td class=\"DetailTitle\">Require all users have a capcode to make new threads</td><td>");
 	$Page->Print("<input type=checkbox name=BBS_THREADCAPONLY $setCapOnly value=on>Enable\</td>");
 	$Page->Print("<td class=\"DetailTitle\">Block non-Japanese IPs?</td><td>");
 	$Page->Print("<input type=checkbox name=BBS_JP_CHECK $setOverSea value=on>Enable</td></tr>");
@@ -577,7 +577,7 @@ sub PrintOtherSetting
 	$Page->Print("<tr><td colspan=4><hr></td></tr>");
 	
 	$Page->Print("<tr><td class=\"DetailTitle\">ID Display</td><td><select name=ID_DISP>");
-	$Page->Print("<option value=BBS_FORCE_ID $selIDforce>Force ID (e.g. ID:kC89Lv3M)");
+	$Page->Print("<option value=BBS_FORCE_ID $selIDforce>Display ID (e.g. ID:kC89Lv3M)");
 	$Page->Print("<option value=BBS_ID_DISP $selIDdisp>Only display ID if no e-mail is entered.");
 	$Page->Print("<option value=BBS_NO_ID $selIDnone>No IDs");
 	$Page->Print("<option value=BBS_DISP_IP1 $selIDhost>Show hostname (e.g. 192.168.0.1.HOSTNAME)");
