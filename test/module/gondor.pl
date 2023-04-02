@@ -302,7 +302,7 @@ sub Stop
 	my ($Sys) = @_;
 	
 	# ↓スレスト文言
-	my $stopData = "停止しました。。。<>Thread Locked<>Thread Locked<>A true thread stopper...（￣ー￣）*grin*<>Thread Locked.\n";
+	my $stopData = "Thread Locked...<>Thread_Locked<>Thread Locked<>A true thread stopper...（￣ー￣）*grin*<>Thread Locked.\n";
 	
 	# レス最大数超えてる場合はスレスト不可
 	if ($this->Size() <= $Sys->Get('RESMAX')) {
